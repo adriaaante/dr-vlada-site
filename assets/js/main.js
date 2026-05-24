@@ -86,6 +86,17 @@
     document.addEventListener('click', (e) => {
       if (!fab.contains(e.target)) fab.classList.remove('is-open');
     });
+    // Прячем кнопку когда виден футер — чтобы не перекрывала FutureFlow
+    const footer = $('.footer');
+    if (!footer) return;
+    const checkHide = () => {
+      const r = footer.getBoundingClientRect();
+      const overlap = r.top < window.innerHeight - 40;
+      fab.classList.toggle('fab--hidden', overlap);
+    };
+    checkHide();
+    window.addEventListener('scroll', checkHide, { passive: true });
+    window.addEventListener('resize', checkHide);
   }
 
   /* -------- Before/After слайдер -------- */

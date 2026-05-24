@@ -50,7 +50,7 @@ window.VB_CONFIG = {
   whatsapp:    'https://wa.me/7XXXXXXXXXX?text=Здравствуйте',
   telegram:    'https://t.me/USERNAME',
   instagram:   'https://instagram.com/USERNAME',
-  address:     'г. Москва, ул. Адрес, д. XX',
+  address:     'г. Чебоксары, ул. Адрес, д. XX',
   hours:       'Пн–Сб 10:00–20:00',
   mapEmbed:    'https://yandex.ru/map-widget/v1/?...',
   ...

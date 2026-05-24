@@ -27,8 +27,8 @@ window.VB_CONFIG = {
   instagram:     'https://instagram.com/USERNAME',
 
   // Адрес и режим работы
-  address:       'г. Москва, ул. Адрес, д. XX',
-  addressShort:  'г. Москва',
+  address:       'г. Чебоксары, ул. Адрес, д. XX',
+  addressShort:  'г. Чебоксары',
   hours:         'Пн–Сб 10:00–20:00',
   hoursShort:    '10:00–20:00',
 
