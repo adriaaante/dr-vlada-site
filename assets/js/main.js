@@ -294,15 +294,38 @@
      и мерцания. Функция оставлена заглушкой, на случай если потом вернём. */
   function observeReveals() { /* no-op */ }
 
-  /* -------- Счётчики (статичные, без анимации) -------- */
+  /* -------- Счётчики trust-strip — count-up при появлении в viewport -------- */
   function setupCounters() {
-    $$('[data-counter]').forEach(c => {
-      const n = parseFloat(c.getAttribute('data-counter')) || 0;
-      c.textContent = Math.round(n).toLocaleString('ru-RU');
-    });
+    const counters = $$('[data-counter]');
+    if (!counters.length) return;
+    const fmt = (n) => Math.round(n).toLocaleString('ru-RU');
+    const animate = (el) => {
+      const target = parseFloat(el.getAttribute('data-counter')) || 0;
+      const duration = 1400;
+      const startTs = performance.now();
+      const step = (now) => {
+        const t = Math.min(1, (now - startTs) / duration);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = fmt(target * eased);
+        if (t < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    if (!('IntersectionObserver' in window)) {
+      counters.forEach(c => { c.textContent = fmt(parseFloat(c.getAttribute('data-counter')) || 0); });
+      return;
+    }
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        animate(e.target);
+        obs.unobserve(e.target);
+      });
+    }, { threshold: 0.45 });
+    counters.forEach(c => obs.observe(c));
   }
 
-  /* -------- Отзывы: стрелки навигации -------- */
+  /* -------- Отзывы: карусель только на стрелках (без свайпа) -------- */
   function setupReviews() {
     const wrap = $('.reviews-wrap');
     if (!wrap) return;
@@ -311,29 +334,33 @@
     const next  = wrap.querySelector('.reviews-arrow--next');
     if (!track || !prev || !next) return;
 
-    const cardStep = () => {
+    let index = 0;
+
+    const stepPx = () => {
       const first = track.firstElementChild;
-      if (!first) return 320;
-      const styles = getComputedStyle(track);
-      const gap = parseFloat(styles.columnGap || styles.gap || 22);
+      if (!first) return 0;
+      const gap = parseFloat(getComputedStyle(track).gap || '22');
       return first.getBoundingClientRect().width + gap;
     };
 
-    prev.addEventListener('click', () => {
-      track.scrollBy({ left: -cardStep(), behavior: 'smooth' });
-    });
-    next.addEventListener('click', () => {
-      track.scrollBy({ left:  cardStep(), behavior: 'smooth' });
-    });
-
-    const updateState = () => {
-      const max = track.scrollWidth - track.clientWidth - 2;
-      prev.toggleAttribute('disabled', track.scrollLeft <= 2);
-      next.toggleAttribute('disabled', track.scrollLeft >= max);
+    const maxIndex = () => {
+      const visible = Math.max(1, Math.round(wrap.clientWidth / stepPx()));
+      return Math.max(0, track.children.length - visible);
     };
-    track.addEventListener('scroll', updateState, { passive: true });
-    window.addEventListener('resize', updateState);
-    requestAnimationFrame(updateState);
+
+    const update = () => {
+      const max = maxIndex();
+      if (index > max) index = max;
+      if (index < 0) index = 0;
+      track.style.transform = `translateX(-${index * stepPx()}px)`;
+      prev.toggleAttribute('disabled', index <= 0);
+      next.toggleAttribute('disabled', index >= max);
+    };
+
+    prev.addEventListener('click', () => { index--; update(); });
+    next.addEventListener('click', () => { index++; update(); });
+    window.addEventListener('resize', update);
+    update();
   }
 
   /* -------- Год в футере -------- */
@@ -367,8 +394,14 @@
   });
 
   /* Утилита для скриншот-тестов: window.__revealAll() показывает всё мгновенно. */
-  window.__revealAll = () => $$('.reveal:not(.is-in)').forEach(el => {
-    el.style.transition = 'none';
-    el.classList.add('is-in');
-  });
+  window.__revealAll = () => {
+    $$('.reveal:not(.is-in)').forEach(el => {
+      el.style.transition = 'none';
+      el.classList.add('is-in');
+    });
+    $$('[data-counter]').forEach(c => {
+      const n = parseFloat(c.getAttribute('data-counter')) || 0;
+      c.textContent = Math.round(n).toLocaleString('ru-RU');
+    });
+  };
 })();

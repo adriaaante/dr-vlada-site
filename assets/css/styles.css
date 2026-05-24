@@ -891,28 +891,21 @@ a.service-card:hover { color: inherit; }
 .why-item__title { font-size: 22px; margin: 0 0 10px; }
 .why-item__text { color: var(--c-text-muted); font-size: 15px; margin: 0; }
 
-/* -------- Reviews — горизонтальная лента с scroll-snap -------- */
+/* -------- Reviews — карусель: только стрелки, без свайпа -------- */
+.reviews-wrap {
+  position: relative;
+  overflow: hidden; /* скрывает то, что за пределами видимой части */
+}
 .reviews {
   display: flex;
   gap: 22px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding: 0 24px;
-  padding: 4px 4px 22px;
-  margin: 0 -4px;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-color: var(--c-accent) transparent;
+  transform: translateX(0);
+  transition: transform .5s var(--ease-out);
+  will-change: transform;
+  padding: 4px 0;
 }
-.reviews::-webkit-scrollbar { height: 8px; }
-.reviews::-webkit-scrollbar-thumb {
-  background: var(--c-accent);
-  border-radius: 4px;
-}
-.reviews::-webkit-scrollbar-track { background: var(--c-border-soft); border-radius: 4px; }
 .review {
-  flex: 0 0 340px;
-  max-width: calc(100vw - 60px);
-  scroll-snap-align: start;
+  flex: 0 0 calc((100% - 44px) / 3); /* 3 отзыва видны одновременно */
   padding: 32px 28px;
   background: var(--c-bg-card);
   border: 1px solid var(--c-border);
@@ -920,16 +913,6 @@ a.service-card:hover { color: inherit; }
   position: relative;
   display: flex; flex-direction: column;
 }
-.reviews__hint {
-  display: block;
-  text-align: center;
-  font-size: 13px;
-  color: var(--c-text-muted);
-  margin-top: 12px;
-}
-
-/* Обёртка со стрелками навигации */
-.reviews-wrap { position: relative; }
 .reviews-arrow {
   position: absolute;
   top: calc(50% - 14px);
@@ -960,14 +943,11 @@ a.service-card:hover { color: inherit; }
   pointer-events: none;
 }
 .reviews-arrow svg { width: 22px; height: 22px; }
-.reviews-arrow--prev { left: -22px; }
-.reviews-arrow--next { right: -22px; }
-@media (max-width: 1024px) {
-  .reviews-arrow--prev { left: -14px; }
-  .reviews-arrow--next { right: -14px; }
-}
+.reviews-arrow--prev { left: 8px; }
+.reviews-arrow--next { right: 8px; }
 @media (max-width: 720px) {
-  .reviews-arrow { display: none; }
+  .reviews-arrow { width: 44px; height: 44px; }
+  .reviews-arrow svg { width: 18px; height: 18px; }
 }
 .review::before {
   content: '“';
@@ -1556,6 +1536,7 @@ a.service-card:hover { color: inherit; }
   .hero__photo { max-width: 500px; margin: 0 auto; aspect-ratio: 5/6; }
   .services { grid-template-columns: repeat(2, 1fr); }
   .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .review { flex: 0 0 calc((100% - 22px) / 2); } /* 2 отзыва на планшете */
   .why { grid-template-columns: 1fr; gap: 24px; }
   .why-item { display: grid; grid-template-columns: 80px 1fr; gap: 18px; align-items: start; }
   .why-item__num { margin-bottom: 0; }
@@ -1590,7 +1571,7 @@ a.service-card:hover { color: inherit; }
 
   .services,
   .portfolio-grid { grid-template-columns: 1fr; }
-  .review { flex: 0 0 86%; }
+  .review { flex: 0 0 100%; }
   .svc-row { grid-template-columns: 56px 1fr; padding: 22px; }
   .svc-row__icon { width: 56px; height: 56px; }
   .svc-row__icon svg { width: 26px; height: 26px; }
