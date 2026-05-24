@@ -1324,17 +1324,9 @@ a.service-card:hover { color: inherit; }
   background:
     radial-gradient(80% 60% at 20% 0%, rgba(197,165,114,.16) 0%, transparent 60%),
     linear-gradient(180deg, var(--c-bg) 0%, var(--c-bg-soft) 100%);
-  padding: clamp(50px, 7vw, 90px) 0 clamp(40px, 6vw, 70px);
+  padding: clamp(40px, 6vw, 72px) 0 clamp(40px, 6vw, 70px);
   text-align: center;
 }
-.breadcrumbs {
-  font-size: 13px;
-  color: var(--c-text-muted);
-  margin-bottom: 18px;
-}
-.breadcrumbs a { color: var(--c-text-muted); }
-.breadcrumbs a:hover { color: var(--c-accent-dark); }
-.breadcrumbs span { color: var(--c-accent-dark); }
 .page-hero h1 { margin: 0 0 16px; }
 .page-hero p { font-size: 18px; max-width: 680px; margin: 0 auto; }
 
