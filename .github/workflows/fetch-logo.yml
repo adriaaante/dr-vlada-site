@@ -1,0 +1,41 @@
+name: Fetch logo from Higgsfield CDN
+
+# Sandbox Claude не имеет доступа к CloudFront — workflow скачивает
+# сгенерированный логотип на GitHub-runner'е и коммитит в репо.
+
+on:
+  workflow_dispatch: {}
+  push:
+    paths:
+      - '.github/workflows/fetch-logo.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download logo from CDN
+        run: |
+          mkdir -p assets/img
+          # Скачиваем первый вариант (нано-банан 1024×1024)
+          curl -sSfL --retry 3 \
+            -o assets/img/logo-mark.png \
+            "https://d8j0ntlcm91z4.cloudfront.net/user_3Di09CVa1BatdZIdE0tir1KKUxw/hf_20260524_155354_4e433d39-35ee-44cc-b975-ce0dfa304021.png"
+          ls -la assets/img/logo-mark.png
+          file assets/img/logo-mark.png
+
+      - name: Commit & push
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/img/logo-mark.png
+          if git diff --staged --quiet; then
+            echo "Логотип не изменился — пропускаю коммит."
+          else
+            git commit -m "Add generated logo (Higgsfield Nano Banana 2)"
+            git push
+          fi
