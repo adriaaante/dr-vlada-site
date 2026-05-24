@@ -428,7 +428,12 @@ p { margin: 0 0 1em; color: var(--c-text-muted); }
   width: 8px; height: 8px;
   border-radius: 50%;
   background: var(--c-accent);
-  box-shadow: 0 0 0 4px rgba(197,165,114,.25);
+  /* плавный пульс — нежная радар-волна вокруг точки */
+  animation: eyebrow-dot 2.6s ease-in-out infinite;
+}
+@keyframes eyebrow-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(197,165,114,.45); }
+  60%      { box-shadow: 0 0 0 10px rgba(197,165,114,0); }
 }
 .hero__title {
   font-size: clamp(40px, 6vw, 72px);
@@ -1118,26 +1123,25 @@ a.service-card:hover { color: inherit; }
   background: linear-gradient(135deg, var(--c-accent) 0%, var(--c-accent-dark) 100%);
   color: #fff;
   display: inline-flex; align-items: center; justify-content: center;
-  box-shadow: 0 12px 28px rgba(197,165,114,.45);
   position: relative;
   transition: transform var(--t) var(--ease);
+  /* Мягкое «дыхание» — тень с переменным внешним свечением.
+     Никаких расширяющихся колец: они выглядели агрессивно. */
+  animation: fab-breathe 4s ease-in-out infinite;
 }
-.fab__toggle::before,
-.fab__toggle::after {
-  content: '';
-  position: absolute; inset: 0;
-  border-radius: 50%;
-  border: 1.5px solid var(--c-accent);
-  opacity: 0;
-  /* мягкий пульс: 4 с, плавный ease-in-out, небольшое расширение */
-  animation: fab-pulse 4s ease-in-out infinite;
-  pointer-events: none;
-}
-.fab__toggle::after { animation-delay: 2s; }
 .fab__toggle svg { width: 26px; height: 26px; transition: transform var(--t) var(--ease); }
-.fab.is-open .fab__toggle { transform: rotate(45deg); }
-.fab.is-open .fab__toggle::before,
-.fab.is-open .fab__toggle::after { animation: none; opacity: 0; }
+.fab.is-open .fab__toggle { transform: rotate(45deg); animation: none; box-shadow: 0 12px 28px rgba(197,165,114,.45); }
+
+@keyframes fab-breathe {
+  0%, 100% {
+    box-shadow: 0 12px 28px rgba(197,165,114,.45),
+                0 0 0 0 rgba(197,165,114,.0);
+  }
+  50% {
+    box-shadow: 0 14px 32px rgba(197,165,114,.55),
+                0 0 0 12px rgba(197,165,114,.10);
+  }
+}
 
 .fab__menu {
   position: absolute;
@@ -1177,11 +1181,7 @@ a.service-card:hover { color: inherit; }
 }
 .fab__item svg { width: 20px; height: 20px; }
 
-@keyframes fab-pulse {
-  0%   { transform: scale(1);    opacity: 0; }
-  20%  { opacity: .35; }
-  100% { transform: scale(1.25); opacity: 0; }
-}
+/* fab-pulse удалён — кольца выглядели агрессивно, заменено на fab-breathe */
 
 /* -------- Sticky CTA (mobile) -------- */
 .sticky-cta {
