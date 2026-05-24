@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Фото врача (плейсхолдер)">
+  <defs>
+    <linearGradient id="bg_thumb" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8d9b8"/>
+      <stop offset="0.6" stop-color="#d6e8ec"/>
+      <stop offset="1" stop-color="#1e6478"/>
+    </linearGradient>
+    <radialGradient id="glow_thumb" cx=".5" cy=".35" r=".6">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg_thumb)"/>
+  <rect width="400" height="400" fill="url(#glow_thumb)"/>
+
+  <!-- Силуэт врача -->
+  <g transform="translate(200.0 168.0)" opacity=".55">
+    <circle cx="0" cy="0" r="72.0" fill="#0e3d4d" opacity=".7"/>
+    <path d="M -128.0 220.00000000000003
+             Q 0 72.0 128.0 220.00000000000003
+             L 128.0 220.00000000000003
+             L -128.0 220.00000000000003 Z"
+          fill="#0e3d4d" opacity=".7"/>
+  </g>
+
+  <!-- Подпись -->
+  <g transform="translate(200.0 290)">
+    <text text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif"
+          font-size="24" font-weight="500" fill="#0e3d4d">Влад Бобров</text>
+    <text y="20" text-anchor="middle" font-family="Inter, system-ui, sans-serif"
+          font-size="10" font-weight="600" letter-spacing="4" fill="#c5a572">ВРАЧ-КОСМЕТОЛОГ</text>
+    <text y="40" text-anchor="middle" font-family="Inter, system-ui, sans-serif"
+          font-size="7" letter-spacing="2" fill="#1e6478" opacity=".75">
+      ПЛЕЙСХОЛДЕР · ЗАМЕНИТЕ THUMB.JPG/.PNG
+    </text>
+  </g>
+</svg>

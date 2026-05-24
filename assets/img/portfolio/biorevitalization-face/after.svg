@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="После: Биоревитализация лица — сияние кожи">
+  <defs>
+    <linearGradient id="g_biorevitalization-face_after" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fdfaf3"/>
+      <stop offset="1" stop-color="#e8d9b8"/>
+    </linearGradient>
+    <pattern id="p_biorevitalization-face_after" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+      <circle cx="30" cy="30" r="1" fill="#c5a572" opacity=".35"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="900" fill="url(#g_biorevitalization-face_after)"/>
+  <rect width="1200" height="900" fill="url(#p_biorevitalization-face_after)"/>
+
+  <!-- Декоративный медицинский символ (стилизованная капля / лицо) -->
+  <g transform="translate(600 380)" opacity=".55">
+    <circle cx="0" cy="0" r="170" fill="none" stroke="#c5a572" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="120" fill="none" stroke="#c5a572" stroke-width="1"/>
+    <circle cx="0" cy="0" r="70" fill="#c5a572" opacity=".25"/>
+    <path d="M-50 -40 Q0 -120 50 -40 Q0 30 -50 -40 Z" fill="#c5a572" opacity=".7"/>
+  </g>
+
+  <!-- Тег категории -->
+  <g transform="translate(60 60)">
+    <rect width="180" height="42" rx="6" fill="#c5a572" opacity=".9"/>
+    <text x="90" y="28" text-anchor="middle" font-family="Inter, system-ui, sans-serif"
+          font-size="13" font-weight="700" letter-spacing="2" fill="#0e3d4d">БИОРЕВА</text>
+  </g>
+
+  <!-- Метка До/После -->
+  <g transform="translate(1010 60)">
+    <rect width="130" height="42" rx="6" fill="#c5a572"/>
+    <text x="65" y="28" text-anchor="middle" font-family="Inter, system-ui, sans-serif"
+          font-size="14" font-weight="700" letter-spacing="2" fill="#0e3d4d">ПОСЛЕ</text>
+  </g>
+
+  <!-- Заголовок -->
+  <g transform="translate(600 700)">
+    <text text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif"
+          font-size="38" font-weight="500" fill="#0e3d4d">Биоревитализация лица — сияние кожи</text>
+    <text y="50" text-anchor="middle" font-family="Inter, system-ui, sans-serif"
+          font-size="14" font-weight="500" letter-spacing="3" fill="#1e6478" opacity=".7">
+      ПЛЕЙСХОЛДЕР · ЗАМЕНИТЕ AFTER.JPG В ПАПКЕ КЕЙСА
+    </text>
+  </g>
+</svg>
