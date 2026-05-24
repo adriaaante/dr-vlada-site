@@ -528,32 +528,8 @@ p { margin: 0 0 1em; color: var(--c-text-muted); }
 .hero__badge-text strong { font-size: 14.5px; color: var(--c-primary); }
 .hero__badge-text span { font-size: 12px; color: var(--c-text-muted); }
 
-/* Decorative floating dots in hero */
-.hero__deco {
-  position: absolute; inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
-}
-.hero__deco span {
-  position: absolute;
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--c-accent);
-  opacity: .35;
-  animation: float 14s ease-in-out infinite;
-}
-.hero__deco span:nth-child(1) { top: 12%; left: 8%;  animation-delay: 0s; }
-.hero__deco span:nth-child(2) { top: 28%; left: 92%; animation-delay: 2s; width: 10px; height: 10px; }
-.hero__deco span:nth-child(3) { top: 70%; left: 4%;  animation-delay: 4s; }
-.hero__deco span:nth-child(4) { top: 84%; left: 88%; animation-delay: 1s; width: 8px; height: 8px; opacity: .25; }
-.hero__deco span:nth-child(5) { top: 48%; left: 50%; animation-delay: 5s; opacity: .15; width: 14px; height: 14px; }
-
-@keyframes float {
-  0%, 100% { transform: translate(0, 0); }
-  33%      { transform: translate(20px, -16px); }
-  66%      { transform: translate(-14px, 14px); }
-}
+/* Декоративные плавающие точки в hero удалены — резкая смена направления
+   на keyframes выглядела как «прыжки» вместо плавного движения. */
 
 /* -------- Trust strip -------- */
 .trust {
@@ -1151,12 +1127,13 @@ a.service-card:hover { color: inherit; }
   content: '';
   position: absolute; inset: 0;
   border-radius: 50%;
-  border: 2px solid var(--c-accent);
-  opacity: .6;
-  animation: fab-pulse 2.4s ease-out infinite;
+  border: 1.5px solid var(--c-accent);
+  opacity: 0;
+  /* мягкий пульс: 4 с, плавный ease-in-out, небольшое расширение */
+  animation: fab-pulse 4s ease-in-out infinite;
   pointer-events: none;
 }
-.fab__toggle::after { animation-delay: 1.2s; }
+.fab__toggle::after { animation-delay: 2s; }
 .fab__toggle svg { width: 26px; height: 26px; transition: transform var(--t) var(--ease); }
 .fab.is-open .fab__toggle { transform: rotate(45deg); }
 .fab.is-open .fab__toggle::before,
@@ -1201,8 +1178,9 @@ a.service-card:hover { color: inherit; }
 .fab__item svg { width: 20px; height: 20px; }
 
 @keyframes fab-pulse {
-  0%   { transform: scale(.95); opacity: .55; }
-  100% { transform: scale(1.6);  opacity: 0; }
+  0%   { transform: scale(1);    opacity: 0; }
+  20%  { opacity: .35; }
+  100% { transform: scale(1.25); opacity: 0; }
 }
 
 /* -------- Sticky CTA (mobile) -------- */
