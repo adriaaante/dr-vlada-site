@@ -131,7 +131,7 @@ def make_doctor_svg(kind):
   <!-- Подпись -->
   <g transform="translate({w/2} {h-110})">
     <text text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif"
-          font-size="{int(min(w,h)*0.06)}" font-weight="500" fill="{PRIMARY}">Влад Бобров</text>
+          font-size="{int(min(w,h)*0.06)}" font-weight="500" fill="{PRIMARY}">Влада Боброва</text>
     <text y="{int(min(w,h)*0.05)}" text-anchor="middle" font-family="Inter, system-ui, sans-serif"
           font-size="{int(min(w,h)*0.025)}" font-weight="600" letter-spacing="4" fill="{ACCENT}">ВРАЧ-КОСМЕТОЛОГ</text>
     <text y="{int(min(w,h)*0.10)}" text-anchor="middle" font-family="Inter, system-ui, sans-serif"
@@ -170,7 +170,7 @@ def make_og_cover():
   <rect width="1200" height="630" fill="url(#ogbg)"/>
   <circle cx="950" cy="315" r="220" fill="{ACCENT}" opacity=".25"/>
   <circle cx="950" cy="315" r="140" fill="{ACCENT}" opacity=".35"/>
-  <text x="80" y="290" font-family="Cormorant Garamond, Georgia, serif" font-size="78" font-weight="500" fill="#ffffff">Влад Бобров</text>
+  <text x="80" y="290" font-family="Cormorant Garamond, Georgia, serif" font-size="78" font-weight="500" fill="#ffffff">Влада Боброва</text>
   <text x="80" y="350" font-family="Inter, sans-serif" font-size="26" font-weight="600" letter-spacing="6" fill="{ACCENT}">ВРАЧ-КОСМЕТОЛОГ</text>
   <text x="80" y="420" font-family="Inter, sans-serif" font-size="22" font-weight="400" fill="rgba(255,255,255,.78)">Эстетическая медицина · Москва</text>
 </svg>

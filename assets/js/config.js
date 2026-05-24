@@ -9,8 +9,8 @@
    ============================================================ */
 window.VB_CONFIG = {
   doctor: {
-    name:        'Влад Бобров',
-    nameShort:   'Влад Бобров',
+    name:        'Влада Боброва',
+    nameShort:   'Влада Боброва',
     title:       'Врач-косметолог',
     titleLong:   'Врач-косметолог · эстетическая медицина',
     initials:    'ВБ'
@@ -22,7 +22,7 @@ window.VB_CONFIG = {
   phoneClean:    '+7XXXXXXXXXX',
 
   // Мессенджеры (deeplinks)
-  whatsapp:      'https://wa.me/7XXXXXXXXXX?text=Здравствуйте,%20Влад!%20Хочу%20записаться%20на%20консультацию.',
+  whatsapp:      'https://wa.me/7XXXXXXXXXX?text=Здравствуйте,%20Влада!%20Хочу%20записаться%20на%20консультацию.',
   telegram:      'https://t.me/USERNAME',
   instagram:     'https://instagram.com/USERNAME',
 

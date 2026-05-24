@@ -110,26 +110,38 @@
       };
 
       let dragging = false;
-      const start = (e) => { dragging = true; ba.style.cursor = 'grabbing'; e.preventDefault(); };
+      let startX = 0;
+      let moved = false;
+      const start = (e) => {
+        dragging = true;
+        moved = false;
+        startX = e.touches ? e.touches[0].clientX : e.clientX;
+        ba.style.cursor = 'grabbing';
+      };
       const move  = (e) => {
         if (!dragging) return;
         const x = e.touches ? e.touches[0].clientX : e.clientX;
-        onMove(x);
+        if (Math.abs(x - startX) > 4) moved = true;
+        if (moved) onMove(x);
       };
-      const end   = () => { dragging = false; ba.style.cursor = ''; };
+      const end   = () => {
+        if (!dragging) return;
+        dragging = false;
+        ba.style.cursor = '';
+        if (moved) {
+          // Помечаем .ba как "только что был drag" — внешний клик-handler
+          // карточки увидит этот флаг и не откроет лайтбокс.
+          ba.dataset.dragJust = '1';
+          setTimeout(() => { delete ba.dataset.dragJust; }, 200);
+        }
+      };
 
       ba.addEventListener('mousedown',  start);
-      ba.addEventListener('touchstart', start, { passive: false });
+      ba.addEventListener('touchstart', start, { passive: true });
       window.addEventListener('mousemove',  move);
       window.addEventListener('touchmove',  move, { passive: true });
       window.addEventListener('mouseup',   end);
       window.addEventListener('touchend',  end);
-
-      // Клик по картинке — переместить слайдер
-      ba.addEventListener('click', (e) => {
-        if (e.target.closest('a, button')) return;
-        onMove(e.clientX);
-      });
 
       set(50);
     });
@@ -157,6 +169,9 @@
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 
     document.addEventListener('click', (e) => {
+      // Если клик был сразу после drag по слайдеру — игнорируем
+      const ba = e.target.closest('.ba');
+      if (ba && ba.dataset.dragJust) return;
       const btn = e.target.closest('[data-case]');
       if (!btn) return;
       e.preventDefault();
@@ -241,8 +256,10 @@
   }
 
   function caseCardHTML(item) {
+    // data-case на самом <article> — клик в любом месте карточки откроет
+    // лайтбокс (drag по слайдеру корректно отфильтрован).
     return `
-      <article class="case-card reveal">
+      <article class="case-card reveal" data-case="${esc(item.slug)}" role="button" tabindex="0" aria-label="${esc(item.title)} — открыть подробности">
         <div class="ba" role="img" aria-label="${esc(item.title)} — до и после">
           <img class="ba__img" src="${esc(item.before)}" alt="" loading="lazy">
           <div class="ba__after-wrap">
@@ -258,15 +275,24 @@
           <p class="case-card__text">${esc(item.summary || '')}</p>
           <div class="case-card__meta">
             <span>${esc(item.duration || '')}</span>
-            <a href="#" class="case-card__more" data-case="${esc(item.slug)}">
+            <span class="case-card__more" aria-hidden="true">
               Подробнее
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
+            </span>
           </div>
         </div>
       </article>
     `;
   }
+
+  /* Enter/Space на сфокусированной карточке — тоже открывает лайтбокс */
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const card = e.target.closest('[data-case]');
+    if (!card) return;
+    e.preventDefault();
+    card.click();
+  });
 
   /* -------- Reveal-on-scroll -------- */
   let revealObserver;

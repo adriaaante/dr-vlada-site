@@ -660,7 +660,11 @@ p { margin: 0 0 1em; color: var(--c-text-muted); }
   transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease), border-color var(--t-fast) var(--ease);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
 }
+a.service-card:hover { color: inherit; }
 .service-card::before {
   content: '';
   position: absolute;
@@ -720,12 +724,21 @@ p { margin: 0 0 1em; color: var(--c-text-muted); }
   border: 1px solid var(--c-border);
   display: flex;
   flex-direction: column;
-  transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease);
+  transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease), border-color var(--t-fast) var(--ease);
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
 }
 .case-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow);
+  border-color: var(--c-accent-soft);
 }
+.case-card:focus-visible {
+  outline: 3px solid var(--c-accent);
+  outline-offset: 3px;
+}
+.case-card .ba { cursor: ew-resize; }
 
 /* Before/after slider */
 .ba {
