@@ -290,66 +290,50 @@
     card.click();
   });
 
-  /* -------- Reveal-on-scroll -------- */
-  let revealObserver;
-  function observeReveals(root = document) {
-    if (!('IntersectionObserver' in window)) {
-      $$('.reveal', root).forEach(el => el.classList.add('is-in'));
-      return;
-    }
-    if (!revealObserver) {
-      revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.classList.add('is-in');
-            revealObserver.unobserve(e.target);
-          }
-        });
-      }, { rootMargin: '0px 0px -40px 0px', threshold: 0.05 });
-    }
-    const vh = window.innerHeight || 800;
-    $$('.reveal', root).forEach(el => {
-      if (el.classList.contains('is-in')) return;
-      // Элементы выше "1.5 экрана" от верха страницы показываем сразу
-      // (без ожидания скролла) — иначе при загрузке выше-фолд контент
-      // мелькает невидимым, и фуллпейдж-скрин рендерится пустым.
-      const rect = el.getBoundingClientRect();
-      if (rect.top < vh * 1.5) {
-        el.classList.add('is-in');
-      } else {
-        revealObserver.observe(el);
-      }
+  /* Reveal-on-scroll отключён: контент сразу видим, чтобы избежать прыжков
+     и мерцания. Функция оставлена заглушкой, на случай если потом вернём. */
+  function observeReveals() { /* no-op */ }
+
+  /* -------- Счётчики (статичные, без анимации) -------- */
+  function setupCounters() {
+    $$('[data-counter]').forEach(c => {
+      const n = parseFloat(c.getAttribute('data-counter')) || 0;
+      c.textContent = Math.round(n).toLocaleString('ru-RU');
     });
   }
 
-  /* -------- Counter-up -------- */
-  function setupCounters() {
-    const counters = $$('[data-counter]');
-    if (!counters.length || !('IntersectionObserver' in window)) {
-      counters.forEach(c => { c.textContent = c.getAttribute('data-counter'); });
-      return;
-    }
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        animateCounter(e.target);
-        obs.unobserve(e.target);
-      });
-    }, { threshold: 0.4 });
-    counters.forEach(c => obs.observe(c));
-  }
-  function animateCounter(el) {
-    const target = parseFloat(el.getAttribute('data-counter')) || 0;
-    const duration = 1400;
-    const startTs = performance.now();
-    const fmt = (n) => Math.round(n).toLocaleString('ru-RU');
-    function step(now) {
-      const t = Math.min(1, (now - startTs) / duration);
-      const eased = 1 - Math.pow(1 - t, 3);
-      el.textContent = fmt(target * eased);
-      if (t < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
+  /* -------- Отзывы: стрелки навигации -------- */
+  function setupReviews() {
+    const wrap = $('.reviews-wrap');
+    if (!wrap) return;
+    const track = wrap.querySelector('.reviews');
+    const prev  = wrap.querySelector('.reviews-arrow--prev');
+    const next  = wrap.querySelector('.reviews-arrow--next');
+    if (!track || !prev || !next) return;
+
+    const cardStep = () => {
+      const first = track.firstElementChild;
+      if (!first) return 320;
+      const styles = getComputedStyle(track);
+      const gap = parseFloat(styles.columnGap || styles.gap || 22);
+      return first.getBoundingClientRect().width + gap;
+    };
+
+    prev.addEventListener('click', () => {
+      track.scrollBy({ left: -cardStep(), behavior: 'smooth' });
+    });
+    next.addEventListener('click', () => {
+      track.scrollBy({ left:  cardStep(), behavior: 'smooth' });
+    });
+
+    const updateState = () => {
+      const max = track.scrollWidth - track.clientWidth - 2;
+      prev.toggleAttribute('disabled', track.scrollLeft <= 2);
+      next.toggleAttribute('disabled', track.scrollLeft >= max);
+    };
+    track.addEventListener('scroll', updateState, { passive: true });
+    window.addEventListener('resize', updateState);
+    requestAnimationFrame(updateState);
   }
 
   /* -------- Год в футере -------- */
@@ -378,18 +362,13 @@
     setupCounters();
     setupYear();
     setupActiveNav();
+    setupReviews();
     observeReveals();
-
-    // Страховка: если через 1.5 с после загрузки какие-то .reveal так и не
-    // оказались видны (например, пользователь не скроллил или браузер
-    // не сработал с IntersectionObserver) — показываем их безусловно.
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        $$('.reveal:not(.is-in)').forEach(el => el.classList.add('is-in'));
-      }, 1500);
-    });
   });
 
-  /* Утилита для скриншот-тестов: window.__revealAll() показывает всё. */
-  window.__revealAll = () => $$('.reveal:not(.is-in)').forEach(el => el.classList.add('is-in'));
+  /* Утилита для скриншот-тестов: window.__revealAll() показывает всё мгновенно. */
+  window.__revealAll = () => $$('.reveal:not(.is-in)').forEach(el => {
+    el.style.transition = 'none';
+    el.classList.add('is-in');
+  });
 })();
