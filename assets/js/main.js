@@ -128,12 +128,6 @@
         if (!dragging) return;
         dragging = false;
         ba.style.cursor = '';
-        if (moved) {
-          // Помечаем .ba как "только что был drag" — внешний клик-handler
-          // карточки увидит этот флаг и не откроет лайтбокс.
-          ba.dataset.dragJust = '1';
-          setTimeout(() => { delete ba.dataset.dragJust; }, 200);
-        }
       };
 
       ba.addEventListener('mousedown',  start);
@@ -169,9 +163,11 @@
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 
     document.addEventListener('click', (e) => {
-      // Если клик был сразу после drag по слайдеру — игнорируем
-      const ba = e.target.closest('.ba');
-      if (ba && ba.dataset.dragJust) return;
+      // Клик внутри слайдера .ba НИКОГДА не открывает лайтбокс —
+      // зона слайдера предназначена только для листания "до/после".
+      // Чтобы открыть кейс — нужно кликнуть на тело карточки
+      // (заголовок, описание или ссылку "Подробнее").
+      if (e.target.closest('.ba')) return;
       const btn = e.target.closest('[data-case]');
       if (!btn) return;
       e.preventDefault();
