@@ -39,57 +39,26 @@ def make_portfolio_svg(item, kind):
     is_after = (kind == "after")
     bg1, bg2 = (CREAM, ACCENT_SOFT) if is_after else ("#eef3f5", "#d6e8ec")
     accent = ACCENT if is_after else PRIMARY_SOFT
-    label = "После" if is_after else "До"
-    label_bg = ACCENT if is_after else PRIMARY
-    label_color = PRIMARY if is_after else "#ffffff"
-    title = item["title"]
-    if len(title) > 42:
-        title = title[:40] + "…"
     grad_id = f"g_{item['slug']}_{kind}"
     pat_id  = f"p_{item['slug']}_{kind}"
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="{label}: {title}">
+    # Бейджи "До/После" рисует сама карточка поверх изображения через
+    # .ba__label — в SVG их не дублируем, иначе видны два бейджа.
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="{escape_xml(item['title'])}">
   <defs>
     <linearGradient id="{grad_id}" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="{bg1}"/>
       <stop offset="1" stop-color="{bg2}"/>
     </linearGradient>
     <pattern id="{pat_id}" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-      <circle cx="30" cy="30" r="1" fill="{accent}" opacity=".35"/>
+      <circle cx="30" cy="30" r="1" fill="{accent}" opacity=".3"/>
     </pattern>
   </defs>
   <rect width="1200" height="900" fill="url(#{grad_id})"/>
   <rect width="1200" height="900" fill="url(#{pat_id})"/>
-
-  <!-- Декоративный медицинский символ (стилизованная капля / лицо) -->
-  <g transform="translate(600 380)" opacity=".55">
-    <circle cx="0" cy="0" r="170" fill="none" stroke="{accent}" stroke-width="1.5"/>
-    <circle cx="0" cy="0" r="120" fill="none" stroke="{accent}" stroke-width="1"/>
-    <circle cx="0" cy="0" r="70" fill="{accent}" opacity=".25"/>
-    <path d="M-50 -40 Q0 -120 50 -40 Q0 30 -50 -40 Z" fill="{accent}" opacity=".7"/>
-  </g>
-
-  <!-- Тег категории -->
-  <g transform="translate(60 60)">
-    <rect width="180" height="42" rx="6" fill="{accent}" opacity=".9"/>
-    <text x="90" y="28" text-anchor="middle" font-family="Inter, system-ui, sans-serif"
-          font-size="13" font-weight="700" letter-spacing="2" fill="{PRIMARY}">{item['label'].upper()}</text>
-  </g>
-
-  <!-- Метка До/После -->
-  <g transform="translate(1010 60)">
-    <rect width="130" height="42" rx="6" fill="{label_bg}"/>
-    <text x="65" y="28" text-anchor="middle" font-family="Inter, system-ui, sans-serif"
-          font-size="14" font-weight="700" letter-spacing="2" fill="{label_color}">{label.upper()}</text>
-  </g>
-
-  <!-- Заголовок -->
-  <g transform="translate(600 700)">
-    <text text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif"
-          font-size="38" font-weight="500" fill="{PRIMARY}">{escape_xml(title)}</text>
-    <text y="50" text-anchor="middle" font-family="Inter, system-ui, sans-serif"
-          font-size="14" font-weight="500" letter-spacing="3" fill="{PRIMARY_SOFT}" opacity=".7">
-      ПЛЕЙСХОЛДЕР · ЗАМЕНИТЕ {kind.upper()}.JPG В ПАПКЕ КЕЙСА
-    </text>
+  <g transform="translate(600 450)" opacity=".4">
+    <circle cx="0" cy="0" r="220" fill="none" stroke="{accent}" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="140" fill="none" stroke="{accent}" stroke-width="1"/>
+    <circle cx="0" cy="0" r="70" fill="{accent}" opacity=".2"/>
   </g>
 </svg>
 '''
@@ -128,16 +97,12 @@ def make_doctor_svg(kind):
           fill="{PRIMARY}" opacity=".7"/>
   </g>
 
-  <!-- Подпись -->
-  <g transform="translate({w/2} {h-110})">
+  <!-- Подпись (только имя, без слова «плейсхолдер») -->
+  <g transform="translate({w/2} {h-80})">
     <text text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif"
-          font-size="{int(min(w,h)*0.06)}" font-weight="500" fill="{PRIMARY}">Влада Боброва</text>
-    <text y="{int(min(w,h)*0.05)}" text-anchor="middle" font-family="Inter, system-ui, sans-serif"
-          font-size="{int(min(w,h)*0.025)}" font-weight="600" letter-spacing="4" fill="{ACCENT}">ВРАЧ-КОСМЕТОЛОГ</text>
-    <text y="{int(min(w,h)*0.10)}" text-anchor="middle" font-family="Inter, system-ui, sans-serif"
-          font-size="{int(min(w,h)*0.018)}" letter-spacing="2" fill="{PRIMARY_SOFT}" opacity=".75">
-      ПЛЕЙСХОЛДЕР · ЗАМЕНИТЕ {kind.upper()}.JPG/.PNG
-    </text>
+          font-size="{int(min(w,h)*0.055)}" font-weight="500" fill="{PRIMARY}">Влада Боброва</text>
+    <text y="{int(min(w,h)*0.045)}" text-anchor="middle" font-family="Inter, system-ui, sans-serif"
+          font-size="{int(min(w,h)*0.022)}" font-weight="600" letter-spacing="4" fill="{ACCENT}">ВРАЧ-КОСМЕТОЛОГ</text>
   </g>
 </svg>
 '''

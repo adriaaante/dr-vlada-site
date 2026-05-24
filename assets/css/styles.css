@@ -665,6 +665,8 @@ p { margin: 0 0 1em; color: var(--c-text-muted); }
   text-decoration: none;
 }
 a.service-card:hover { color: inherit; }
+/* Чтобы внутри карточки курсор не превращался в I-beam на тексте */
+.service-card * { cursor: inherit; }
 .service-card::before {
   content: '';
   position: absolute;
@@ -738,7 +740,12 @@ a.service-card:hover { color: inherit; }
   outline: 3px solid var(--c-accent);
   outline-offset: 3px;
 }
-.case-card .ba { cursor: ew-resize; }
+/* Pointer-курсор на тексте/иконках внутри карточки кейса */
+.case-card .case-card__body,
+.case-card .case-card__body * { cursor: pointer; }
+/* А внутри слайдера — курсор перетаскивания */
+.case-card .ba,
+.case-card .ba * { cursor: ew-resize; }
 
 /* Before/after slider */
 .ba {

@@ -23,15 +23,11 @@
           fill="#0e3d4d" opacity=".7"/>
   </g>
 
-  <!-- Подпись -->
-  <g transform="translate(400.0 890)">
+  <!-- Подпись (только имя, без слова «плейсхолдер») -->
+  <g transform="translate(400.0 920)">
     <text text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif"
-          font-size="48" font-weight="500" fill="#0e3d4d">Влада Боброва</text>
-    <text y="40" text-anchor="middle" font-family="Inter, system-ui, sans-serif"
-          font-size="20" font-weight="600" letter-spacing="4" fill="#c5a572">ВРАЧ-КОСМЕТОЛОГ</text>
-    <text y="80" text-anchor="middle" font-family="Inter, system-ui, sans-serif"
-          font-size="14" letter-spacing="2" fill="#1e6478" opacity=".75">
-      ПЛЕЙСХОЛДЕР · ЗАМЕНИТЕ ABOUT.JPG/.PNG
-    </text>
+          font-size="44" font-weight="500" fill="#0e3d4d">Влада Боброва</text>
+    <text y="36" text-anchor="middle" font-family="Inter, system-ui, sans-serif"
+          font-size="17" font-weight="600" letter-spacing="4" fill="#c5a572">ВРАЧ-КОСМЕТОЛОГ</text>
   </g>
 </svg>
