@@ -50,7 +50,8 @@ def make_opener():
 
 def download_one(opener, file_id: str, dest: Path) -> None:
     """Скачивает один файл с Drive, обрабатывая 'virus scan' интерстишал."""
-    url = f"https://drive.google.com/uc?export=download&id={file_id}"
+    # confirm=t сразу обходит окно подтверждения для большинства файлов
+    url = f"https://drive.google.com/uc?export=download&confirm=t&id={file_id}"
     print(f"\n→ {file_id} → {dest.name}")
     print(f"  GET {url}")
     resp = opener.open(url, timeout=60)
