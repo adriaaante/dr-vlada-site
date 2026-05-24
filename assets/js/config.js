@@ -32,8 +32,10 @@ window.VB_CONFIG = {
   hours:         'Пн–Сб 10:00–20:00',
   hoursShort:    '10:00–20:00',
 
-  // Карта (Яндекс embed). Замените src на свой адрес.
-  mapEmbed:      'https://yandex.ru/map-widget/v1/?ll=37.617635%2C55.755814&z=12',
+  // Карта (Яндекс embed) — Чебоксары. Для конкретной точки откройте
+  // yandex.ru/maps → нужный адрес → «Поделиться» → «Скопировать ссылку»
+  // и подставьте сюда (формат /map-widget/v1/?ll=lng,lat&z=zoom).
+  mapEmbed:      'https://yandex.ru/map-widget/v1/?ll=47.249714%2C56.132431&z=13',
 
   // Email (опционально)
   email:         'hello@vladbobrov.ru',
