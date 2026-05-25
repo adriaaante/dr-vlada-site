@@ -21,10 +21,10 @@ jobs:
       - name: Download logo from CDN
         run: |
           mkdir -p assets/img
-          # Скачиваем первый вариант (нано-банан 1024×1024)
+          # Премиум ornate V с лавровыми ветвями (Higgsfield, Nano Banana Pro 2k)
           curl -sSfL --retry 3 \
             -o assets/img/logo-mark.png \
-            "https://d8j0ntlcm91z4.cloudfront.net/user_3Di09CVa1BatdZIdE0tir1KKUxw/hf_20260524_155354_4e433d39-35ee-44cc-b975-ce0dfa304021.png"
+            "https://d8j0ntlcm91z4.cloudfront.net/user_3Di09CVa1BatdZIdE0tir1KKUxw/hf_20260525_070316_aaeaa23d-ee42-410b-9749-8b377a89faf6.png"
           ls -la assets/img/logo-mark.png
           file assets/img/logo-mark.png
 
@@ -36,6 +36,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "Логотип не изменился — пропускаю коммит."
           else
-            git commit -m "Add generated logo (Higgsfield Nano Banana 2)"
+            git commit -m "Update logo: ornate luxury V with laurels (Higgsfield)"
             git push
           fi
