@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Логотип Влады Бобровой — ВБ">
+  <defs>
+    <linearGradient id="lmGold" x1="0.1" y1="0.1" x2="0.9" y2="0.9">
+      <stop offset="0" stop-color="#f3e5c2"/>
+      <stop offset="0.5" stop-color="#d4b572"/>
+      <stop offset="1" stop-color="#a8884f"/>
+    </linearGradient>
+    <radialGradient id="lmBg" cx="0.32" cy="0.28" r="0.85">
+      <stop offset="0" stop-color="#1e6478"/>
+      <stop offset="0.55" stop-color="#0e3d4d"/>
+      <stop offset="1" stop-color="#082a36"/>
+    </radialGradient>
+  </defs>
+  <!-- Идеальный круг во всё полотно -->
+  <circle cx="100" cy="100" r="100" fill="url(#lmBg)"/>
+  <!-- ВБ крупным серифом, золотая заливка -->
+  <text x="100" y="135"
+        text-anchor="middle"
+        font-family="'Cormorant Garamond', 'Times New Roman', Georgia, serif"
+        font-size="120"
+        font-weight="700"
+        fill="url(#lmGold)"
+        letter-spacing="-4">ВБ</text>
+</svg>
