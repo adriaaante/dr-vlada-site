@@ -1079,7 +1079,7 @@ a.service-card:hover { color: inherit; }
   color: rgba(255,255,255,.5);
 }
 
-/* FutureFlow credit (адаптированный) */
+/* FutureFlow credit (фирменный стиль) */
 .ff-credit {
   display: inline-flex;
   align-items: center;
@@ -1094,17 +1094,16 @@ a.service-card:hover { color: inherit; }
 }
 .ff-credit:hover {
   background: rgba(255,255,255,.1);
-  border-color: rgba(197,165,114,.4);
+  border-color: rgba(74,134,216,.4);
   color: #fff;
 }
-.ff-credit__mark { flex-shrink: 0; filter: drop-shadow(0 0 6px rgba(197,165,114,.4)); }
+.ff-credit__mark { flex-shrink: 0; filter: drop-shadow(0 0 6px rgba(74,134,216,.45)); }
 .ff-credit__brand {
   font-weight: 700;
-  background: linear-gradient(90deg, #e8d9b8 0%, #ffffff 50%, #c5a572 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  letter-spacing: -.2px;
+  color: #fff;
 }
+.ff-credit__brand span { color: #4A86D8; }
 
 /* -------- Floating Action Button -------- */
 .fab {
