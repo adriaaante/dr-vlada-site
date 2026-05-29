@@ -1079,32 +1079,6 @@ a.service-card:hover { color: inherit; }
   color: rgba(255,255,255,.5);
 }
 
-/* FutureFlow credit (фирменный стиль) */
-.ff-credit {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 14px 7px 11px;
-  border-radius: 100px;
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.12);
-  color: rgba(255,255,255,.7);
-  font-size: 12.5px;
-  transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
-}
-.ff-credit:hover {
-  background: rgba(255,255,255,.1);
-  border-color: rgba(74,134,216,.4);
-  color: #fff;
-}
-.ff-credit__mark { flex-shrink: 0; filter: drop-shadow(0 0 6px rgba(74,134,216,.45)); }
-.ff-credit__brand {
-  font-weight: 700;
-  letter-spacing: -.2px;
-  color: #fff;
-}
-.ff-credit__brand span { color: #4A86D8; }
-
 /* -------- Floating Action Button -------- */
 .fab {
   position: fixed;
