@@ -24,7 +24,8 @@ window.VB_CONFIG = {
   // Мессенджеры (deeplinks)
   whatsapp:      'https://wa.me/7XXXXXXXXXX?text=Здравствуйте,%20Влада!%20Хочу%20записаться%20на%20консультацию.',
   telegram:      'https://t.me/USERNAME',
-  instagram:     'https://instagram.com/USERNAME',
+  instagram:     'https://instagram.com/dr.bobrova_',
+  vk:            'https://vk.com/doctorbobrova',
 
   // Адрес и режим работы
   address:       'г. Чебоксары, ул. Адрес, д. XX',
@@ -40,16 +41,19 @@ window.VB_CONFIG = {
   // Email (опционально)
   email:         'hello@vladbobrov.ru',
 
-  // Цены (показываются на странице услуг, "от ..."). null — скрыть.
+  // Цены (стартовые, "от ..."). Источник — прайс из Taplink.
   prices: {
-    consultation:   '3 500',
-    botox:          '15 000',
-    fillers:        '22 000',
-    bioreva:        '12 000',
-    peels:          '8 000',
-    laser:          '6 000',
-    threads:        '35 000',
-    plasma:         '9 000',
-    mesotherapy:    '7 500'
+    consultation:   '800',
+    lips:           '7 000',
+    fillers:        '9 000',
+    tearTrough:     '14 000',
+    bioreva:        '6 000',
+    mesotherapy:    '3 000',
+    botox:          '300',
+    blanching:      '13 000',
+    lipolytics:     '2 500',
+    cleaning:       '3 500',
+    peels:          '2 900',
+    care:           '2 900'
   }
 };

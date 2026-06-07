@@ -29,6 +29,7 @@
         else if (key === 'whatsapp')el.href = cfg.whatsapp || '#';
         else if (key === 'telegram')el.href = cfg.telegram || '#';
         else if (key === 'instagram')el.href = cfg.instagram || '#';
+        else if (key === 'vk')      el.href = cfg.vk || '#';
         else if (key === 'email')   el.href = 'mailto:' + value;
         if (!el.textContent.trim()) el.textContent = value;
       } else {
@@ -42,6 +43,7 @@
       else if (key === 'whatsapp') el.href = cfg.whatsapp;
       else if (key === 'telegram') el.href = cfg.telegram;
       else if (key === 'instagram')el.href = cfg.instagram;
+      else if (key === 'vk')       el.href = cfg.vk;
       else if (key === 'email')    el.href = 'mailto:' + cfg.email;
     });
 
