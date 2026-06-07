@@ -8,7 +8,7 @@
   <link rel="icon" href="assets/img/logo-mark.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root{
       --teal:#0e3d4d; --teal-dark:#082a36; --teal-soft:#1e6478;
@@ -16,17 +16,13 @@
       --cream:#fdfaf3; --cream-soft:#f6f1e6; --ink:#1a2129; --muted:#5a6470;
       --display:'Cormorant Garamond',Georgia,'Times New Roman',serif;
       --body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
-      --script:'Pinyon Script','Cormorant Garamond',cursive;
     }
     *{box-sizing:border-box;}
     html,body{margin:0;}
     body{
-      font-family:var(--body);
-      background:#e9e6df;
-      color:var(--ink);
+      font-family:var(--body);background:#e9e6df;color:var(--ink);
       display:flex;flex-direction:column;align-items:center;
-      padding:26px 16px 60px;
-      -webkit-font-smoothing:antialiased;
+      padding:26px 16px 60px;-webkit-font-smoothing:antialiased;
     }
 
     /* Панель-подсказка (не печатается) */
@@ -49,100 +45,57 @@
     /* Лист A4 альбомный */
     .sheet{
       width:297mm;height:210mm;
-      background:
-        radial-gradient(120% 120% at 0% 0%, #ffffff 0%, var(--cream) 45%, var(--cream-soft) 100%);
-      box-shadow:0 30px 80px rgba(14,61,77,.22);
-      position:relative;overflow:hidden;
+      background:radial-gradient(120% 120% at 0% 0%, #ffffff 0%, var(--cream) 45%, var(--cream-soft) 100%);
+      box-shadow:0 30px 80px rgba(14,61,77,.22);position:relative;overflow:hidden;
     }
-    /* Двойная золотая рамка */
-    .frame{
-      position:absolute;inset:11mm;
-      border:2px solid var(--gold);
-      border-radius:3px;
-    }
-    .frame::after{
-      content:'';position:absolute;inset:4px;
-      border:0.6px solid var(--gold-dark);
-      opacity:.55;border-radius:2px;
-    }
-    /* Уголки-орнаменты */
+    .frame{position:absolute;inset:11mm;border:2px solid var(--gold);border-radius:3px;}
+    .frame::after{content:'';position:absolute;inset:4px;border:0.6px solid var(--gold-dark);opacity:.55;border-radius:2px;}
     .corner{position:absolute;width:34px;height:34px;border:0 solid var(--gold-dark);opacity:.9;}
     .corner.tl{top:11mm;left:11mm;border-top-width:2px;border-left-width:2px;margin:-6px 0 0 -6px;}
     .corner.tr{top:11mm;right:11mm;border-top-width:2px;border-right-width:2px;margin:-6px -6px 0 0;}
     .corner.bl{bottom:11mm;left:11mm;border-bottom-width:2px;border-left-width:2px;margin:0 0 -6px -6px;}
     .corner.br{bottom:11mm;right:11mm;border-bottom-width:2px;border-right-width:2px;margin:0 -6px -6px 0;}
 
-    /* Водяной знак — крупная B */
     .watermark{
       position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
       font-family:var(--display);font-weight:700;font-size:560px;line-height:1;
-      color:var(--gold);opacity:.05;pointer-events:none;user-select:none;
-      transform:translateY(6px);
+      color:var(--gold);opacity:.05;pointer-events:none;user-select:none;transform:translateY(6px);
     }
 
-    .content{
-      position:absolute;inset:11mm;
-      display:flex;flex-direction:column;align-items:center;
-      text-align:center;padding:14mm 20mm;
-    }
-    .logo{height:54px;width:auto;margin-bottom:6px;}
-    .eyebrow{
-      font-size:11px;letter-spacing:.42em;text-transform:uppercase;
-      color:var(--gold-dark);font-weight:600;margin:10px 0 0;
-    }
-    .rule{width:64px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:14px 0 0;}
-    .title{
-      font-family:var(--display);font-weight:600;color:var(--teal);
-      font-size:64px;line-height:1;letter-spacing:.14em;margin:14px 0 2px;
-    }
+    .content{position:absolute;inset:11mm;display:flex;flex-direction:column;align-items:center;text-align:center;padding:13mm 22mm;}
+    .logo{height:52px;width:auto;margin-bottom:4px;}
+    .eyebrow{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold-dark);font-weight:600;margin:10px 0 0;}
+    .rule{width:64px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:13px 0 0;}
+    .title{font-family:var(--display);font-weight:600;color:var(--teal);font-size:60px;line-height:1;letter-spacing:.14em;margin:12px 0 2px;}
     .subtitle{font-size:13px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);margin:0;}
 
-    .lead{font-size:15px;color:var(--muted);margin:26px 0 4px;}
-    .name{
-      font-family:var(--script);
-      font-size:62px;line-height:1;color:var(--teal-dark);
-      margin:6px 0 4px;padding:0 14px 6px;
-      min-width:60%;
-      border-bottom:1.4px solid var(--gold);
-      outline:none;
-    }
-    .name:empty::before{content:'Имя Фамилия';color:#b9c0c6;}
-    .body{
-      font-family:var(--display);font-size:23px;line-height:1.5;color:var(--ink);
-      max-width:760px;margin:18px 0 0;font-weight:500;
-    }
-    .course{color:var(--teal);font-weight:600;outline:none;}
-    .course:empty::before{content:'«Название программы обучения»';color:#b9c0c6;font-weight:500;}
-    .hours{color:var(--teal);font-weight:600;outline:none;}
-    .hours:empty::before{content:'__';color:#b9c0c6;}
+    .lead{font-size:15px;color:var(--muted);margin:22px 0 0;}
 
-    /* Низ: дата · печать · подпись */
-    .footer{
-      position:absolute;left:20mm;right:20mm;bottom:16mm;
-      display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+    /* Поля для заполнения от руки */
+    .field{
+      border-bottom:1.4px solid var(--gold);
+      min-height:1.25em;min-width:55%;max-width:80%;
+      outline:none;padding:2px 18px 6px;
+      font-family:var(--display);color:var(--teal-dark);font-weight:600;
     }
-    .sign{display:flex;flex-direction:column;align-items:center;min-width:190px;}
-    .sign__line{width:100%;border-bottom:1.2px solid var(--teal);padding-bottom:4px;}
-    .sign__val{font-family:var(--script);font-size:34px;color:var(--teal-dark);line-height:1;outline:none;}
-    .sign__val:empty::before{content:'__.__.____';color:#b9c0c6;font-family:var(--display);font-size:18px;}
-    .sign__cap{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:8px;}
+    .field--name{font-size:40px;line-height:1.1;margin-top:8px;}
+    .field--program{font-size:26px;line-height:1.25;margin-top:6px;}
+    .cap{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:6px;}
+
+    .body{font-family:var(--display);font-size:21px;line-height:1.45;color:var(--ink);max-width:720px;margin:16px 0 0;font-weight:500;}
+
+    /* Низ: дата · печать · подпись (вписываются от руки) */
+    .footer{position:absolute;left:24mm;right:24mm;bottom:17mm;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;}
+    .sign{display:flex;flex-direction:column;align-items:center;width:210px;}
+    .sign__line{width:100%;min-height:30px;border-bottom:1.2px solid var(--teal);outline:none;}
+    .sign__cap{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:8px;text-align:center;}
 
     /* Печать */
-    .seal{position:relative;width:118px;height:118px;flex-shrink:0;}
-    .seal__ring{
-      position:absolute;inset:0;border-radius:50%;
-      border:2px solid var(--gold-dark);
-      box-shadow:inset 0 0 0 4px rgba(197,165,114,.18);
-    }
+    .seal{position:relative;width:120px;height:120px;flex-shrink:0;}
+    .seal__ring{position:absolute;inset:0;border-radius:50%;border:2px solid var(--gold-dark);box-shadow:inset 0 0 0 4px rgba(197,165,114,.18);}
     .seal__ring2{position:absolute;inset:11px;border-radius:50%;border:1px solid var(--gold);opacity:.7;}
-    .seal__mono{
-      position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-      font-family:var(--display);font-weight:700;font-size:58px;color:var(--teal);
-    }
-    .seal__txt{
-      position:absolute;left:0;right:0;bottom:18px;text-align:center;
-      font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-dark);
-    }
+    .seal__mono{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:54px;color:var(--teal);transform:translateY(-6px);}
+    .seal__txt{position:absolute;left:0;right:0;bottom:20px;text-align:center;font-size:8px;letter-spacing:.14em;text-transform:lowercase;color:var(--gold-dark);font-weight:600;}
 
     @media print{
       @page{size:A4 landscape;margin:0;}
@@ -150,19 +103,15 @@
       .toolbar{display:none;}
       .sheet{box-shadow:none;width:297mm;height:210mm;}
     }
-    @media (max-width:1100px){
-      .sheet{transform:scale(.62);transform-origin:top center;margin-bottom:-300px;}
-    }
-    @media (max-width:680px){
-      .sheet{transform:scale(.34);margin-bottom:-560px;}
-    }
+    @media (max-width:1100px){ .sheet{transform:scale(.62);transform-origin:top center;margin-bottom:-300px;} }
+    @media (max-width:680px){ .sheet{transform:scale(.34);margin-bottom:-560px;} }
   </style>
 </head>
 <body>
 
   <div class="toolbar">
-    <div class="hint"><strong>Как выдать сертификат:</strong> кликните по полям «Имя Фамилия», «Название программы», количеству часов и дате — впишите данные ученика, затем нажмите «Сохранить PDF» (или Ctrl/Cmd&nbsp;+&nbsp;P → «Сохранить как PDF»).</div>
-    <button onclick="window.print()">Сохранить PDF / Печать</button>
+    <div class="hint"><strong>Готовый бланк.</strong> Распечатайте сертификат и впишите от руки имя и фамилию ученика, программу, дату и поставьте подпись. При необходимости поля можно заполнить и на компьютере — просто кликните по линии и введите текст.</div>
+    <button onclick="window.print()">Печать / Сохранить PDF</button>
   </div>
 
   <div class="sheet">
@@ -180,12 +129,14 @@
       <p class="subtitle">о прохождении индивидуального обучения</p>
 
       <p class="lead">Настоящим подтверждается, что</p>
-      <div class="name" contenteditable="true"></div>
+      <div class="field field--name" contenteditable="true"></div>
+      <div class="cap">Имя и фамилия</div>
 
-      <p class="body">
-        успешно прошёл(а) индивидуальный курс обучения по программе
-        <span class="course" contenteditable="true"></span>
-        в объёме <span class="hours" contenteditable="true"></span> ак. часов
+      <p class="body" style="margin-top:18px">успешно прошёл(а) индивидуальное обучение по программе</p>
+      <div class="field field--program" contenteditable="true"></div>
+      <div class="cap">Программа обучения</div>
+
+      <p class="body" style="font-size:18px;color:var(--muted);margin-top:16px">
         под руководством врача-косметолога Влады Бобровой, освоив теоретические
         знания и практические техники эстетической косметологии.
       </p>
@@ -193,7 +144,7 @@
 
     <div class="footer">
       <div class="sign">
-        <div class="sign__line"><span class="sign__val" contenteditable="true"></span></div>
+        <div class="sign__line" contenteditable="true"></div>
         <div class="sign__cap">Дата выдачи</div>
       </div>
 
@@ -201,12 +152,12 @@
         <div class="seal__ring"></div>
         <div class="seal__ring2"></div>
         <div class="seal__mono">B</div>
-        <div class="seal__txt">Doctor Bobrova</div>
+        <div class="seal__txt">doctorbobrova.ru</div>
       </div>
 
       <div class="sign">
-        <div class="sign__line"><span class="sign__val" style="font-size:30px">Влада Боброва</span></div>
-        <div class="sign__cap">Подпись · врач-косметолог</div>
+        <div class="sign__line" contenteditable="true"></div>
+        <div class="sign__cap">Подпись · Влада Боброва, врач-косметолог</div>
       </div>
     </div>
   </div>
