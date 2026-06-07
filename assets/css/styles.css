@@ -1456,6 +1456,88 @@ a.service-card:hover { color: inherit; }
 .process__step h4 { font-size: 18px; margin: 0 0 8px; }
 .process__step p { margin: 0; font-size: 14px; color: var(--c-text-muted); }
 
+/* -------- Обучение врачей (edu) -------- */
+.edu { overflow: hidden; }
+.edu__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(36px, 5vw, 72px);
+  align-items: center;
+}
+.edu__lead { font-size: 18px; color: rgba(255,255,255,.88); }
+.edu__intro .section__eyebrow { margin-bottom: 14px; }
+.edu__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 22px;
+  margin-top: 30px;
+}
+.edu__price {
+  color: var(--c-accent);
+  font-weight: 600;
+  font-size: 14.5px;
+  letter-spacing: .01em;
+}
+.edu__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.edu-card {
+  padding: 26px 24px;
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+  transition: transform var(--t) var(--ease), border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+}
+.edu-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(197,165,114,.45);
+  background: rgba(255,255,255,.07);
+}
+.edu-card__icon {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--c-accent) 0%, var(--c-accent-dark) 100%);
+  color: #fff;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 20px rgba(197,165,114,.3);
+}
+.edu-card__icon svg { width: 24px; height: 24px; }
+.edu-card h3 { font-size: 18px; color: #fff; margin: 0 0 8px; }
+.edu-card p { font-size: 14px; color: rgba(255,255,255,.72); margin: 0; line-height: 1.6; }
+.edu__cert {
+  margin-top: clamp(32px, 5vw, 52px);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px clamp(22px, 4vw, 36px);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(197,165,114,.20) 0%, rgba(197,165,114,.05) 100%);
+  border: 1px solid rgba(197,165,114,.38);
+}
+.edu__cert-icon {
+  flex-shrink: 0;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--c-accent) 0%, var(--c-accent-dark) 100%);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(197,165,114,.4);
+}
+.edu__cert-icon svg { width: 28px; height: 28px; }
+.edu__cert strong {
+  display: block;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.edu__cert p { margin: 0; color: rgba(255,255,255,.78); font-size: 14.5px; }
+
 /* -------- Утилиты -------- */
 .text-center { text-align: center; }
 .mt-0 { margin-top: 0; }
@@ -1482,11 +1564,20 @@ a.service-card:hover { color: inherit; }
   .process { grid-template-columns: repeat(2, 1fr); }
   .about-preview__grid,
   .about-bio,
+  .edu__grid,
   .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .about-bio__photo { position: static; max-width: 460px; margin: 0 auto; }
   .trust__grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .footer__grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   .lightbox__media { grid-template-columns: 1fr; }
+}
+
+/* Раньше переключаемся на бургер-меню: 6 пунктов навигации перестают
+   помещаться рядом с логотипом и кнопкой раньше, чем на 720px. */
+@media (max-width: 900px) {
+  .nav, .header__phone { display: none; }
+  .burger { display: inline-flex; }
+  .header__cta .btn:not(.header__cta-mobile) { display: none; }
 }
 
 @media (max-width: 720px) {
@@ -1500,16 +1591,29 @@ a.service-card:hover { color: inherit; }
   .topbar { display: none; }
   .header__cta .btn:not(.header__cta-mobile) { display: none; }
 
-  .hero { padding: 50px 0 80px; }
+  .hero { padding: 40px 0 72px; }
+  .hero__grid { gap: 36px; }
   .hero__title { font-size: clamp(34px, 8vw, 44px); }
-  .hero__photo { aspect-ratio: 4/5; }
+  /* На смартфоне фото показываем компактно и сразу под текстом,
+     лицо в кадре по центру, чтобы оно всегда было видно. */
+  .hero__photo {
+    aspect-ratio: 4/5;
+    max-width: 420px;
+    width: 100%;
+    margin: 4px auto 0;
+  }
+  .hero__photo img { object-position: center 22%; }
   .hero__props { gap: 18px 28px; }
   .hero__prop strong { font-size: 24px; }
   .hero__badge { left: 12px; right: 12px; bottom: 12px; padding: 10px 12px; }
   .hero__badge-icon { width: 38px; height: 38px; }
 
   .services,
-  .portfolio-grid { grid-template-columns: 1fr; }
+  .portfolio-grid,
+  .edu__cards { grid-template-columns: 1fr; }
+  .edu__cta { gap: 14px; }
+  .edu__cta .btn { width: 100%; }
+  .edu__cert { flex-direction: column; align-items: flex-start; gap: 14px; }
   .review { flex: 0 0 100%; }
   .svc-row { grid-template-columns: 56px 1fr; padding: 22px; }
   .svc-row__icon { width: 56px; height: 56px; }
