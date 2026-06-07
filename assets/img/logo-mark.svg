@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Логотип Влады Бобровой — ВБ">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Doctor Bobrova Cosmetology">
   <defs>
     <linearGradient id="lmGold" x1="0.1" y1="0.1" x2="0.9" y2="0.9">
       <stop offset="0" stop-color="#f3e5c2"/>
@@ -13,12 +13,11 @@
   </defs>
   <!-- Идеальный круг во всё полотно -->
   <circle cx="100" cy="100" r="100" fill="url(#lmBg)"/>
-  <!-- ВБ крупным серифом, золотая заливка -->
-  <text x="100" y="135"
+  <!-- B серифом (BOBROVA), золотая заливка -->
+  <text x="100" y="146"
         text-anchor="middle"
         font-family="'Cormorant Garamond', 'Times New Roman', Georgia, serif"
-        font-size="120"
+        font-size="150"
         font-weight="700"
-        fill="url(#lmGold)"
-        letter-spacing="-4">ВБ</text>
+        fill="url(#lmGold)">B</text>
 </svg>
