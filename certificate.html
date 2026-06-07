@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Сертификат — Doctor Bobrova Cosmetology</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="assets/img/logo-mark.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --teal:#0e3d4d; --teal-dark:#082a36; --teal-soft:#1e6478;
+      --gold:#c5a572; --gold-dark:#a8884f; --gold-soft:#e8d9b8; --gold-pale:#f3e5c2;
+      --cream:#fdfaf3; --cream-soft:#f6f1e6; --ink:#1a2129; --muted:#5a6470;
+      --display:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+      --body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+      --script:'Pinyon Script','Cormorant Garamond',cursive;
+    }
+    *{box-sizing:border-box;}
+    html,body{margin:0;}
+    body{
+      font-family:var(--body);
+      background:#e9e6df;
+      color:var(--ink);
+      display:flex;flex-direction:column;align-items:center;
+      padding:26px 16px 60px;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    /* Панель-подсказка (не печатается) */
+    .toolbar{
+      width:100%;max-width:1040px;margin:0 auto 22px;
+      background:#fff;border:1px solid #e2ddd0;border-radius:14px;
+      padding:14px 18px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+      box-shadow:0 8px 24px rgba(14,61,77,.08);font-size:14px;color:var(--muted);
+    }
+    .toolbar strong{color:var(--teal);}
+    .toolbar button{
+      font:600 14px/1 var(--body);cursor:pointer;border:0;border-radius:100px;
+      padding:11px 20px;color:#fff;
+      background:linear-gradient(135deg,var(--teal-soft),var(--teal));
+      box-shadow:0 8px 20px rgba(14,61,77,.22);
+    }
+    .toolbar button:hover{filter:brightness(1.07);}
+    .toolbar .hint{flex:1;min-width:220px;}
+
+    /* Лист A4 альбомный */
+    .sheet{
+      width:297mm;height:210mm;
+      background:
+        radial-gradient(120% 120% at 0% 0%, #ffffff 0%, var(--cream) 45%, var(--cream-soft) 100%);
+      box-shadow:0 30px 80px rgba(14,61,77,.22);
+      position:relative;overflow:hidden;
+    }
+    /* Двойная золотая рамка */
+    .frame{
+      position:absolute;inset:11mm;
+      border:2px solid var(--gold);
+      border-radius:3px;
+    }
+    .frame::after{
+      content:'';position:absolute;inset:4px;
+      border:0.6px solid var(--gold-dark);
+      opacity:.55;border-radius:2px;
+    }
+    /* Уголки-орнаменты */
+    .corner{position:absolute;width:34px;height:34px;border:0 solid var(--gold-dark);opacity:.9;}
+    .corner.tl{top:11mm;left:11mm;border-top-width:2px;border-left-width:2px;margin:-6px 0 0 -6px;}
+    .corner.tr{top:11mm;right:11mm;border-top-width:2px;border-right-width:2px;margin:-6px -6px 0 0;}
+    .corner.bl{bottom:11mm;left:11mm;border-bottom-width:2px;border-left-width:2px;margin:0 0 -6px -6px;}
+    .corner.br{bottom:11mm;right:11mm;border-bottom-width:2px;border-right-width:2px;margin:0 -6px -6px 0;}
+
+    /* Водяной знак — крупная B */
+    .watermark{
+      position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+      font-family:var(--display);font-weight:700;font-size:560px;line-height:1;
+      color:var(--gold);opacity:.05;pointer-events:none;user-select:none;
+      transform:translateY(6px);
+    }
+
+    .content{
+      position:absolute;inset:11mm;
+      display:flex;flex-direction:column;align-items:center;
+      text-align:center;padding:14mm 20mm;
+    }
+    .logo{height:54px;width:auto;margin-bottom:6px;}
+    .eyebrow{
+      font-size:11px;letter-spacing:.42em;text-transform:uppercase;
+      color:var(--gold-dark);font-weight:600;margin:10px 0 0;
+    }
+    .rule{width:64px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:14px 0 0;}
+    .title{
+      font-family:var(--display);font-weight:600;color:var(--teal);
+      font-size:64px;line-height:1;letter-spacing:.14em;margin:14px 0 2px;
+    }
+    .subtitle{font-size:13px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);margin:0;}
+
+    .lead{font-size:15px;color:var(--muted);margin:26px 0 4px;}
+    .name{
+      font-family:var(--script);
+      font-size:62px;line-height:1;color:var(--teal-dark);
+      margin:6px 0 4px;padding:0 14px 6px;
+      min-width:60%;
+      border-bottom:1.4px solid var(--gold);
+      outline:none;
+    }
+    .name:empty::before{content:'Имя Фамилия';color:#b9c0c6;}
+    .body{
+      font-family:var(--display);font-size:23px;line-height:1.5;color:var(--ink);
+      max-width:760px;margin:18px 0 0;font-weight:500;
+    }
+    .course{color:var(--teal);font-weight:600;outline:none;}
+    .course:empty::before{content:'«Название программы обучения»';color:#b9c0c6;font-weight:500;}
+    .hours{color:var(--teal);font-weight:600;outline:none;}
+    .hours:empty::before{content:'__';color:#b9c0c6;}
+
+    /* Низ: дата · печать · подпись */
+    .footer{
+      position:absolute;left:20mm;right:20mm;bottom:16mm;
+      display:flex;align-items:flex-end;justify-content:space-between;gap:20px;
+    }
+    .sign{display:flex;flex-direction:column;align-items:center;min-width:190px;}
+    .sign__line{width:100%;border-bottom:1.2px solid var(--teal);padding-bottom:4px;}
+    .sign__val{font-family:var(--script);font-size:34px;color:var(--teal-dark);line-height:1;outline:none;}
+    .sign__val:empty::before{content:'__.__.____';color:#b9c0c6;font-family:var(--display);font-size:18px;}
+    .sign__cap{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:8px;}
+
+    /* Печать */
+    .seal{position:relative;width:118px;height:118px;flex-shrink:0;}
+    .seal__ring{
+      position:absolute;inset:0;border-radius:50%;
+      border:2px solid var(--gold-dark);
+      box-shadow:inset 0 0 0 4px rgba(197,165,114,.18);
+    }
+    .seal__ring2{position:absolute;inset:11px;border-radius:50%;border:1px solid var(--gold);opacity:.7;}
+    .seal__mono{
+      position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+      font-family:var(--display);font-weight:700;font-size:58px;color:var(--teal);
+    }
+    .seal__txt{
+      position:absolute;left:0;right:0;bottom:18px;text-align:center;
+      font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-dark);
+    }
+
+    @media print{
+      @page{size:A4 landscape;margin:0;}
+      html,body{background:#fff;padding:0;margin:0;}
+      .toolbar{display:none;}
+      .sheet{box-shadow:none;width:297mm;height:210mm;}
+    }
+    @media (max-width:1100px){
+      .sheet{transform:scale(.62);transform-origin:top center;margin-bottom:-300px;}
+    }
+    @media (max-width:680px){
+      .sheet{transform:scale(.34);margin-bottom:-560px;}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <div class="hint"><strong>Как выдать сертификат:</strong> кликните по полям «Имя Фамилия», «Название программы», количеству часов и дате — впишите данные ученика, затем нажмите «Сохранить PDF» (или Ctrl/Cmd&nbsp;+&nbsp;P → «Сохранить как PDF»).</div>
+    <button onclick="window.print()">Сохранить PDF / Печать</button>
+  </div>
+
+  <div class="sheet">
+    <div class="watermark">B</div>
+    <div class="frame"></div>
+    <span class="corner tl"></span><span class="corner tr"></span>
+    <span class="corner bl"></span><span class="corner br"></span>
+
+    <div class="content">
+      <img class="logo" src="assets/img/logo-wordmark.png" alt="Doctor Bobrova Cosmetology">
+      <div class="eyebrow">Школа эстетической косметологии</div>
+      <div class="rule"></div>
+
+      <h1 class="title">СЕРТИФИКАТ</h1>
+      <p class="subtitle">о прохождении индивидуального обучения</p>
+
+      <p class="lead">Настоящим подтверждается, что</p>
+      <div class="name" contenteditable="true"></div>
+
+      <p class="body">
+        успешно прошёл(а) индивидуальный курс обучения по программе
+        <span class="course" contenteditable="true"></span>
+        в объёме <span class="hours" contenteditable="true"></span> ак. часов
+        под руководством врача-косметолога Влады Бобровой, освоив теоретические
+        знания и практические техники эстетической косметологии.
+      </p>
+    </div>
+
+    <div class="footer">
+      <div class="sign">
+        <div class="sign__line"><span class="sign__val" contenteditable="true"></span></div>
+        <div class="sign__cap">Дата выдачи</div>
+      </div>
+
+      <div class="seal" aria-hidden="true">
+        <div class="seal__ring"></div>
+        <div class="seal__ring2"></div>
+        <div class="seal__mono">B</div>
+        <div class="seal__txt">Doctor Bobrova</div>
+      </div>
+
+      <div class="sign">
+        <div class="sign__line"><span class="sign__val" style="font-size:30px">Влада Боброва</span></div>
+        <div class="sign__cap">Подпись · врач-косметолог</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
