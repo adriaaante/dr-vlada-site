@@ -17,26 +17,27 @@ window.VB_CONFIG = {
   },
 
   // Телефон в человекочитаемом виде — для отображения
-  phone:         '+7 (XXX) XXX-XX-XX',
+  phone:         '+7 903 359 9647',
   // Телефон без форматирования — для tel: и wa.me ссылок
-  phoneClean:    '+7XXXXXXXXXX',
+  phoneClean:    '+79033599647',
 
   // Мессенджеры (deeplinks)
-  whatsapp:      'https://wa.me/7XXXXXXXXXX?text=Здравствуйте,%20Влада!%20Хочу%20записаться%20на%20консультацию.',
-  telegram:      'https://t.me/USERNAME',
+  whatsapp:      'https://wa.me/79033599647?text=Здравствуйте,%20Влада!%20Хочу%20записаться%20на%20консультацию.',
+  telegram:      'https://t.me/vladabobro',
   instagram:     'https://instagram.com/dr.bobrova_',
   vk:            'https://vk.com/doctorbobrova',
 
-  // Адрес и режим работы
-  address:       'г. Чебоксары, ул. Адрес, д. XX',
-  addressShort:  'г. Чебоксары',
+  // Адрес и режим работы.
+  // Приём в двух городах: Чебоксары (постоянный адрес) и Москва (по записи).
+  address:       'г. Чебоксары, ул. Лукина, 3 — салон me’one',
+  addressCheb:   'г. Чебоксары, ул. Лукина, 3 — салон me’one',
+  addressMoscow: 'Москва — приём по записи, адрес уточняйте при записи',
+  addressShort:  'Чебоксары · Москва',
   hours:         'Пн–Сб 10:00–20:00',
   hoursShort:    '10:00–20:00',
 
-  // Карта (Яндекс embed) — Чебоксары. Для конкретной точки откройте
-  // yandex.ru/maps → нужный адрес → «Поделиться» → «Скопировать ссылку»
-  // и подставьте сюда (формат /map-widget/v1/?ll=lng,lat&z=zoom).
-  mapEmbed:      'https://yandex.ru/map-widget/v1/?ll=47.249714%2C56.132431&z=13',
+  // Карта (Яндекс embed) — Чебоксары, ул. Лукина, 3 (салон me’one).
+  mapEmbed:      'https://yandex.ru/map-widget/v1/?text=Чебоксары,%20улица%20Лукина,%203&z=17',
 
   // Email (опционально)
   email:         'hello@vladbobrov.ru',

@@ -28,8 +28,10 @@
     "@type": "Physician",
     "name": "Влада Боброва",
     "medicalSpecialty": "Cosmetology",
-    "description": "Врач-косметолог Влада Боброва. Инъекционная косметология, чистка лица и уходовые процедуры.",
-    "address": { "@type": "PostalAddress", "addressLocality": "Чебоксары", "addressCountry": "RU" }
+    "description": "Врач-косметолог Влада Боброва. Инъекционная косметология, чистка лица и уходовые процедуры, обучение врачей-косметологов.",
+    "telephone": "+79033599647",
+    "address": { "@type": "PostalAddress", "streetAddress": "ул. Лукина, 3, салон me’one", "addressLocality": "Чебоксары", "addressCountry": "RU" },
+    "areaServed": ["Чебоксары", "Москва"]
   }
   </script>
 </head>
@@ -76,12 +78,13 @@
       <a class="nav__link" href="index.html">Главная</a>
       <a class="nav__link" href="about.html">Обо мне</a>
       <a class="nav__link" href="services.html">Услуги</a>
+      <a class="nav__link" href="index.html#training">Обучение</a>
       <a class="nav__link" href="portfolio.html">Работы</a>
       <a class="nav__link" href="contacts.html">Контакты</a>
     </nav>
     <div class="header__cta">
       <a class="header__phone" data-href="phone">
-        <span data-cfg="phone">+7 (XXX) XXX-XX-XX</span>
+        <span data-cfg="phone">+7 903 359 9647</span>
         <small data-cfg="hoursShort">10:00–20:00</small>
       </a>
       <a class="btn btn--primary btn--sm" data-href="telegram" target="_blank" rel="noopener">Записаться</a>
@@ -97,6 +100,7 @@
   <a class="mobile-menu__link" href="index.html">Главная <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
   <a class="mobile-menu__link" href="about.html">Обо мне <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
   <a class="mobile-menu__link" href="services.html">Услуги <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
+  <a class="mobile-menu__link" href="index.html#training">Обучение <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
   <a class="mobile-menu__link" href="portfolio.html">Работы <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
   <a class="mobile-menu__link" href="contacts.html">Контакты <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></a>
   <div class="mobile-menu__actions">
@@ -129,7 +133,7 @@
       </div>
     </div>
     <div class="hero__photo reveal reveal--delay-2">
-      <img src="assets/img/doctor/hero.jpg" alt="Врач-косметолог Влада Боброва">
+      <img src="assets/img/doctor/hero.jpg" alt="Врач-косметолог Влада Боброва" loading="eager" fetchpriority="high" decoding="async">
       <div class="hero__badge">
         <span class="hero__badge-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
@@ -330,6 +334,62 @@
   </div>
 </section>
 
+<!-- Обучение врачей-косметологов -->
+<section class="section training" id="training">
+  <div class="container">
+    <div class="training__grid">
+      <div class="training__intro reveal">
+        <span class="section__eyebrow section__eyebrow--light">Обучение</span>
+        <h2 class="section__title mt-0">Индивидуальное обучение врачей-косметологов</h2>
+        <p class="training__lead">Я не только принимаю пациентов, но и обучаю коллег. Передаю авторские техники и проверенные протоколы персонально — в формате «один на один», с отработкой на практике. Вы уходите не с конспектом, а с уверенностью в руках и готовыми схемами работы.</p>
+        <ul class="training__list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <div><strong>Персональный формат</strong><span>Программа подстраивается под ваш уровень, опыт и запрос — без потока и шаблонов.</span></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+            <div><strong>Реальная практика</strong><span>Отработка техник на пациентах под моим контролем — а не только теория.</span></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <div><strong>Авторские протоколы</strong><span>Готовые схемы инъекций и контурной пластики, которые работают на результат.</span></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <div><strong>Сопровождение после</strong><span>Остаюсь на связи и помогаю с разбором ваших первых самостоятельных работ.</span></div>
+          </li>
+        </ul>
+        <div class="training__actions">
+          <a class="btn btn--primary btn--lg" data-href="telegram" target="_blank" rel="noopener">
+            <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+            Записаться на обучение
+          </a>
+          <a class="btn btn--ghost btn--lg" data-href="phone">Позвонить</a>
+        </div>
+      </div>
+
+      <aside class="training__card reveal reveal--delay-1">
+        <div class="training__seal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89 7 22l5-3 5 3-1.21-8.11"/></svg>
+        </div>
+        <h3 class="training__card-title">Сертификат по окончании</h3>
+        <p class="training__card-text">После обучения вы получаете именной сертификат, подтверждающий освоенные техники, — и можете уверенно вести собственную практику.</p>
+        <div class="training__stats">
+          <div class="training__stat"><strong>1:1</strong><span>персональный формат</span></div>
+          <div class="training__stat"><strong>Практика</strong><span>на пациентах</span></div>
+          <div class="training__stat"><strong>Диплом</strong><span>именной сертификат</span></div>
+        </div>
+        <div class="training__price">
+          <span class="training__price-label">Стоимость обучения</span>
+          <strong class="training__price-value">Уточняется индивидуально</strong>
+          <span class="training__price-note">Зависит от программы и количества часов — обсудим при записи.</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
 <!-- Отзывы -->
 <section class="section">
   <div class="container">
@@ -448,7 +508,7 @@
       <div class="cta-banner__actions">
         <a class="btn btn--primary btn--lg" data-href="phone">
           <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <span data-cfg="phone">+7 (XXX) XXX-XX-XX</span>
+          <span data-cfg="phone">+7 903 359 9647</span>
         </a>
         <a class="btn btn--light btn--lg" data-href="telegram" target="_blank" rel="noopener">
           <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
@@ -473,14 +533,21 @@
             <span class="contact-list__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
             <div>
               <div class="contact-list__label">Телефон</div>
-              <div class="contact-list__value"><a data-href="phone"><span data-cfg="phone">+7 (XXX) XXX-XX-XX</span></a></div>
+              <div class="contact-list__value"><a data-href="phone"><span data-cfg="phone">+7 903 359 9647</span></a></div>
             </div>
           </li>
           <li>
             <span class="contact-list__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
             <div>
-              <div class="contact-list__label">Адрес</div>
-              <div class="contact-list__value" data-cfg="address">г. Чебоксары, ул. Адрес, д. XX</div>
+              <div class="contact-list__label">Приём в Чебоксарах</div>
+              <div class="contact-list__value" data-cfg="addressCheb">г. Чебоксары, ул. Лукина, 3 — салон me’one</div>
+            </div>
+          </li>
+          <li>
+            <span class="contact-list__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <div>
+              <div class="contact-list__label">Приём в Москве</div>
+              <div class="contact-list__value" data-cfg="addressMoscow">Москва — приём по записи, адрес уточняйте при записи</div>
             </div>
           </li>
           <li>
@@ -530,6 +597,7 @@
           <li><a href="index.html">Главная</a></li>
           <li><a href="about.html">Обо мне</a></li>
           <li><a href="services.html">Услуги</a></li>
+          <li><a href="index.html#training">Обучение врачей</a></li>
           <li><a href="portfolio.html">Работы</a></li>
           <li><a href="contacts.html">Контакты</a></li>
         </ul>
@@ -547,12 +615,13 @@
       <div class="footer__col">
         <h4>Контакты</h4>
         <ul class="footer__list">
-          <li><a data-href="phone"><span data-cfg="phone">+7 (XXX) XXX-XX-XX</span></a></li>
+          <li><a data-href="phone"><span data-cfg="phone">+7 903 359 9647</span></a></li>
           <li><a data-href="whatsapp" target="_blank" rel="noopener">WhatsApp</a></li>
           <li><a data-href="telegram" target="_blank" rel="noopener">Telegram</a></li>
           <li><a data-href="instagram" target="_blank" rel="noopener">Instagram</a></li>
           <li><a data-href="vk" target="_blank" rel="noopener">ВКонтакте</a></li>
-          <li><span data-cfg="address">г. Чебоксары, ул. Адрес</span></li>
+          <li><span data-cfg="addressCheb">г. Чебоксары, ул. Лукина, 3</span></li>
+          <li><span data-cfg="addressMoscow">Москва — по записи</span></li>
         </ul>
       </div>
     </div>

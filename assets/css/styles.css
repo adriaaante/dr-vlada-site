@@ -1472,7 +1472,7 @@ a.service-card:hover { color: inherit; }
    ============================================================ */
 @media (max-width: 1024px) {
   .hero__grid { grid-template-columns: 1fr; gap: 50px; }
-  .hero__photo { max-width: 500px; margin: 0 auto; aspect-ratio: 5/6; }
+  .hero__photo { max-width: 500px; width: 100%; justify-self: center; aspect-ratio: 5/6; }
   .services { grid-template-columns: repeat(2, 1fr); }
   .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
   .review { flex: 0 0 calc((100% - 22px) / 2); } /* 2 отзыва на планшете */
@@ -1545,4 +1545,162 @@ a.service-card:hover { color: inherit; }
 @media print {
   .header, .topbar, .fab, .sticky-cta, .footer { display: none; }
   .section { padding: 20px 0; }
+}
+
+/* ============================================================
+   Якоря под фиксированной шапкой — заголовок не прячется
+   ============================================================ */
+html { scroll-padding-top: calc(var(--header-h) + 16px); }
+
+/* ============================================================
+   Раздел «Обучение врачей-косметологов»
+   ============================================================ */
+.training {
+  background:
+    radial-gradient(70% 60% at 88% -5%, rgba(197,165,114,.16), transparent 60%),
+    radial-gradient(60% 55% at -5% 105%, rgba(14,61,77,.06), transparent 60%),
+    var(--c-bg);
+}
+.training__grid {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+.training__lead {
+  font-size: clamp(16px, 1.4vw, 18px);
+  color: var(--c-text-muted);
+  margin: 0 0 28px;
+  max-width: 580px;
+}
+.training__list {
+  list-style: none;
+  margin: 0 0 34px;
+  padding: 0;
+  display: grid;
+  gap: 18px;
+}
+.training__list li {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.training__list li svg {
+  width: 48px; height: 48px;
+  padding: 12px;
+  border-radius: 13px;
+  background: var(--c-accent-50);
+  color: var(--c-accent-dark);
+}
+.training__list strong {
+  display: block;
+  font-size: 16px;
+  color: var(--c-primary);
+  margin-bottom: 3px;
+}
+.training__list span {
+  display: block;
+  color: var(--c-text-muted);
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+.training__actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+.training__card {
+  position: relative;
+  border-radius: var(--radius-xl);
+  padding: clamp(28px, 3.5vw, 46px);
+  color: #fff;
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgba(197,165,114,.30), transparent 55%),
+    linear-gradient(160deg, var(--c-primary-soft) 0%, var(--c-primary) 45%, var(--c-primary-dark) 100%);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+.training__seal {
+  width: 64px; height: 64px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--c-accent) 0%, var(--c-accent-dark) 100%);
+  color: #fff;
+  box-shadow: var(--shadow-gold);
+  margin-bottom: 22px;
+}
+.training__seal svg { width: 32px; height: 32px; }
+.training__card-title {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.4vw, 30px);
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 12px;
+}
+.training__card-text {
+  color: rgba(255,255,255,.82);
+  margin: 0 0 26px;
+  font-size: 15px;
+}
+.training__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 22px 0;
+  margin-bottom: 24px;
+  border-top: 1px solid rgba(255,255,255,.16);
+  border-bottom: 1px solid rgba(255,255,255,.16);
+}
+.training__stat { text-align: center; }
+.training__stat strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--c-accent-soft);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.training__stat span {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: rgba(255,255,255,.66);
+}
+.training__price { display: flex; flex-direction: column; gap: 5px; }
+.training__price-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--c-accent-soft);
+}
+.training__price-value {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 600;
+  color: #fff;
+}
+.training__price-note { font-size: 13px; color: rgba(255,255,255,.62); }
+
+@media (max-width: 880px) {
+  .training__grid { grid-template-columns: 1fr; gap: 36px; }
+}
+
+/* ============================================================
+   Полировка: навигация с 6 пунктами и фото в hero на смартфоне
+   ============================================================ */
+@media (max-width: 1100px) {
+  .nav { gap: 0; }
+  .nav__link { padding: 10px 11px; font-size: 14px; }
+}
+/* Лицо в кадре — фото врача в hero */
+.hero__photo img { object-position: center 22%; }
+
+@media (max-width: 720px) {
+  /* Фото врача — сразу под шапкой, чтобы было видно на смартфоне */
+  .hero__grid { gap: 30px; }
+  .hero__photo { order: -1; width: 100%; max-width: 100%; aspect-ratio: 5/6; }
+  .hero__content { text-align: left; }
+  .training__card { padding: 28px 22px; }
+  .training__list li { grid-template-columns: 42px 1fr; gap: 13px; }
+  .training__list li svg { width: 42px; height: 42px; padding: 10px; }
+  .training__actions .btn { width: 100%; justify-content: center; }
 }
