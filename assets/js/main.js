@@ -79,31 +79,26 @@
     $$('.mobile-menu a', menu).forEach(a => a.addEventListener('click', () => toggle(false)));
   }
 
-  /* -------- FAB + нижняя панель (sticky CTA) -------- */
+  /* -------- FAB (плавающая кнопка связи) -------- */
   function setupFab() {
     const fab = $('.fab');
-    const cta = $('.sticky-cta');           // нижняя панель Позвонить/Telegram (моб.)
-    if (fab) {
-      const toggle = fab.querySelector('.fab__toggle');
-      const syncAria = () => toggle?.setAttribute('aria-expanded', String(fab.classList.contains('is-open')));
-      toggle?.addEventListener('click', () => { fab.classList.toggle('is-open'); syncAria(); });
-      document.addEventListener('click', (e) => {
-        if (!fab.contains(e.target)) { fab.classList.remove('is-open'); syncAria(); }
-      });
-    }
-    // Прячем плавающие кнопки у футера — чтобы не перекрывать «Сделано в FutureFlow»
+    if (!fab) return;
+    const toggle = fab.querySelector('.fab__toggle');
+    const syncAria = () => toggle?.setAttribute('aria-expanded', String(fab.classList.contains('is-open')));
+    toggle?.addEventListener('click', () => { fab.classList.toggle('is-open'); syncAria(); });
+    document.addEventListener('click', (e) => {
+      if (!fab.contains(e.target)) { fab.classList.remove('is-open'); syncAria(); }
+    });
+    // На мобильном кнопка видна всегда (внизу слева — FutureFlow, справа — кнопка,
+    // ничего не перекрывает). На десктопе прячем её у футера, где значок FutureFlow
+    // в правом нижнем углу — чтобы не накрывать его.
     const footer = $('.footer');
     if (!footer) return;
-    const footerBottom = $('.footer__bottom') || footer;
     const checkHide = () => {
-      if (fab) {
-        const r = footer.getBoundingClientRect();
-        fab.classList.toggle('fab--hidden', r.top < window.innerHeight - 40);
-      }
-      if (cta) {
-        const rb = footerBottom.getBoundingClientRect();
-        cta.classList.toggle('sticky-cta--hidden', rb.top < window.innerHeight - 70);
-      }
+      const isDesktop = window.matchMedia('(min-width: 721px)').matches;
+      if (!isDesktop) { fab.classList.remove('fab--hidden'); return; }
+      const r = footer.getBoundingClientRect();
+      fab.classList.toggle('fab--hidden', r.top < window.innerHeight - 40);
     };
     checkHide();
     window.addEventListener('scroll', checkHide, { passive: true });
