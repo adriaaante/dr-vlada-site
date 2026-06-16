@@ -418,14 +418,30 @@
       });
     });
 
-    // Раскрыть услугу и (опц.) плавно прокрутить к ней.
+    // Высота «липких» элементов сверху (шапка + панель быстрого перехода),
+    // измеряется в момент прокрутки — чтобы заголовок раздела не уходил под них.
+    const stickyOffset = () => {
+      const header = document.querySelector('.header');
+      const bar = document.querySelector('.svc-jump');
+      const hH = (header && getComputedStyle(header).position === 'sticky') ? header.offsetHeight : 0;
+      const bH = bar ? bar.offsetHeight : 0;
+      return hH + bH + 14;
+    };
+    const scrollToItem = (item) => {
+      requestAnimationFrame(() => {
+        const y = item.getBoundingClientRect().top + window.scrollY - stickyOffset();
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      });
+    };
+
+    // Раскрыть услугу и (опц.) плавно прокрутить к её началу.
     const openAcc = (id, scroll) => {
       const item = document.getElementById(id);
       if (!item || !item.classList.contains('acc-item')) return;
       item.classList.add('is-open');
       item.querySelector('.acc-head')?.setAttribute('aria-expanded', 'true');
       setActiveChip(id);
-      if (scroll) setTimeout(() => item.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+      if (scroll) scrollToItem(item);
     };
 
     // Чипы быстрого перехода — открыть + прокрутить (работает и при повторном
