@@ -1172,8 +1172,11 @@ a.service-card:hover { color: inherit; }
   border-radius: 999px;
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--c-border);
+  transition: transform .35s var(--ease), opacity .35s var(--ease);
 }
 .sticky-cta .btn { flex: 1; padding: 13px 18px; font-size: 14px; }
+/* Прячем нижнюю панель у футера, чтобы не перекрывать «Сделано в FutureFlow» */
+.sticky-cta--hidden { transform: translateY(160%); opacity: 0; pointer-events: none; }
 
 /* -------- Lightbox (portfolio modal) -------- */
 .lightbox {
@@ -1587,7 +1590,7 @@ a.service-card:hover { color: inherit; }
 .svc-jump {
   position: sticky;
   top: var(--header-h);
-  z-index: 80;
+  z-index: 40;
   background: rgba(253, 250, 243, .92);
   backdrop-filter: saturate(160%) blur(10px);
   -webkit-backdrop-filter: saturate(160%) blur(10px);
@@ -1736,8 +1739,9 @@ a.service-card:hover { color: inherit; }
   .process { grid-template-columns: 1fr; }
   .trust__grid { grid-template-columns: 1fr 1fr; }
 
+  /* На мобильном вместо плавающего «плюса» — постоянная панель Позвонить/Telegram */
   .sticky-cta { display: flex; }
-  .fab { bottom: 84px; right: 16px; }
+  .fab { display: none; }
 
   .filters { gap: 8px; }
   .filter-chip { padding: 8px 14px; font-size: 13px; }

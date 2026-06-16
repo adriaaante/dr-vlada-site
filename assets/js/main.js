@@ -79,22 +79,30 @@
     $$('.mobile-menu a', menu).forEach(a => a.addEventListener('click', () => toggle(false)));
   }
 
-  /* -------- FAB -------- */
+  /* -------- FAB + нижняя панель (sticky CTA) -------- */
   function setupFab() {
     const fab = $('.fab');
-    if (!fab) return;
-    const toggle = fab.querySelector('.fab__toggle');
-    toggle.addEventListener('click', () => fab.classList.toggle('is-open'));
-    document.addEventListener('click', (e) => {
-      if (!fab.contains(e.target)) fab.classList.remove('is-open');
-    });
-    // Прячем кнопку когда виден футер — чтобы не перекрывала FutureFlow
+    const cta = $('.sticky-cta');           // нижняя панель Позвонить/Telegram (моб.)
+    if (fab) {
+      const toggle = fab.querySelector('.fab__toggle');
+      toggle?.addEventListener('click', () => fab.classList.toggle('is-open'));
+      document.addEventListener('click', (e) => {
+        if (!fab.contains(e.target)) fab.classList.remove('is-open');
+      });
+    }
+    // Прячем плавающие кнопки у футера — чтобы не перекрывать «Сделано в FutureFlow»
     const footer = $('.footer');
     if (!footer) return;
+    const footerBottom = $('.footer__bottom') || footer;
     const checkHide = () => {
-      const r = footer.getBoundingClientRect();
-      const overlap = r.top < window.innerHeight - 40;
-      fab.classList.toggle('fab--hidden', overlap);
+      if (fab) {
+        const r = footer.getBoundingClientRect();
+        fab.classList.toggle('fab--hidden', r.top < window.innerHeight - 40);
+      }
+      if (cta) {
+        const rb = footerBottom.getBoundingClientRect();
+        cta.classList.toggle('sticky-cta--hidden', rb.top < window.innerHeight - 70);
+      }
     };
     checkHide();
     window.addEventListener('scroll', checkHide, { passive: true });
