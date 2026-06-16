@@ -102,8 +102,16 @@
   }
 
   /* -------- Before/After слайдер -------- */
+  /* Pointer Events + распознавание жеста: вертикальный свайп листает
+     страницу (touch-action: pan-y), горизонтальный — двигает слайдер.
+     setPointerCapture гарантирует, что палец/курсор не «теряется».
+     Флаг __baReady защищает от повторной инициализации одного и того же
+     элемента (иначе слушатели дублируются и слайдер дёргается). */
   function setupBA(root = document) {
     $$('.ba', root).forEach(ba => {
+      if (ba.__baReady) return;
+      ba.__baReady = true;
+
       const wrap = ba.querySelector('.ba__after-wrap');
       const handle = ba.querySelector('.ba__handle');
       const img = wrap && wrap.querySelector('img');
@@ -113,42 +121,51 @@
         pct = Math.max(0, Math.min(100, pct));
         wrap.style.width = pct + '%';
         handle.style.left = pct + '%';
-        if (img) img.style.width = (10000 / pct) + '%';
+        if (img) img.style.width = (10000 / Math.max(pct, 0.5)) + '%';
       };
-
-      const onMove = (clientX) => {
+      const pctFromX = (clientX) => {
         const rect = ba.getBoundingClientRect();
-        const pct = ((clientX - rect.left) / rect.width) * 100;
-        set(pct);
+        return rect.width ? ((clientX - rect.left) / rect.width) * 100 : 50;
       };
 
-      let dragging = false;
-      let startX = 0;
-      let moved = false;
-      const start = (e) => {
-        dragging = true;
-        moved = false;
-        startX = e.touches ? e.touches[0].clientX : e.clientX;
-        ba.style.cursor = 'grabbing';
-      };
-      const move  = (e) => {
-        if (!dragging) return;
-        const x = e.touches ? e.touches[0].clientX : e.clientX;
-        if (Math.abs(x - startX) > 4) moved = true;
-        if (moved) onMove(x);
-      };
-      const end   = () => {
-        if (!dragging) return;
-        dragging = false;
-        ba.style.cursor = '';
-      };
+      let active = false, engaged = false, pid = null, sx = 0, sy = 0;
 
-      ba.addEventListener('mousedown',  start);
-      ba.addEventListener('touchstart', start, { passive: true });
-      window.addEventListener('mousemove',  move);
-      window.addEventListener('touchmove',  move, { passive: true });
-      window.addEventListener('mouseup',   end);
-      window.addEventListener('touchend',  end);
+      ba.addEventListener('pointerdown', (e) => {
+        active = true; engaged = false; pid = e.pointerId;
+        sx = e.clientX; sy = e.clientY;
+        // Мышь и клик прямо по ручке — двигаем сразу.
+        if (e.pointerType === 'mouse' || e.target === handle) {
+          engaged = true;
+          try { ba.setPointerCapture(pid); } catch (_) {}
+          ba.classList.add('is-dragging');
+          set(pctFromX(e.clientX));
+          if (e.cancelable) e.preventDefault();
+        }
+      });
+
+      ba.addEventListener('pointermove', (e) => {
+        if (!active || e.pointerId !== pid) return;
+        if (!engaged) {
+          const dx = Math.abs(e.clientX - sx), dy = Math.abs(e.clientY - sy);
+          if (dx < 6 && dy < 6) return;        // слишком мелкое движение — ждём
+          if (dy > dx) { active = false; return; } // вертикаль — отдаём странице на скролл
+          engaged = true;
+          try { ba.setPointerCapture(pid); } catch (_) {}
+          ba.classList.add('is-dragging');
+        }
+        set(pctFromX(e.clientX));
+        if (e.cancelable) e.preventDefault();
+      });
+
+      const stop = (e) => {
+        if (e.pointerId !== pid && pid !== null) return;
+        active = false; engaged = false;
+        ba.classList.remove('is-dragging');
+        try { ba.releasePointerCapture(pid); } catch (_) {}
+        pid = null;
+      };
+      ba.addEventListener('pointerup', stop);
+      ba.addEventListener('pointercancel', stop);
 
       set(50);
     });
@@ -381,6 +398,32 @@
     $$('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
   }
 
+  /* -------- Аккордеон услуг -------- */
+  function setupAccordion() {
+    const items = $$('.acc-item');
+    if (!items.length) return;
+    items.forEach(item => {
+      const head = item.querySelector('.acc-head');
+      if (!head) return;
+      head.addEventListener('click', () => {
+        const open = item.classList.toggle('is-open');
+        head.setAttribute('aria-expanded', String(open));
+      });
+    });
+    // Открыть нужную услугу по якорю (#fillers, #botox …) и прокрутить к ней.
+    const openFromHash = () => {
+      const id = decodeURIComponent(location.hash.slice(1));
+      if (!id) return;
+      const item = document.getElementById(id);
+      if (!item || !item.classList.contains('acc-item')) return;
+      item.classList.add('is-open');
+      item.querySelector('.acc-head')?.setAttribute('aria-expanded', 'true');
+      setTimeout(() => item.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+    };
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+  }
+
   /* -------- Active nav link -------- */
   function setupActiveNav() {
     const path = location.pathname.split('/').pop() || 'index.html';
@@ -403,6 +446,7 @@
     setupYear();
     setupActiveNav();
     setupReviews();
+    setupAccordion();
     observeReveals();
   });
 

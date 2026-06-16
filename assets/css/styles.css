@@ -743,7 +743,7 @@ a.service-card:hover { color: inherit; }
   background: var(--c-primary-50);
   user-select: none;
   -webkit-user-select: none;
-  touch-action: none;
+  touch-action: pan-y;
   cursor: ew-resize;
 }
 .ba__img {
@@ -1525,6 +1525,63 @@ a.service-card:hover { color: inherit; }
   text-align: center;
 }
 
+/* -------- Аккордеон услуг -------- */
+.accordion { display: grid; gap: 16px; }
+.acc-item {
+  background: var(--c-bg-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color var(--t-fast) var(--ease), box-shadow var(--t) var(--ease);
+}
+.acc-item:hover { border-color: var(--c-accent-soft); }
+.acc-item.is-open { border-color: var(--c-accent-soft); box-shadow: var(--shadow-sm); }
+.acc-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 28px;
+  text-align: left;
+  background: none;
+  cursor: pointer;
+}
+.acc-head:hover .acc-head__title { color: var(--c-accent-dark); }
+.acc-head__icon {
+  width: 56px; height: 56px;
+  flex: 0 0 auto;
+  border-radius: 15px;
+  background: var(--c-primary-50);
+  color: var(--c-primary);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background var(--t) var(--ease), color var(--t) var(--ease);
+}
+.acc-head__icon svg { width: 28px; height: 28px; }
+.acc-item.is-open .acc-head__icon { background: var(--c-accent); color: #fff; }
+.acc-head__main { flex: 1 1 auto; min-width: 0; }
+.acc-head__title { display: block; font-family: var(--font-display); font-size: 23px; font-weight: 600; color: var(--c-text); line-height: 1.2; transition: color var(--t-fast) var(--ease); }
+.acc-head__sub { display: block; font-size: 13.5px; color: var(--c-text-muted); margin-top: 3px; }
+.acc-head__price { font-family: var(--font-display); font-size: 21px; font-weight: 600; color: var(--c-accent-dark); white-space: nowrap; text-align: right; }
+.acc-head__price small { display: block; font-size: 10.5px; font-weight: 600; color: var(--c-text-soft); text-transform: uppercase; letter-spacing: .12em; font-family: var(--font-body); }
+.acc-head__chevron { flex: 0 0 auto; width: 24px; height: 24px; color: var(--c-text-soft); transition: transform var(--t) var(--ease), color var(--t) var(--ease); }
+.acc-item.is-open .acc-head__chevron { transform: rotate(180deg); color: var(--c-accent-dark); }
+.acc-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--t) var(--ease); }
+.acc-item.is-open .acc-panel { grid-template-rows: 1fr; }
+.acc-panel__inner { overflow: hidden; min-height: 0; }
+.acc-body { padding: 4px 28px 28px; }
+.acc-desc { margin: 0 0 14px; color: var(--c-text-muted); font-size: 15px; }
+.acc-result {
+  margin: 0;
+  padding: 13px 16px;
+  background: var(--c-accent-50);
+  border: 1px solid var(--c-accent-soft);
+  border-radius: var(--radius);
+  font-size: 14.5px;
+  color: var(--c-text);
+}
+.acc-result strong { color: var(--c-accent-dark); }
+.acc-body .price-group:first-of-type { margin-top: 24px; }
+
 /* -------- Process steps -------- */
 .process {
   display: grid;
@@ -1625,6 +1682,17 @@ a.service-card:hover { color: inherit; }
   .price-card__title { font-size: 22px; }
   .price-row__name { font-size: 14.5px; }
   .price-row__price { font-size: 18px; }
+
+  .acc-head { padding: 16px 16px; gap: 13px; column-gap: 13px; flex-wrap: wrap; }
+  .acc-head__icon { width: 46px; height: 46px; border-radius: 12px; }
+  .acc-head__icon svg { width: 24px; height: 24px; }
+  .acc-head__main { flex: 1 1 auto; }
+  .acc-head__title { font-size: 18.5px; }
+  .acc-head__sub { font-size: 12.5px; }
+  .acc-head__chevron { order: 2; }
+  .acc-head__price { order: 3; flex-basis: 100%; text-align: left; font-size: 19px; padding-left: 59px; }
+  .acc-head__price small { display: inline; margin-left: 6px; }
+  .acc-body { padding: 4px 18px 22px; }
 
   .footer__grid { grid-template-columns: 1fr; gap: 28px; margin-bottom: 32px; }
   .footer__bottom { flex-direction: column; align-items: flex-start; gap: 14px; }
