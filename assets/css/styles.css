@@ -1053,6 +1053,11 @@ a.service-card:hover { color: inherit; }
   padding: 64px 0 28px;
   position: relative;
 }
+/* На десктопе плавающая кнопка в правом нижнем углу всегда видна — добавляем
+   запас снизу, чтобы она не накрывала значок «Сделано в FutureFlow». */
+@media (min-width: 721px) {
+  .footer { padding-bottom: 104px; }
+}
 .footer__grid {
   display: grid;
   grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
@@ -1089,8 +1094,8 @@ a.service-card:hover { color: inherit; }
 /* -------- Floating Action Button -------- */
 .fab {
   position: fixed;
-  right: 24px;
-  bottom: 24px;
+  right: 28px;
+  bottom: 28px;
   z-index: 70;
 }
 .fab__toggle {
@@ -1123,8 +1128,8 @@ a.service-card:hover { color: inherit; }
 .fab:not(.is-open) .fab__toggle::before { animation: fabPulse 2.4s var(--ease) infinite; }
 @keyframes fabPulse {
   0%   { transform: scale(1);   opacity: .5; }
-  70%  { transform: scale(1.9); opacity: 0; }
-  100% { transform: scale(1.9); opacity: 0; }
+  70%  { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1.6); opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .fab__toggle::before { animation: none !important; }
@@ -1761,8 +1766,9 @@ a.service-card:hover { color: inherit; }
   .process { grid-template-columns: 1fr; }
   .trust__grid { grid-template-columns: 1fr 1fr; }
 
-  /* На мобильном — плавающая кнопка связи (FAB); нижняя панель скрыта */
-  .fab { right: 16px; bottom: 16px; }
+  /* На мобильном — плавающая кнопка связи (FAB); нижняя панель скрыта.
+     Отступ от краёв ≥ радиуса пульсации, чтобы кольцо не обрезалось вьюпортом. */
+  .fab { right: 24px; bottom: 24px; }
 
   .filters { gap: 8px; }
   .filter-chip { padding: 8px 14px; font-size: 13px; }

@@ -79,7 +79,7 @@
     $$('.mobile-menu a', menu).forEach(a => a.addEventListener('click', () => toggle(false)));
   }
 
-  /* -------- FAB (плавающая кнопка связи) -------- */
+  /* -------- FAB (плавающая кнопка связи) — видна всегда, на всех экранах -------- */
   function setupFab() {
     const fab = $('.fab');
     if (!fab) return;
@@ -89,20 +89,6 @@
     document.addEventListener('click', (e) => {
       if (!fab.contains(e.target)) { fab.classList.remove('is-open'); syncAria(); }
     });
-    // На мобильном кнопка видна всегда (внизу слева — FutureFlow, справа — кнопка,
-    // ничего не перекрывает). На десктопе прячем её у футера, где значок FutureFlow
-    // в правом нижнем углу — чтобы не накрывать его.
-    const footer = $('.footer');
-    if (!footer) return;
-    const checkHide = () => {
-      const isDesktop = window.matchMedia('(min-width: 721px)').matches;
-      if (!isDesktop) { fab.classList.remove('fab--hidden'); return; }
-      const r = footer.getBoundingClientRect();
-      fab.classList.toggle('fab--hidden', r.top < window.innerHeight - 40);
-    };
-    checkHide();
-    window.addEventListener('scroll', checkHide, { passive: true });
-    window.addEventListener('resize', checkHide);
   }
 
   /* -------- Before/After слайдер -------- */
