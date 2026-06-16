@@ -42,19 +42,16 @@ window.VB_CONFIG = {
   // Email (опционально)
   email:         'hello@vladbobrov.ru',
 
-  // Цены (стартовые, "от ..."). Источник — прайс из Taplink.
+  // Цены (стартовые, "от ..."). Источник — актуальный прайс-лист.
   prices: {
-    consultation:   '800',
-    lips:           '7 000',
-    fillers:        '9 000',
-    tearTrough:     '14 000',
-    bioreva:        '6 000',
-    mesotherapy:    '3 000',
-    botox:          '300',
-    blanching:      '13 000',
-    lipolytics:     '2 500',
-    cleaning:       '3 500',
-    peels:          '2 900',
-    care:           '2 900'
+    lips:           '10 000',
+    fillers:        '13 000',
+    tearTrough:     '20 000',
+    bioreva:        '8 000',
+    botox:          '350',
+    lipolytics:     '17 000',
+    cleaning:       '4 000',
+    peels:          '4 000',
+    care:           '4 000'
   }
 };

@@ -11,10 +11,11 @@
    4. Чтобы показать кейс на главной — поставьте featured: true.
 
    Категории (совпадают с фильтрами на странице «Работы»):
-     injection — инъекции (ботокс, биорева, мезо, липолитики, бланширование)
-     contour   — контурная пластика (губы, скулы, лицо, слёзная борозда)
+     injection — инъекции (ботокс, биорева, липолитики)
+     contour   — контурная пластика (губы, лицо, слёзная борозда)
      peels     — пилинги
-     skin      — чистка лица и уходовые процедуры
+     skin      — чистка лица и уход
+   Услуги и кейсы соответствуют актуальному прайс-листу.
    ============================================================ */
 window.VB_PORTFOLIO = [
   {
@@ -29,8 +30,8 @@ window.VB_PORTFOLIO = [
     after:  'assets/img/portfolio/lip-filler-natural/after.svg',
     details: {
       problem:   'Тонкие губы с потерей объёма верхней дуги Купидона, асимметрия.',
-      solution:  'Проработка контура и центральной части верхней губы, 1 мл филлера. Анестезия включена.',
-      materials: 'Neuramis, Stylage M, Juvederm, Belotero (подбирается индивидуально)',
+      solution:  'Проработка контура и центральной части верхней губы, объём 0,5–1 ml. Анестезия включена.',
+      materials: 'Tesoro Deep, Stylage M, Belotero Intense (подбирается индивидуально)',
       result:    'Естественный объём, выраженная дуга Купидона, симметрия сохранена. Эффект до 12 месяцев.'
     }
   },
@@ -46,8 +47,8 @@ window.VB_PORTFOLIO = [
     after:  'assets/img/portfolio/lip-volume/after.svg',
     details: {
       problem:   'Недостаточный объём губ, желание подчеркнуть форму и контур.',
-      solution:  'Введение филлера с учётом анатомии губ, мягкое моделирование объёма. Анестезия включена.',
-      materials: 'Art Filler, Juvederm Ultra 3, Neauvia (подбирается индивидуально)',
+      solution:  'Введение филлера 1 ml с учётом анатомии губ, мягкое моделирование объёма. Анестезия включена.',
+      materials: 'Tesoro Deep, Belotero Lips Shape (подбирается индивидуально)',
       result:    'Аккуратный объём, ухоженные губы, естественный контур. Эффект до 12 месяцев.'
     }
   },
@@ -63,8 +64,8 @@ window.VB_PORTFOLIO = [
     after:  'assets/img/portfolio/cheekbones-sculpting/after.svg',
     details: {
       problem:   'Плоские скулы, желание подчеркнуть овал лица.',
-      solution:  'Расчёт точек по фронтальной и боковой проекции, введение филлера канюлей.',
-      materials: 'Tesoro, Neauvia',
+      solution:  'Расчёт точек по фронтальной и боковой проекции, введение филлера канюлей (2–3 ml).',
+      materials: 'Tesoro, Radiesse',
       result:    'Выразительные скулы, скульптурный овал лица. Эффект 12–18 месяцев.'
     }
   },
@@ -80,8 +81,8 @@ window.VB_PORTFOLIO = [
     after:  'assets/img/portfolio/nasolabial-fillers/after.svg',
     details: {
       problem:   'Глубокие носогубные складки, опущение средней трети лица, «уставший» вид.',
-      solution:  'Векторная поддержка средней трети + точечная коррекция носогубных борозд канюлей.',
-      materials: 'Tesoro deep, Neuramis deep, Stylage M',
+      solution:  'Векторный лифтинг средней трети + точечная коррекция носогубных борозд канюлей.',
+      materials: 'Tesoro, Radiesse',
       result:    'Лицо выглядит свежее и моложе, складки разглажены. Эффект 12–18 месяцев.'
     }
   },
@@ -114,26 +115,9 @@ window.VB_PORTFOLIO = [
     after:  'assets/img/portfolio/botox-forehead-glabella/after.svg',
     details: {
       problem:   'Горизонтальные морщины лба, вертикальная складка между бровями, морщинки у глаз.',
-      solution:  'Точечная коррекция мышц, индивидуальный расчёт единиц по типу мимики. Комплекс «верхняя треть».',
-      materials: 'Релатокс, Ксеомин',
+      solution:  'Комплекс «верхняя треть»: лоб + межбровье + глаза, индивидуальный расчёт единиц по типу мимики.',
+      materials: 'Сертифицированный ботулотоксин типа А',
       result:    'Гладкая кожа, естественная подвижность лица сохранена. Эффект до 6 месяцев.'
-    }
-  },
-  {
-    slug: 'blanching-wrinkles',
-    title: 'Бланширование мимических морщин',
-    category: 'injection',
-    categoryLabel: 'Бланширование',
-    summary: 'Заполнение мелких мимических морщин препаратом на основе гиалуроновой кислоты.',
-    duration: '1 визит · 60 мин',
-    featured: false,
-    before: 'assets/img/portfolio/blanching-wrinkles/before.svg',
-    after:  'assets/img/portfolio/blanching-wrinkles/after.svg',
-    details: {
-      problem:   'Мимические морщины лба и межбровья, «гусиные лапки», кисетные морщины над губой.',
-      solution:  'Поверхностное введение препарата в зону морщин. Анестезия включена.',
-      materials: 'Belotero Soft, Belotero Balance',
-      result:    'Сглаживание мелких морщин, ровная кожа. Эффект до 12 месяцев.'
     }
   },
   {
@@ -141,83 +125,49 @@ window.VB_PORTFOLIO = [
     title: 'Биоревитализация лица — сияние кожи',
     category: 'injection',
     categoryLabel: 'Биорева',
-    summary: 'Восстановление гидробаланса кожи и стимуляция упругости курсом из 2–3 процедур.',
-    duration: '2–3 визита · 1 раз в 2–4 недели',
+    summary: 'Восстановление гидробаланса кожи и стимуляция упругости курсом из 3 процедур.',
+    duration: 'Курс 3 процедуры · 1 раз в 2–4 недели',
     featured: true,
     before: 'assets/img/portfolio/biorevitalization-face/before.svg',
     after:  'assets/img/portfolio/biorevitalization-face/after.svg',
     details: {
       problem:   'Обезвоженная тусклая кожа, мелкие морщинки, тёмные круги вокруг глаз.',
-      solution:  'Курс биоревитализации препаратами на основе гиалуроновой кислоты. Анестезия включена.',
-      materials: 'BELLARTI, Neauvia Hydro Deluxe, Hyalrepair, Revi',
+      solution:  'Курс биоревитализации препаратами на основе гиалуроновой кислоты. Работа с зоной вокруг глаз.',
+      materials: 'BIOGEL, Meso-Wharton, Meso-Xanthin, Revi',
       result:    'Гладкая увлажнённая кожа, ровный тон, естественное сияние.'
     }
   },
   {
-    slug: 'mesotherapy-face',
-    title: 'Мезотерапия лица и шеи',
-    category: 'injection',
-    categoryLabel: 'Мезотерапия',
-    summary: 'Инъекции мезококтейлей для улучшения качества кожи лица и шеи.',
-    duration: 'Курс 4–8 визитов',
-    featured: false,
-    before: 'assets/img/portfolio/mesotherapy-face/before.svg',
-    after:  'assets/img/portfolio/mesotherapy-face/after.svg',
-    details: {
-      problem:   'Тусклая кожа, потеря тонуса, мелкие морщинки, зона вокруг глаз.',
-      solution:  'Курс мезотерапии с подбором коктейля под задачу. Анестезия включена.',
-      materials: 'Индивидуальный подбор мезопрепаратов',
-      result:    'Улучшение качества и плотности кожи, ровный тон, увлажнение.'
-    }
-  },
-  {
-    slug: 'hair-mesotherapy',
-    title: 'Мезотерапия для волос против выпадения',
-    category: 'injection',
-    categoryLabel: 'Мезотерапия',
-    summary: 'Курс инъекций в кожу головы — остановка выпадения и стимуляция роста волос.',
-    duration: 'Курс 4–8 визитов',
-    featured: false,
-    before: 'assets/img/portfolio/hair-mesotherapy/before.svg',
-    after:  'assets/img/portfolio/hair-mesotherapy/after.svg',
-    details: {
-      problem:   'Диффузное выпадение волос, истончение, отсутствие подшёрстка.',
-      solution:  'Курс мезотерапии кожи головы по протоколу.',
-      materials: 'Индивидуальный подбор мезопрепаратов для волос',
-      result:    'Прекращение выпадения, появление новых волос в зонах поредения, утолщение волос.'
-    }
-  },
-  {
     slug: 'lipolytics-double-chin',
-    title: 'Коррекция второго подбородка липолитиками',
+    title: 'Липолитики «Стройность» — второй подбородок',
     category: 'injection',
     categoryLabel: 'Липолитики',
-    summary: 'Локальное уменьшение жирового пакета подбородочной области без операции.',
-    duration: 'Курс 3–5 визитов · 1 раз в 2–3 недели',
+    summary: 'Локальное уменьшение жирового пакета подбородочной области и щёчек без операции.',
+    duration: 'Курс 1–2 процедуры',
     featured: false,
     before: 'assets/img/portfolio/lipolytics-double-chin/before.svg',
     after:  'assets/img/portfolio/lipolytics-double-chin/after.svg',
     details: {
-      problem:   'Выраженный второй подбородок, нечёткий шейно-подбородочный угол.',
-      solution:  'Курс инъекций липолитика по сетке в подбородочную область.',
-      materials: 'LIGHT FIT/P.I, DR.LIPO',
-      result:    'Подбородочная область уменьшена, более чёткий профиль шеи.'
+      problem:   'Выраженный второй подбородок и щёчки, нечёткий шейно-подбородочный угол.',
+      solution:  'Курс инъекций липолитика (2 ml) с сосудистым этапом по сетке в подбородочную область.',
+      materials: 'Липолитический комплекс «Стройность» + сосудистый этап',
+      result:    'Подбородочная область уменьшена, более чёткий профиль, эффект «худого лица».'
     }
   },
   {
     slug: 'lipolytics-body',
-    title: 'Липолитики — коррекция зоны тела',
+    title: 'Липолитики «Стройность» — коррекция тела',
     category: 'injection',
     categoryLabel: 'Липолитики',
-    summary: 'Уменьшение локальных жировых отложений на теле инъекционным методом.',
-    duration: 'Курс 3–5 визитов · 1 раз в 2–3 недели',
+    summary: 'Уменьшение локальных жировых отложений на теле инъекционным методом с сосудистым этапом.',
+    duration: 'Курс 1–2 процедуры',
     featured: false,
     before: 'assets/img/portfolio/lipolytics-body/before.svg',
     after:  'assets/img/portfolio/lipolytics-body/after.svg',
     details: {
       problem:   'Локальные жировые отложения, не уходящие при диете и спорте.',
-      solution:  'Курс инъекций липолитика в проблемную зону по сетке.',
-      materials: 'LIGHT FIT/P.I, DR.LIPO',
+      solution:  'Курс инъекций липолитика (2–4 ml) в проблемную зону + сосудистый этап.',
+      materials: 'Липолитический комплекс «Стройность» + сосудистый этап',
       result:    'Уменьшение объёма в зоне коррекции, более ровный контур.'
     }
   },
@@ -226,7 +176,7 @@ window.VB_PORTFOLIO = [
     title: 'Чистка лица',
     category: 'skin',
     categoryLabel: 'Чистка',
-    summary: 'Профессиональная чистка лица на премиальной израильской косметике GIGI.',
+    summary: 'Профессиональная чистка лица на премиальной израильской космоцевтике GIGI.',
     duration: '1 визит · до 1,5 часа',
     featured: true,
     before: 'assets/img/portfolio/face-cleaning/before.svg',
@@ -234,13 +184,13 @@ window.VB_PORTFOLIO = [
     details: {
       problem:   'Чёрные точки, расширенные поры, тусклый цвет лица, забитая кожа.',
       solution:  'Ультразвуковая и механическая чистка, маска по типу кожи, подбор домашнего ухода.',
-      materials: 'Профессиональная косметика GIGI (Израиль)',
-      result:    'Чистая, ухоженная кожа, сужение пор, ровный тон. Пробники проф. средств в подарок.'
+      materials: 'Космоцевтика GIGI (Израиль)',
+      result:    'Чистая, ухоженная кожа, сужение пор, ровный тон.'
     }
   },
   {
     slug: 'face-cleaning-complex',
-    title: 'Комплексная чистка лица «чистка + пилинг»',
+    title: 'Чистка лица + пилинг BioRePeelCl3',
     category: 'skin',
     categoryLabel: 'Чистка',
     summary: 'Расширенная программа: чистка лица в сочетании с пилингом для максимального результата.',
@@ -250,8 +200,8 @@ window.VB_PORTFOLIO = [
     after:  'assets/img/portfolio/face-cleaning-complex/after.svg',
     details: {
       problem:   'Забитая кожа, неровный тон, тусклость, пигментация.',
-      solution:  'Ультразвуковая и механическая чистка + пилинг, маска, консультация по уходу.',
-      materials: 'Косметика GIGI, пилинг BioRePeelCl3',
+      solution:  'Ультразвуковая и механическая чистка + пилинг BioRePeelCl3, маска, консультация по уходу.',
+      materials: 'Космоцевтика GIGI, пилинг BioRePeelCl3',
       result:    'Глубоко очищенная, обновлённая кожа, ровный тон и сияние.'
     }
   },
@@ -270,40 +220,6 @@ window.VB_PORTFOLIO = [
       solution:  'Отшелушивание в сочетании со стимуляцией биосинтеза и обновлением клеток кожи.',
       materials: 'BioRePeelCl3',
       result:    'Лифтинг-эффект, ровный тон, гладкая кожа уже после первого сеанса.'
-    }
-  },
-  {
-    slug: 'care-carboxytherapy',
-    title: 'Карбокситерапия «Машина времени»',
-    category: 'skin',
-    categoryLabel: 'Уход',
-    summary: 'Уходовая процедура для активного омоложения и оздоровления кожи.',
-    duration: '1 визит · 1 час',
-    featured: false,
-    before: 'assets/img/portfolio/care-carboxytherapy/before.svg',
-    after:  'assets/img/portfolio/care-carboxytherapy/after.svg',
-    details: {
-      problem:   'Тусклая, уставшая кожа, снижение эластичности, фотостарение.',
-      solution:  'Уходовая процедура карбокситерапии для насыщения кожи и стимуляции обновления.',
-      materials: 'Профессиональный уходовый протокол',
-      result:    'Свежая, отдохнувшая кожа, ровный цвет лица, эффект сияния.'
-    }
-  },
-  {
-    slug: 'care-bioplasma',
-    title: 'Биоплазма «Увлажнение и лифтинг»',
-    category: 'skin',
-    categoryLabel: 'Уход',
-    summary: 'Уходовая процедура для глубокого увлажнения и лифтинг-эффекта.',
-    duration: '1 визит · 1 час',
-    featured: false,
-    before: 'assets/img/portfolio/care-bioplasma/before.svg',
-    after:  'assets/img/portfolio/care-bioplasma/after.svg',
-    details: {
-      problem:   'Обезвоженная кожа, снижение тонуса, мелкие морщинки.',
-      solution:  'Уходовая процедура «биоплазма» для увлажнения и лифтинга кожи.',
-      materials: 'Профессиональный уходовый протокол',
-      result:    'Увлажнённая, подтянутая кожа, ровный рельеф, свежий вид.'
     }
   }
 ];
