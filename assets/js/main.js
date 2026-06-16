@@ -406,17 +406,20 @@
     const chips = $$('.svc-jump__chip');
     const chipById = {};
     chips.forEach(c => { chipById[decodeURIComponent((c.getAttribute('href') || '').slice(1))] = c; });
-    const setActiveChip = (id) => chips.forEach(c => c.classList.toggle('is-active', c === chipById[id]));
 
-    items.forEach(item => {
-      const head = item.querySelector('.acc-head');
-      if (!head) return;
-      head.addEventListener('click', () => {
-        const open = item.classList.toggle('is-open');
-        head.setAttribute('aria-expanded', String(open));
-        if (open) setActiveChip(item.id);
+    // Подсвечиваем чипы только тех услуг, которые сейчас раскрыты.
+    const syncChips = () => {
+      items.forEach(item => {
+        const chip = chipById[item.id];
+        if (chip) chip.classList.toggle('is-active', item.classList.contains('is-open'));
       });
-    });
+    };
+
+    const setOpen = (item, open) => {
+      item.classList.toggle('is-open', open);
+      item.querySelector('.acc-head')?.setAttribute('aria-expanded', String(open));
+      syncChips();
+    };
 
     // Высота «липких» элементов сверху (шапка + панель быстрого перехода),
     // измеряется в момент прокрутки — чтобы заголовок раздела не уходил под них.
@@ -434,25 +437,29 @@
       });
     };
 
-    // Раскрыть услугу и (опц.) плавно прокрутить к её началу.
-    const openAcc = (id, scroll) => {
-      const item = document.getElementById(id);
-      if (!item || !item.classList.contains('acc-item')) return;
-      item.classList.add('is-open');
-      item.querySelector('.acc-head')?.setAttribute('aria-expanded', 'true');
-      setActiveChip(id);
-      if (scroll) scrollToItem(item);
-    };
+    // Клик по заголовку — раскрыть/свернуть раздел.
+    items.forEach(item => {
+      const head = item.querySelector('.acc-head');
+      if (!head) return;
+      head.addEventListener('click', () => setOpen(item, !item.classList.contains('is-open')));
+    });
 
-    // Чипы быстрого перехода — открыть + прокрутить (работает и при повторном
-    // клике по тому же чипу, когда хэш не меняется).
+    // Клик по чипу — переключатель: если закрыт → открыть и прокрутить;
+    // если уже открыт → свернуть (повторный клик).
     chips.forEach(c => {
       c.addEventListener('click', (e) => {
         const id = decodeURIComponent((c.getAttribute('href') || '').slice(1));
-        if (!document.getElementById(id)) return;
+        const item = document.getElementById(id);
+        if (!item) return;
         e.preventDefault();
-        if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
-        openAcc(id, true);
+        const willOpen = !item.classList.contains('is-open');
+        setOpen(item, willOpen);
+        if (willOpen) {
+          if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
+          scrollToItem(item);
+        } else if (location.hash === '#' + id) {
+          history.replaceState(null, '', location.pathname + location.search);
+        }
       });
     });
 
@@ -460,18 +467,16 @@
     // со страницы «Главная».
     const openFromHash = () => {
       const id = decodeURIComponent(location.hash.slice(1));
-      if (id) openAcc(id, true);
+      const item = id && document.getElementById(id);
+      if (item && item.classList.contains('acc-item')) {
+        setOpen(item, true);
+        scrollToItem(item);
+      }
     };
     openFromHash();
     window.addEventListener('hashchange', openFromHash);
 
-    // Скролл-спай: подсвечиваем чип услуги, которая сейчас вверху экрана.
-    if ('IntersectionObserver' in window && chips.length) {
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) setActiveChip(e.target.id); });
-      }, { rootMargin: '-150px 0px -60% 0px', threshold: 0 });
-      items.forEach(i => obs.observe(i));
-    }
+    syncChips();
   }
 
   /* -------- Active nav link -------- */
