@@ -85,9 +85,10 @@
     const cta = $('.sticky-cta');           // нижняя панель Позвонить/Telegram (моб.)
     if (fab) {
       const toggle = fab.querySelector('.fab__toggle');
-      toggle?.addEventListener('click', () => fab.classList.toggle('is-open'));
+      const syncAria = () => toggle?.setAttribute('aria-expanded', String(fab.classList.contains('is-open')));
+      toggle?.addEventListener('click', () => { fab.classList.toggle('is-open'); syncAria(); });
       document.addEventListener('click', (e) => {
-        if (!fab.contains(e.target)) fab.classList.remove('is-open');
+        if (!fab.contains(e.target)) { fab.classList.remove('is-open'); syncAria(); }
       });
     }
     // Прячем плавающие кнопки у футера — чтобы не перекрывать «Сделано в FutureFlow»

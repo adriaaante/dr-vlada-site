@@ -1105,8 +1105,30 @@ a.service-card:hover { color: inherit; }
   transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease);
 }
 .fab__toggle:hover { box-shadow: 0 14px 32px rgba(197,165,114,.55); }
-.fab__toggle svg { width: 26px; height: 26px; transition: transform var(--t) var(--ease); }
-.fab.is-open .fab__toggle { transform: rotate(45deg); }
+.fab__icon { width: 26px; height: 26px; }
+.fab__icon--close { display: none; }
+.fab.is-open .fab__icon--chat { display: none; }
+.fab.is-open .fab__icon--close { display: block; }
+
+/* Пульсирующее кольцо — привлекает внимание к кнопке связи (как у виджетов чата).
+   Останавливается, когда меню открыто, и при prefers-reduced-motion. */
+.fab__toggle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--c-accent);
+  z-index: -1;
+}
+.fab:not(.is-open) .fab__toggle::before { animation: fabPulse 2.4s var(--ease) infinite; }
+@keyframes fabPulse {
+  0%   { transform: scale(1);   opacity: .5; }
+  70%  { transform: scale(1.9); opacity: 0; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fab__toggle::before { animation: none !important; }
+}
 
 /* FAB прячется когда страница доскроллена до футера — чтобы не перекрывать FutureFlow */
 .fab {
@@ -1739,9 +1761,8 @@ a.service-card:hover { color: inherit; }
   .process { grid-template-columns: 1fr; }
   .trust__grid { grid-template-columns: 1fr 1fr; }
 
-  /* На мобильном вместо плавающего «плюса» — постоянная панель Позвонить/Telegram */
-  .sticky-cta { display: flex; }
-  .fab { display: none; }
+  /* На мобильном — плавающая кнопка связи (FAB); нижняя панель скрыта */
+  .fab { right: 16px; bottom: 16px; }
 
   .filters { gap: 8px; }
   .filter-chip { padding: 8px 14px; font-size: 13px; }
