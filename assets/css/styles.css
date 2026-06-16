@@ -1182,7 +1182,7 @@ a.service-card:hover { color: inherit; }
   background: var(--c-primary);
   color: #fff;
 }
-.fab__item svg { width: 20px; height: 20px; }
+.fab__item svg { flex: 0 0 auto; width: 22px; height: 22px; }
 
 /* fab-pulse удалён — кольца выглядели агрессивно, заменено на fab-breathe */
 
