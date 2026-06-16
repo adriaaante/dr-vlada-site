@@ -398,30 +398,64 @@
     $$('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
   }
 
-  /* -------- Аккордеон услуг -------- */
+  /* -------- Аккордеон услуг + быстрый переход -------- */
   function setupAccordion() {
     const items = $$('.acc-item');
     if (!items.length) return;
+
+    const chips = $$('.svc-jump__chip');
+    const chipById = {};
+    chips.forEach(c => { chipById[decodeURIComponent((c.getAttribute('href') || '').slice(1))] = c; });
+    const setActiveChip = (id) => chips.forEach(c => c.classList.toggle('is-active', c === chipById[id]));
+
     items.forEach(item => {
       const head = item.querySelector('.acc-head');
       if (!head) return;
       head.addEventListener('click', () => {
         const open = item.classList.toggle('is-open');
         head.setAttribute('aria-expanded', String(open));
+        if (open) setActiveChip(item.id);
       });
     });
-    // Открыть нужную услугу по якорю (#fillers, #botox …) и прокрутить к ней.
-    const openFromHash = () => {
-      const id = decodeURIComponent(location.hash.slice(1));
-      if (!id) return;
+
+    // Раскрыть услугу и (опц.) плавно прокрутить к ней.
+    const openAcc = (id, scroll) => {
       const item = document.getElementById(id);
       if (!item || !item.classList.contains('acc-item')) return;
       item.classList.add('is-open');
       item.querySelector('.acc-head')?.setAttribute('aria-expanded', 'true');
-      setTimeout(() => item.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+      setActiveChip(id);
+      if (scroll) setTimeout(() => item.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+    };
+
+    // Чипы быстрого перехода — открыть + прокрутить (работает и при повторном
+    // клике по тому же чипу, когда хэш не меняется).
+    chips.forEach(c => {
+      c.addEventListener('click', (e) => {
+        const id = decodeURIComponent((c.getAttribute('href') || '').slice(1));
+        if (!document.getElementById(id)) return;
+        e.preventDefault();
+        if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
+        openAcc(id, true);
+      });
+    });
+
+    // Открыть нужную услугу по якорю (#fillers, #botox …) — в т.ч. при переходе
+    // со страницы «Главная».
+    const openFromHash = () => {
+      const id = decodeURIComponent(location.hash.slice(1));
+      if (id) openAcc(id, true);
     };
     openFromHash();
     window.addEventListener('hashchange', openFromHash);
+
+    // Скролл-спай: подсвечиваем чип услуги, которая сейчас вверху экрана.
+    if ('IntersectionObserver' in window && chips.length) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) setActiveChip(e.target.id); });
+      }, { rootMargin: '-150px 0px -60% 0px', threshold: 0 });
+      items.forEach(i => obs.observe(i));
+    }
   }
 
   /* -------- Active nav link -------- */
