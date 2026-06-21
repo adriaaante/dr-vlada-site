@@ -36,17 +36,13 @@ MAX_SIDE = 1600
 JPG_QUALITY = 88
 
 # Папка staging -> [(drive_file_id, исходное_имя)]
-# Догрузка новой партии: реальные липолитики + 2 фото губ, перемещённые из
-# папки «Липолитики» в «губы» (исходная партия уже лежит в _staging).
+# Партия: Ботулинотерапия (новая папка Drive).
 FOLDERS: dict[str, list[tuple[str, str]]] = {
-    "lipo": [  # Липолитики (настоящие — тело/подбородок)
-        ("1BF5AdAyGNKmJqwMaM4UbUq4HigisNSuE", "IMG_8764"),
-        ("1ThU3zItn0UXf4Z_4Tzk313Z_ZyoCIY0B", "IMG_8789"),
-        ("1MxWeQWTGU3QcTosQY55P0byFvl4FvI1J", "IMG_8792"),
-    ],
-    "lips": [  # Контурная пластика губ (перемещены из «Липолитики»)
-        ("1HL8I6bTF0yN27VgJoAItvfzsJoz3nZRv", "IMG_8780"),
-        ("1nbTa1n07Nt0Bl7r9AKmp6U9fIWMOwZIt", "IMG_8781"),
+    "botox": [  # Ботулинотерапия
+        ("1hGHWecdz8ng5U3xwY7LNjZ-J-KYisnt-", "IMG_9028"),
+        ("15Nzwr3dgxDVYBbB4HxGYTt5-TJ_S-xWH", "IMG_9029"),
+        ("18WZtmyTOqs2nMF5DxwIO4S3f7ojoThfJ", "IMG_9030"),
+        ("1R58-vkyMfxmZw0IB1gGdmFK7W-LSL9qo", "IMG_9034"),
     ],
 }
 
