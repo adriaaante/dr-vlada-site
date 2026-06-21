@@ -36,31 +36,17 @@ MAX_SIDE = 1600
 JPG_QUALITY = 88
 
 # Папка staging -> [(drive_file_id, исходное_имя)]
+# Догрузка новой партии: реальные липолитики + 2 фото губ, перемещённые из
+# папки «Липолитики» в «губы» (исходная партия уже лежит в _staging).
 FOLDERS: dict[str, list[tuple[str, str]]] = {
-    "face": [  # Контурная пластика лица
-        ("1o0NZ96C9-I3CQeE0rR51FE6zHEalxzN_", "IMG_8782"),
-        ("1iCTZzk0tX2LyQpB3qMEGmxsjIbuL4KxN", "IMG_8779"),
-        ("1jB0mtAtYP0qkB7Dk79_BDSaw0OQ8zwE4", "IMG_8778"),
-        ("1TnoF4g6rIgP1aYqtWZYCLjhhmpnOfa4t", "IMG_8777"),
-        ("1XxzLMbCdYOQQq3xSMQ3Uflgfle7cWa6N", "IMG_8776"),
-        ("1MYO3ZRK8Eij7hlozeZ-Aq3SPTT0oUnbJ", "IMG_8774"),
-        ("1oYCpFVLGc8SNPyQTnmjmOU7NeEg2MS3A", "IMG_8791"),
+    "lipo": [  # Липолитики (настоящие — тело/подбородок)
+        ("1BF5AdAyGNKmJqwMaM4UbUq4HigisNSuE", "IMG_8764"),
+        ("1ThU3zItn0UXf4Z_4Tzk313Z_ZyoCIY0B", "IMG_8789"),
+        ("1MxWeQWTGU3QcTosQY55P0byFvl4FvI1J", "IMG_8792"),
     ],
-    "lipo": [  # Липолитики
-        ("12ocgtcRNt4Cxjz5KZ_vzLpE3t62WnrjR", "IMG_8781"),
-        ("1cisbTvhYxnNxtnrLScbrQfnvldy5kSrv", "IMG_8780"),
-    ],
-    "lips": [  # Контурная пластика губ
-        ("1XKLwW-R_A-kBYEBXnxCgVIWRUWv_fDYj", "IMG_8775"),
-        ("1zxHfzlw-prO5UJpHZT0QTYTs7Gv41lLM", "IMG_8773"),
-        ("1_ngWJgOLO-eYvElUvzDxd3hospvjEj98", "IMG_8772"),
-        ("17tUcJ3mdfGkY6sRmceaDykV8jemGCOdx", "IMG_8771"),
-        ("1Kb--bHPUNoz3SZv86Kfr5QFh5lyJbI6A", "IMG_8770"),
-        ("1WuUhOCFmOcT5GgLKfQK2B5bKnThFNnz1", "IMG_8769"),
-        ("1us5uVwTPW15L6tZNRqTx9V116_w8ZcbB", "IMG_8768"),
-        ("1-n7jXQ02lCNe3WQOUY-1ITWSa0wER-B5", "IMG_8767"),
-        ("1_hj0UgrgJ2yDgccQaJhNoYiJlFUMcya4", "IMG_8766"),
-        ("1mG6oVNO0TxfYP6SZkjjMfGJIubVzrsut", "IMG_8765"),
+    "lips": [  # Контурная пластика губ (перемещены из «Липолитики»)
+        ("1HL8I6bTF0yN27VgJoAItvfzsJoz3nZRv", "IMG_8780"),
+        ("1nbTa1n07Nt0Bl7r9AKmp6U9fIWMOwZIt", "IMG_8781"),
     ],
 }
 
