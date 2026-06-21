@@ -40,7 +40,7 @@ window.VB_CONFIG = {
   mapEmbed:      'https://yandex.ru/map-widget/v1/?text=Чебоксары,%20улица%20Лукина,%203&z=17',
 
   // Email (опционально)
-  email:         'hello@vladbobrov.ru',
+  email:         'hello@doctorbobrova.ru',
 
   // Цены (стартовые, "от ..."). Источник — актуальный прайс-лист.
   prices: {

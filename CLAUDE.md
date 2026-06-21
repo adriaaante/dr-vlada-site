@@ -17,7 +17,7 @@
 Премиум сайт-визитка врача-косметолога Влады Бобровой. **Статический сайт без
 сборки**: чистый HTML5 + CSS (custom properties) + Vanilla JS. Нет npm, нет
 бандлера, нет бэкенда, нет форм/cookies/аналитики. Открывается двойным кликом.
-Прод-домен: **vladbobrov.ru** (см. sitemap.xml / robots.txt).
+Прод-домен: **doctorbobrova.ru** (см. sitemap.xml / robots.txt).
 
 ## Структура проекта
 - Страницы в корне: `index.html`, `about.html`, `services.html`,
@@ -50,7 +50,7 @@
 - Доступы лежат в `scripts/deploy.config` (gitignored). Шаблон —
   `scripts/deploy.config.example`.
 - Цель по README: GitHub Pages / Netlify / Vercel / Cloudflare Pages / FTP-хостинг.
-  CNAME-файла в репо нет — домен vladbobrov.ru настроен на стороне хостинга/DNS,
+  CNAME-файла в репо нет — домен doctorbobrova.ru настроен на стороне хостинга/DNS,
   не в репо (проверь настройки Pages/хостинга, прежде чем менять домен).
 - Прод-домен в sitemap.xml и robots.txt — при смене домена правь оба.
 

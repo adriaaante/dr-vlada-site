@@ -6,15 +6,15 @@
 # ===== Для обновления НА ХОСТИНГЕ (scripts/update.sh, рекомендуется) =====
 # Папка сайта (веб-корень) на reg.ru. Уточните в панели/по SSH.
 # Часто: ~/www/<домен>  либо  ~/public_html
-WEB_ROOT="$HOME/www/vladbobrov.ru"
+WEB_ROOT="$HOME/www/doctorbobrova.ru"
 # Ветка, из которой берём сайт (по умолчанию main)
 DEPLOY_BRANCH="main"
 
 # ===== Для деплоя С ЛОКАЛЬНОЙ МАШИНЫ по FTP (scripts/deploy.sh) =====
 # Нужны, только если льёте с компьютера, а не обновляете на хостинге.
-FTP_HOST="ftp.vladbobrov.ru"     # FTP-сервер reg.ru
+FTP_HOST="ftp.doctorbobrova.ru"     # FTP-сервер reg.ru
 FTP_USER="ваш_ftp_логин"
 FTP_PASS="ваш_ftp_пароль"
-FTP_DIR="/www/vladbobrov.ru"     # веб-корень на сервере
+FTP_DIR="/www/doctorbobrova.ru"     # веб-корень на сервере
 FTP_PROTOCOL="ftp"               # ftp | ftps
 FTP_PORT="21"

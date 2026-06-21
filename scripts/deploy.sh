@@ -33,7 +33,7 @@ source "$CONFIG"
 : "${FTP_HOST:?Укажите FTP_HOST в scripts/deploy.config}"
 : "${FTP_USER:?Укажите FTP_USER в scripts/deploy.config}"
 : "${FTP_PASS:?Укажите FTP_PASS в scripts/deploy.config}"
-REMOTE_DIR="${FTP_DIR:-/www/vladbobrov.ru}"
+REMOTE_DIR="${FTP_DIR:-/www/doctorbobrova.ru}"
 PROTO="${FTP_PROTOCOL:-ftp}"     # ftp | ftps
 PORT="${FTP_PORT:-21}"
 
@@ -71,4 +71,4 @@ mirror -R --verbose $DRY $DELETE \
 bye
 LFTP
 
-echo "✓ Готово. Проверьте: https://vladbobrov.ru/"
+echo "✓ Готово. Проверьте: https://doctorbobrova.ru/"

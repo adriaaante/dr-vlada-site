@@ -10,7 +10,7 @@
 #   git clone https://github.com/adriaaante/dr-vlada-site.git ~/dr-vlada-site
 #   cd ~/dr-vlada-site
 #   cp scripts/deploy.config.example scripts/deploy.config
-#   # впишите WEB_ROOT — папку сайта на reg.ru (напр. ~/www/vladbobrov.ru)
+#   # впишите WEB_ROOT — папку сайта на reg.ru (напр. ~/www/doctorbobrova.ru)
 #
 # --- Обновление сайта (одна команда) ---
 #   bash ~/dr-vlada-site/scripts/update.sh
@@ -25,7 +25,7 @@ cd "$ROOT"
 [ -f scripts/deploy.config ] && source scripts/deploy.config || true
 
 BRANCH="${DEPLOY_BRANCH:-main}"
-WEB_ROOT="${WEB_ROOT:-$HOME/www/vladbobrov.ru}"
+WEB_ROOT="${WEB_ROOT:-$HOME/www/doctorbobrova.ru}"
 
 command -v git >/dev/null 2>&1 || { echo "✗ На хостинге нет git." >&2; exit 1; }
 
@@ -53,4 +53,4 @@ else
   rm -rf "$WEB_ROOT/assets/img/_staging" 2>/dev/null || true
 fi
 
-echo "✓ Готово. Проверьте: https://vladbobrov.ru/"
+echo "✓ Готово. Проверьте: https://doctorbobrova.ru/"
