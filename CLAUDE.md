@@ -89,6 +89,7 @@ Drive не ходит → фото тянет Action `fetch-portfolio-photos.yml
 - Лицо `1PK9Nr76ZrJxsdD_p5JhfIV17OzxqpyeD` → категория `face`
 - Липолитики `1LBvB07K0P62KQgsDisgKr-cg37arPcqt` → категория `lipo`
 - Губы `1wpJsKl8rEnyWrprvjS7mLNtN4ZM8Y_g6` → категория `lips`
+- Ботулинотерапия `1CjLpfpaBmkmoFxkjLuGfKGW5tkwsMOsQ` → категория `botox`
 ВАЖНО: имя папки = тип работы, но проверяй содержимое — фото могли положить не в
 ту папку (так было с губами в «Липолитики»). Кейс должен соответствовать фото.
 
@@ -108,6 +109,10 @@ Drive не ходит → фото тянет Action `fetch-portfolio-photos.yml
 - lipo-jawline      ← lipo/IMG_8764  `1BF5AdAyGNKmJqwMaM4UbUq4HigisNSuE`
 - lipo-double-chin  ← lipo/IMG_8789  `1ThU3zItn0UXf4Z_4Tzk313Z_ZyoCIY0B`
 - lipo-submental    ← lipo/IMG_8792  `1MxWeQWTGU3QcTosQY55P0byFvl4FvI1J`
+- botox-upper-third ← botox/IMG_9028 `1hGHWecdz8ng5U3xwY7LNjZ-J-KYisnt-`
+- botox-forehead    ← botox/IMG_9029 `15Nzwr3dgxDVYBbB4HxGYTt5-TJ_S-xWH` (до СНИЗУ — половинки меняются местами)
+- botox-crowsfeet   ← botox/IMG_9030 `18WZtmyTOqs2nMF5DxwIO4S3f7ojoThfJ`
+- botox-glabella    ← botox/IMG_9034 `1R58-vkyMfxmZw0IB1gGdmFK7W-LSL9qo`
 
 Ещё лежат в Drive, но НЕ использованы (можно добавить позже):
 face/IMG_8777 `1TnoF4g6rIgP1aYqtWZYCLjhhmpnOfa4t`, face/IMG_8774
