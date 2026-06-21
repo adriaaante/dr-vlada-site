@@ -5,16 +5,14 @@ name: Fetch portfolio before/after photos from Google Drive
 # коммитит их в assets/img/_staging/ для дальнейшего разбора (до/после,
 # обрезка, раскладка по кейсам portfolio.js).
 #
-# Запуск:
-#   - автоматически при пуше этого workflow/скрипта
-#   - вручную: Actions → этот workflow → Run workflow (выбрать нужную ветку)
+# Запуск: ТОЛЬКО вручную (workflow_dispatch), чтобы Action не коммитил
+#   _staging автоматически на каждый пуш скрипта. Запустить:
+#   - Actions → этот workflow → Run workflow (выбрать ветку), либо
+#   - через GitHub MCP: actions_run_trigger (workflow=fetch-portfolio-photos.yml).
+# Перед запуском впиши нужные файлы Drive в scripts/fetch-portfolio-staging.py.
 
 on:
   workflow_dispatch: {}
-  push:
-    paths:
-      - '.github/workflows/fetch-portfolio-photos.yml'
-      - 'scripts/fetch-portfolio-staging.py'
 
 permissions:
   contents: write
