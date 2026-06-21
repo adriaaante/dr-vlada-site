@@ -2,13 +2,17 @@
    ПОРТФОЛИО — работы врача-косметолога Влады Бобровой.
 
    Все кейсы построены на реальных фото «до/после». Каждая папка
-   assets/img/portfolio/<slug>/ содержит before.jpg и after.jpg —
-   это две половины исходного совмещённого кадра «до/после»
-   (см. scripts/fetch-portfolio-staging.py — откуда берутся фото).
+   assets/img/portfolio/<slug>/ содержит ОДИН совмещённый кадр result.jpg
+   («до» слева/сверху, «после» справа/снизу — как снято), с водяным знаком.
+   Фото показывается целиком, без обрезки (чёрный фон срезается отдельно).
+
+   Поле layout — расположение «до/после» в кадре (для подписей):
+     'lr' — до слева, после справа (горизонтальный кадр)
+     'tb' — до сверху, после снизу (вертикальный кадр)
 
    Как добавить новый кейс:
-   1. Папка кейса: assets/img/portfolio/<slug>/ с before.jpg и after.jpg.
-   2. Скопируйте объект ниже и замените поля.
+   1. Папка кейса: assets/img/portfolio/<slug>/ с result.jpg (с водяным знаком).
+   2. Скопируйте объект ниже, задайте image, layout, featured.
    3. featured: true — показать кейс на главной (максимум 6).
 
    Категории (совпадают с фильтрами на странице «Работы», portfolio.html):
@@ -26,8 +30,8 @@ window.VB_PORTFOLIO = [
     summary: 'Деликатное увеличение губ с сохранением естественной формы и чёткого контура.',
     duration: '1 визит · 40 мин',
     featured: true,
-    before: 'assets/img/portfolio/lips-natural/before.jpg',
-    after:  'assets/img/portfolio/lips-natural/after.jpg',
+    image:  'assets/img/portfolio/lips-natural/result.jpg',
+    layout: 'lr',
     details: {
       problem:   'Недостаточный объём губ, размытый контур, лёгкая сухость.',
       solution:  'Введение филлера 0,5–1 ml по технике мягкого моделирования, проработка контура. Анестезия включена.',
@@ -43,8 +47,8 @@ window.VB_PORTFOLIO = [
     summary: 'Увеличение объёма и коррекция формы для более выразительного, но гармоничного результата.',
     duration: '1 визит · 40 мин',
     featured: true,
-    before: 'assets/img/portfolio/lips-volume/before.jpg',
-    after:  'assets/img/portfolio/lips-volume/after.jpg',
+    image:  'assets/img/portfolio/lips-volume/result.jpg',
+    layout: 'lr',
     details: {
       problem:   'Тонкие губы, желание подчеркнуть объём и форму.',
       solution:  'Введение филлера 1 ml с учётом анатомии губ, равномерное распределение объёма. Анестезия включена.',
@@ -60,8 +64,8 @@ window.VB_PORTFOLIO = [
     summary: 'Прорисовка дуги Купидона и контура — губы становятся более очерченными и симметричными.',
     duration: '1 визит · 40 мин',
     featured: false,
-    before: 'assets/img/portfolio/lips-cupid-bow/before.jpg',
-    after:  'assets/img/portfolio/lips-cupid-bow/after.jpg',
+    image:  'assets/img/portfolio/lips-cupid-bow/result.jpg',
+    layout: 'lr',
     details: {
       problem:   'Нечёткая дуга Купидона, лёгкая асимметрия, размытый край губ.',
       solution:  'Акцент на контур и центральную часть верхней губы, аккуратное моделирование. Анестезия включена.',
@@ -77,8 +81,8 @@ window.VB_PORTFOLIO = [
     summary: 'Возвращение объёма и свежести сухим, обезвоженным губам.',
     duration: '1 визит · 40 мин',
     featured: false,
-    before: 'assets/img/portfolio/lips-hydro-volume/before.jpg',
-    after:  'assets/img/portfolio/lips-hydro-volume/after.jpg',
+    image:  'assets/img/portfolio/lips-hydro-volume/result.jpg',
+    layout: 'lr',
     details: {
       problem:   'Сухие губы с потерей объёма, тусклый цвет.',
       solution:  'Введение филлера с акцентом на увлажнение и мягкий объём. Анестезия включена.',
@@ -94,8 +98,8 @@ window.VB_PORTFOLIO = [
     summary: 'Коррекция формы и асимметрии губ для сбалансированного результата.',
     duration: '1 визит · 40 мин',
     featured: false,
-    before: 'assets/img/portfolio/lips-shape/before.jpg',
-    after:  'assets/img/portfolio/lips-shape/after.jpg',
+    image:  'assets/img/portfolio/lips-shape/result.jpg',
+    layout: 'lr',
     details: {
       problem:   'Асимметрия губ, неравномерный объём верхней и нижней губы.',
       solution:  'Точечное моделирование для выравнивания формы и пропорций. Анестезия включена.',
@@ -111,8 +115,8 @@ window.VB_PORTFOLIO = [
     summary: 'Лёгкое увеличение с акцентом на естественность — объём «как свой».',
     duration: '1 визит · 40 мин',
     featured: false,
-    before: 'assets/img/portfolio/lips-soft-volume/before.jpg',
-    after:  'assets/img/portfolio/lips-soft-volume/after.jpg',
+    image:  'assets/img/portfolio/lips-soft-volume/result.jpg',
+    layout: 'lr',
     details: {
       problem:   'Желание добавить объём без эффекта «перекаченных» губ.',
       solution:  'Минимальный объём филлера, мягкая техника распределения. Анестезия включена.',
@@ -128,8 +132,8 @@ window.VB_PORTFOLIO = [
     summary: 'Объём и насыщенный, здоровый вид губ за одну процедуру.',
     duration: '1 визит · 40 мин',
     featured: false,
-    before: 'assets/img/portfolio/lips-glossy/before.jpg',
-    after:  'assets/img/portfolio/lips-glossy/after.jpg',
+    image:  'assets/img/portfolio/lips-glossy/result.jpg',
+    layout: 'lr',
     details: {
       problem:   'Плоские губы, размытый контур, тусклый цвет.',
       solution:  'Моделирование объёма и контура с акцентом на «сочный» естественный вид. Анестезия включена.',
@@ -147,8 +151,8 @@ window.VB_PORTFOLIO = [
     summary: 'Создание выразительных скул и более чёткого овала лица.',
     duration: '1 визит · 60 мин',
     featured: true,
-    before: 'assets/img/portfolio/cheekbones/before.jpg',
-    after:  'assets/img/portfolio/cheekbones/after.jpg',
+    image:  'assets/img/portfolio/cheekbones/result.jpg',
+    layout: 'lr',
     details: {
       problem:   'Недостаточно выраженные скулы, желание подчеркнуть овал лица.',
       solution:  'Расчёт точек по фронтальной и боковой проекции, введение филлера канюлей.',
@@ -164,8 +168,8 @@ window.VB_PORTFOLIO = [
     summary: 'Объёмное моделирование средней трети — лицо выглядит отдохнувшим и свежим.',
     duration: '1 визит · 60 мин',
     featured: true,
-    before: 'assets/img/portfolio/nasolabial/before.jpg',
-    after:  'assets/img/portfolio/nasolabial/after.jpg',
+    image:  'assets/img/portfolio/nasolabial/result.jpg',
+    layout: 'lr',
     details: {
       problem:   'Опущение средней трети лица, носогубные складки, «уставший» вид.',
       solution:  'Векторная поддержка средней трети + деликатная коррекция носогубных борозд канюлей.',
@@ -181,8 +185,8 @@ window.VB_PORTFOLIO = [
     summary: 'Заполнение слёзной борозды канюльным методом — уходит «уставший» взгляд.',
     duration: '1 визит · 60 мин',
     featured: true,
-    before: 'assets/img/portfolio/tear-trough/before.jpg',
-    after:  'assets/img/portfolio/tear-trough/after.jpg',
+    image:  'assets/img/portfolio/tear-trough/result.jpg',
+    layout: 'lr',
     details: {
       problem:   'Выраженная слёзная борозда, тёмные круги, «тени» под глазами.',
       solution:  'Введение деликатного филлера канюлей по технологии коррекции носослёзной борозды.',
@@ -198,8 +202,8 @@ window.VB_PORTFOLIO = [
     summary: 'Комплексная работа с пропорциями лица — естественный, но заметный результат.',
     duration: '1–2 визита · 60 мин',
     featured: false,
-    before: 'assets/img/portfolio/face-harmony/before.jpg',
-    after:  'assets/img/portfolio/face-harmony/after.jpg',
+    image:  'assets/img/portfolio/face-harmony/result.jpg',
+    layout: 'lr',
     details: {
       problem:   'Дисбаланс пропорций, асимметрия, «уставший» вид лица.',
       solution:  'Поэтапная коррекция нескольких зон с учётом анатомии и индивидуальных пропорций.',
@@ -215,8 +219,8 @@ window.VB_PORTFOLIO = [
     summary: 'Восстановление тонуса и свежести кожи лица.',
     duration: '1 визит · 60 мин',
     featured: false,
-    before: 'assets/img/portfolio/face-fresh/before.jpg',
-    after:  'assets/img/portfolio/face-fresh/after.jpg',
+    image:  'assets/img/portfolio/face-fresh/result.jpg',
+    layout: 'lr',
     details: {
       problem:   'Потеря тонуса, тусклый и «уставший» вид кожи.',
       solution:  'Деликатная контурная коррекция и поддержка тканей для более свежего вида.',
@@ -234,8 +238,8 @@ window.VB_PORTFOLIO = [
     summary: 'Уменьшение жирового пакета нижней трети лица и более чёткий овал без операции.',
     duration: 'Курс 1–2 процедуры',
     featured: true,
-    before: 'assets/img/portfolio/lipo-jawline/before.jpg',
-    after:  'assets/img/portfolio/lipo-jawline/after.jpg',
+    image:  'assets/img/portfolio/lipo-jawline/result.jpg',
+    layout: 'lr',
     details: {
       problem:   'Нечёткий овал лица, лишний объём в нижней трети.',
       solution:  'Курс инъекций липолитика по сетке + сосудистый этап.',
@@ -251,8 +255,8 @@ window.VB_PORTFOLIO = [
     summary: 'Коррекция второго подбородка инъекционным методом — чёткий шейно-подбородочный угол.',
     duration: 'Курс 1–2 процедуры',
     featured: false,
-    before: 'assets/img/portfolio/lipo-double-chin/before.jpg',
-    after:  'assets/img/portfolio/lipo-double-chin/after.jpg',
+    image:  'assets/img/portfolio/lipo-double-chin/result.jpg',
+    layout: 'tb',
     details: {
       problem:   'Выраженный второй подбородок, нечёткий шейно-подбородочный угол.',
       solution:  'Курс инъекций липолитика в подбородочную область + сосудистый этап.',
@@ -268,8 +272,8 @@ window.VB_PORTFOLIO = [
     summary: 'Уменьшение объёма подбородочной зоны и более выразительная линия челюсти.',
     duration: 'Курс 1–2 процедуры',
     featured: false,
-    before: 'assets/img/portfolio/lipo-submental/before.jpg',
-    after:  'assets/img/portfolio/lipo-submental/after.jpg',
+    image:  'assets/img/portfolio/lipo-submental/result.jpg',
+    layout: 'tb',
     details: {
       problem:   'Лишний объём в подбородочной зоне, сглаженная линия челюсти.',
       solution:  'Курс инъекций липолитика по сетке + сосудистый этап.',

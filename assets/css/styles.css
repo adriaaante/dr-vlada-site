@@ -69,7 +69,7 @@ body {
   overflow-x: hidden;
   /* Над обычным текстом — стрелка, а не I-beam (форм у нас нет).
      Кликабельные элементы (a, button, .service-card, .case-card)
-     перебивают на pointer; слайдер .ba — на ew-resize. */
+     перебивают на pointer. */
   cursor: default;
 }
 img, svg { display: block; max-width: 100%; height: auto; }
@@ -731,59 +731,21 @@ a.service-card:hover { color: inherit; }
 /* Pointer-курсор на тексте/иконках внутри карточки кейса */
 .case-card .case-card__body,
 .case-card .case-card__body * { cursor: pointer; }
-/* А внутри слайдера — курсор перетаскивания */
+/* Фото «до/после» — клик открывает подробности */
 .case-card .ba,
-.case-card .ba * { cursor: ew-resize; }
+.case-card .ba * { cursor: pointer; }
 
-/* Before/after slider */
+/* Фото «до/после» — совмещённый кадр целиком, без обрезки */
 .ba {
   position: relative;
-  aspect-ratio: 4/3;
+  aspect-ratio: 1/1;
   overflow: hidden;
-  background: var(--c-primary-50);
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: pan-y;
-  cursor: ew-resize;
+  background: var(--c-bg);
 }
-.ba__img {
-  position: absolute;
-  inset: 0;
+.ba__photo {
   width: 100%; height: 100%;
-  object-fit: cover;
-}
-.ba__after-wrap {
-  position: absolute;
-  inset: 0;
-  width: 50%;
-  overflow: hidden;
-}
-.ba__after-wrap img {
-  width: 200%;
-  height: 100%;
-  object-fit: cover;
-  object-position: left center;
-}
-.ba__handle {
-  position: absolute;
-  top: 0; bottom: 0;
-  left: 50%;
-  width: 3px;
-  background: #fff;
-  transform: translateX(-50%);
-  box-shadow: 0 0 0 1px rgba(14,61,77,.1), 0 2px 8px rgba(0,0,0,.2);
-  pointer-events: none;
-}
-.ba__handle::after {
-  content: '';
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 38px; height: 38px;
-  border-radius: 50%;
-  background: #fff
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230e3d4d' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'/%3E%3Cpolyline points='9 18 15 12 9 6' transform='translate(6 0)'/%3E%3C/svg%3E") center/22px no-repeat;
-  box-shadow: 0 4px 14px rgba(0,0,0,.18);
+  object-fit: contain;
+  display: block;
 }
 .ba__label {
   position: absolute;
@@ -797,9 +759,13 @@ a.service-card:hover { color: inherit; }
   text-transform: uppercase;
   border-radius: 6px;
   z-index: 2;
+  pointer-events: none;
 }
 .ba__label--before { left: 12px; }
 .ba__label--after  { right: 12px; background: rgba(197,165,114,.95); color: var(--c-primary-dark); }
+/* Вертикальный кадр «верх/низ»: «После» — внизу слева
+   (справа внизу — водяной знак). */
+.ba--tb .ba__label--after { top: auto; bottom: 12px; right: auto; left: 12px; }
 
 .case-card__body { padding: 22px 24px 24px; flex: 1; display: flex; flex-direction: column; }
 .case-card__tag {
@@ -1250,6 +1216,18 @@ a.service-card:hover { color: inherit; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0;
+}
+/* Совмещённый кадр «до/после» целиком (без обрезки) */
+.lightbox__media--single {
+  display: block;
+  position: relative;
+  background: var(--c-bg);
+}
+.lightbox__media--single img {
+  width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  display: block;
 }
 .lightbox__media figure { margin: 0; position: relative; aspect-ratio: 4/3; }
 .lightbox__media figure img { width: 100%; height: 100%; object-fit: cover; }

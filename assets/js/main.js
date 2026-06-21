@@ -4,8 +4,7 @@
    - header scroll-state
    - мобильное меню
    - FAB (мессенджеры)
-   - before/after слайдер
-   - lightbox для портфолио
+   - lightbox для портфолио (совмещённый кадр «до/после»)
    - рендер портфолио (карточки + фильтры)
    - reveal-on-scroll
    - counter-up
@@ -91,76 +90,6 @@
     });
   }
 
-  /* -------- Before/After слайдер -------- */
-  /* Pointer Events + распознавание жеста: вертикальный свайп листает
-     страницу (touch-action: pan-y), горизонтальный — двигает слайдер.
-     setPointerCapture гарантирует, что палец/курсор не «теряется».
-     Флаг __baReady защищает от повторной инициализации одного и того же
-     элемента (иначе слушатели дублируются и слайдер дёргается). */
-  function setupBA(root = document) {
-    $$('.ba', root).forEach(ba => {
-      if (ba.__baReady) return;
-      ba.__baReady = true;
-
-      const wrap = ba.querySelector('.ba__after-wrap');
-      const handle = ba.querySelector('.ba__handle');
-      const img = wrap && wrap.querySelector('img');
-      if (!wrap || !handle) return;
-
-      const set = (pct) => {
-        pct = Math.max(0, Math.min(100, pct));
-        wrap.style.width = pct + '%';
-        handle.style.left = pct + '%';
-        if (img) img.style.width = (10000 / Math.max(pct, 0.5)) + '%';
-      };
-      const pctFromX = (clientX) => {
-        const rect = ba.getBoundingClientRect();
-        return rect.width ? ((clientX - rect.left) / rect.width) * 100 : 50;
-      };
-
-      let active = false, engaged = false, pid = null, sx = 0, sy = 0;
-
-      ba.addEventListener('pointerdown', (e) => {
-        active = true; engaged = false; pid = e.pointerId;
-        sx = e.clientX; sy = e.clientY;
-        // Мышь и клик прямо по ручке — двигаем сразу.
-        if (e.pointerType === 'mouse' || e.target === handle) {
-          engaged = true;
-          try { ba.setPointerCapture(pid); } catch (_) {}
-          ba.classList.add('is-dragging');
-          set(pctFromX(e.clientX));
-          if (e.cancelable) e.preventDefault();
-        }
-      });
-
-      ba.addEventListener('pointermove', (e) => {
-        if (!active || e.pointerId !== pid) return;
-        if (!engaged) {
-          const dx = Math.abs(e.clientX - sx), dy = Math.abs(e.clientY - sy);
-          if (dx < 6 && dy < 6) return;        // слишком мелкое движение — ждём
-          if (dy > dx) { active = false; return; } // вертикаль — отдаём странице на скролл
-          engaged = true;
-          try { ba.setPointerCapture(pid); } catch (_) {}
-          ba.classList.add('is-dragging');
-        }
-        set(pctFromX(e.clientX));
-        if (e.cancelable) e.preventDefault();
-      });
-
-      const stop = (e) => {
-        if (e.pointerId !== pid && pid !== null) return;
-        active = false; engaged = false;
-        ba.classList.remove('is-dragging');
-        try { ba.releasePointerCapture(pid); } catch (_) {}
-        pid = null;
-      };
-      ba.addEventListener('pointerup', stop);
-      ba.addEventListener('pointercancel', stop);
-
-      set(50);
-    });
-  }
-
   /* -------- Lightbox -------- */
   function setupLightbox() {
     const lb = $('#lightbox');
@@ -170,7 +99,6 @@
       body.innerHTML = html;
       lb.classList.add('is-open');
       document.body.classList.add('no-scroll');
-      setupBA(body);
       // Close button (re-find inside new content)
       const closeBtn = body.querySelector('[data-close]');
       if (closeBtn) closeBtn.addEventListener('click', close);
@@ -183,11 +111,7 @@
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 
     document.addEventListener('click', (e) => {
-      // Клик внутри слайдера .ba НИКОГДА не открывает лайтбокс —
-      // зона слайдера предназначена только для листания "до/после".
-      // Чтобы открыть кейс — нужно кликнуть на тело карточки
-      // (заголовок, описание или ссылку "Подробнее").
-      if (e.target.closest('.ba')) return;
+      // Клик в любом месте карточки кейса открывает подробности.
       const btn = e.target.closest('[data-case]');
       if (!btn) return;
       e.preventDefault();
@@ -204,15 +128,10 @@
       <button class="lightbox__close" data-close aria-label="Закрыть">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
-      <div class="lightbox__media">
-        <figure>
-          <figcaption>До</figcaption>
-          <img src="${esc(item.before)}" alt="${esc(item.title)} — до" loading="lazy">
-        </figure>
-        <figure>
-          <figcaption class="after">После</figcaption>
-          <img src="${esc(item.after)}" alt="${esc(item.title)} — после" loading="lazy">
-        </figure>
+      <div class="lightbox__media lightbox__media--single ba--${esc(item.layout || 'lr')}">
+        <img src="${esc(item.image)}" alt="${esc(item.title)} — до и после" loading="lazy">
+        <span class="ba__label ba__label--before">До</span>
+        <span class="ba__label ba__label--after">После</span>
       </div>
       <div class="lightbox__content">
         <span class="lightbox__tag">${esc(item.categoryLabel || '')}</span>
@@ -253,7 +172,6 @@
     const featuredOnly = grid.hasAttribute('data-featured');
     const list = featuredOnly ? items.filter(x => x.featured).slice(0, 6) : items.slice();
     grid.innerHTML = list.map(caseCardHTML).join('');
-    setupBA(grid);
 
     // фильтры
     const filters = $('#portfolio-filters');
@@ -265,7 +183,6 @@
         const cat = chip.getAttribute('data-filter');
         const filtered = cat === 'all' ? items : items.filter(x => x.category === cat);
         grid.innerHTML = filtered.map(caseCardHTML).join('');
-        setupBA(grid);
         observeReveals(grid);
       });
     }
@@ -276,12 +193,8 @@
     // лайтбокс (drag по слайдеру корректно отфильтрован).
     return `
       <article class="case-card reveal" data-case="${esc(item.slug)}" role="button" tabindex="0" aria-label="${esc(item.title)} — открыть подробности">
-        <div class="ba" role="img" aria-label="${esc(item.title)} — до и после">
-          <img class="ba__img" src="${esc(item.before)}" alt="" loading="lazy">
-          <div class="ba__after-wrap">
-            <img src="${esc(item.after)}" alt="" loading="lazy">
-          </div>
-          <div class="ba__handle"></div>
+        <div class="ba ba--${esc(item.layout || 'lr')}" role="img" aria-label="${esc(item.title)} — до и после">
+          <img class="ba__photo" src="${esc(item.image)}" alt="${esc(item.title)} — до и после" loading="lazy">
           <span class="ba__label ba__label--before">До</span>
           <span class="ba__label ba__label--after">После</span>
         </div>
@@ -486,7 +399,6 @@
     setupFab();
     renderPortfolio();
     setupLightbox();
-    setupBA();
     setupCounters();
     setupYear();
     setupActiveNav();
