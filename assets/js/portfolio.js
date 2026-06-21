@@ -1,225 +1,280 @@
 /* ============================================================
    ПОРТФОЛИО — работы врача-косметолога Влады Бобровой.
 
-   Как добавить/заменить фото в кейсе:
-   1. Папка кейса: assets/img/portfolio/<slug>/
-   2. Положите туда before.jpg и after.jpg
-      (рекомендуем 1200×900 — одинаковый ракурс и освещение).
-      Имя файла можно оставить before.svg/after.svg или поменять
-      путь в полях before/after ниже.
-   3. Чтобы добавить новый кейс — скопируйте один из объектов и замените поля.
-   4. Чтобы показать кейс на главной — поставьте featured: true.
+   Все кейсы построены на реальных фото «до/после». Каждая папка
+   assets/img/portfolio/<slug>/ содержит before.jpg и after.jpg —
+   это две половины исходного совмещённого кадра «до/после»
+   (см. scripts/fetch-portfolio-staging.py — откуда берутся фото).
 
-   Категории (совпадают с фильтрами на странице «Работы»):
-     injection — инъекции (ботокс, биорева, липолитики)
-     contour   — контурная пластика (губы, лицо, слёзная борозда)
-     peels     — пилинги
-     skin      — чистка лица и уход
-   Услуги и кейсы соответствуют актуальному прайс-листу.
+   Как добавить новый кейс:
+   1. Папка кейса: assets/img/portfolio/<slug>/ с before.jpg и after.jpg.
+   2. Скопируйте объект ниже и замените поля.
+   3. featured: true — показать кейс на главной (максимум 6).
+
+   Категории (совпадают с фильтрами на странице «Работы», portfolio.html):
+     lips — контурная пластика губ
+     face — контурная пластика лица (скулы, средняя треть, слёзная борозда)
+     lipo — липолитики (коррекция второго подбородка и овала)
    ============================================================ */
 window.VB_PORTFOLIO = [
+  /* -------------------- Губы -------------------- */
   {
-    slug: 'lip-filler-natural',
+    slug: 'lips-natural',
     title: 'Контурная пластика губ — натуральный объём',
-    category: 'contour',
+    category: 'lips',
     categoryLabel: 'Губы',
-    summary: 'Гармоничное увеличение губ филлером на гиалуроновой кислоте с сохранением естественной формы.',
+    summary: 'Деликатное увеличение губ с сохранением естественной формы и чёткого контура.',
     duration: '1 визит · 40 мин',
     featured: true,
-    before: 'assets/img/portfolio/lip-filler-natural/before.svg',
-    after:  'assets/img/portfolio/lip-filler-natural/after.svg',
+    before: 'assets/img/portfolio/lips-natural/before.jpg',
+    after:  'assets/img/portfolio/lips-natural/after.jpg',
     details: {
-      problem:   'Тонкие губы с потерей объёма верхней дуги Купидона, асимметрия.',
-      solution:  'Проработка контура и центральной части верхней губы, объём 0,5–1 ml. Анестезия включена.',
-      materials: 'Tesoro Deep, Stylage M, Belotero Intense (подбирается индивидуально)',
-      result:    'Естественный объём, выраженная дуга Купидона, симметрия сохранена. Эффект до 12 месяцев.'
+      problem:   'Недостаточный объём губ, размытый контур, лёгкая сухость.',
+      solution:  'Введение филлера 0,5–1 ml по технике мягкого моделирования, проработка контура. Анестезия включена.',
+      materials: 'Филлер на гиалуроновой кислоте (подбирается индивидуально)',
+      result:    'Естественный объём и аккуратный контур, губы выглядят ухоженно. Эффект до 12 месяцев.'
     }
   },
   {
-    slug: 'lip-volume',
-    title: 'Контурная пластика губ — увеличение объёма',
-    category: 'contour',
+    slug: 'lips-volume',
+    title: 'Контурная пластика губ — выразительный объём',
+    category: 'lips',
     categoryLabel: 'Губы',
-    summary: 'Увеличение губ и коррекция формы для более выразительного, но естественного результата.',
+    summary: 'Увеличение объёма и коррекция формы для более выразительного, но гармоничного результата.',
+    duration: '1 визит · 40 мин',
+    featured: true,
+    before: 'assets/img/portfolio/lips-volume/before.jpg',
+    after:  'assets/img/portfolio/lips-volume/after.jpg',
+    details: {
+      problem:   'Тонкие губы, желание подчеркнуть объём и форму.',
+      solution:  'Введение филлера 1 ml с учётом анатомии губ, равномерное распределение объёма. Анестезия включена.',
+      materials: 'Филлер на гиалуроновой кислоте (подбирается индивидуально)',
+      result:    'Выразительный естественный объём, ровный контур. Эффект до 12 месяцев.'
+    }
+  },
+  {
+    slug: 'lips-cupid-bow',
+    title: 'Контурная пластика губ — чёткий контур',
+    category: 'lips',
+    categoryLabel: 'Губы',
+    summary: 'Прорисовка дуги Купидона и контура — губы становятся более очерченными и симметричными.',
     duration: '1 визит · 40 мин',
     featured: false,
-    before: 'assets/img/portfolio/lip-volume/before.svg',
-    after:  'assets/img/portfolio/lip-volume/after.svg',
+    before: 'assets/img/portfolio/lips-cupid-bow/before.jpg',
+    after:  'assets/img/portfolio/lips-cupid-bow/after.jpg',
     details: {
-      problem:   'Недостаточный объём губ, желание подчеркнуть форму и контур.',
-      solution:  'Введение филлера 1 ml с учётом анатомии губ, мягкое моделирование объёма. Анестезия включена.',
-      materials: 'Tesoro Deep, Belotero Lips Shape (подбирается индивидуально)',
-      result:    'Аккуратный объём, ухоженные губы, естественный контур. Эффект до 12 месяцев.'
+      problem:   'Нечёткая дуга Купидона, лёгкая асимметрия, размытый край губ.',
+      solution:  'Акцент на контур и центральную часть верхней губы, аккуратное моделирование. Анестезия включена.',
+      materials: 'Филлер на гиалуроновой кислоте (подбирается индивидуально)',
+      result:    'Выраженная дуга Купидона, чёткий контур, сохранённая симметрия. Эффект до 12 месяцев.'
     }
   },
   {
-    slug: 'cheekbones-sculpting',
-    title: 'Контурная пластика лица — скулы',
-    category: 'contour',
+    slug: 'lips-hydro-volume',
+    title: 'Контурная пластика губ — объём и увлажнение',
+    category: 'lips',
+    categoryLabel: 'Губы',
+    summary: 'Возвращение объёма и свежести сухим, обезвоженным губам.',
+    duration: '1 визит · 40 мин',
+    featured: false,
+    before: 'assets/img/portfolio/lips-hydro-volume/before.jpg',
+    after:  'assets/img/portfolio/lips-hydro-volume/after.jpg',
+    details: {
+      problem:   'Сухие губы с потерей объёма, тусклый цвет.',
+      solution:  'Введение филлера с акцентом на увлажнение и мягкий объём. Анестезия включена.',
+      materials: 'Филлер на гиалуроновой кислоте (подбирается индивидуально)',
+      result:    'Увлажнённые, наполненные губы, естественный блеск. Эффект до 12 месяцев.'
+    }
+  },
+  {
+    slug: 'lips-shape',
+    title: 'Контурная пластика губ — коррекция формы',
+    category: 'lips',
+    categoryLabel: 'Губы',
+    summary: 'Коррекция формы и асимметрии губ для сбалансированного результата.',
+    duration: '1 визит · 40 мин',
+    featured: false,
+    before: 'assets/img/portfolio/lips-shape/before.jpg',
+    after:  'assets/img/portfolio/lips-shape/after.jpg',
+    details: {
+      problem:   'Асимметрия губ, неравномерный объём верхней и нижней губы.',
+      solution:  'Точечное моделирование для выравнивания формы и пропорций. Анестезия включена.',
+      materials: 'Филлер на гиалуроновой кислоте (подбирается индивидуально)',
+      result:    'Сбалансированная форма, ровный контур, естественный объём. Эффект до 12 месяцев.'
+    }
+  },
+  {
+    slug: 'lips-soft-volume',
+    title: 'Контурная пластика губ — мягкий объём',
+    category: 'lips',
+    categoryLabel: 'Губы',
+    summary: 'Лёгкое увеличение с акцентом на естественность — объём «как свой».',
+    duration: '1 визит · 40 мин',
+    featured: false,
+    before: 'assets/img/portfolio/lips-soft-volume/before.jpg',
+    after:  'assets/img/portfolio/lips-soft-volume/after.jpg',
+    details: {
+      problem:   'Желание добавить объём без эффекта «перекаченных» губ.',
+      solution:  'Минимальный объём филлера, мягкая техника распределения. Анестезия включена.',
+      materials: 'Филлер на гиалуроновой кислоте (подбирается индивидуально)',
+      result:    'Естественный мягкий объём, ухоженный вид. Эффект до 12 месяцев.'
+    }
+  },
+  {
+    slug: 'lips-glossy',
+    title: 'Контурная пластика губ — объём и сияние',
+    category: 'lips',
+    categoryLabel: 'Губы',
+    summary: 'Объём и насыщенный, здоровый вид губ за одну процедуру.',
+    duration: '1 визит · 40 мин',
+    featured: false,
+    before: 'assets/img/portfolio/lips-glossy/before.jpg',
+    after:  'assets/img/portfolio/lips-glossy/after.jpg',
+    details: {
+      problem:   'Плоские губы, размытый контур, тусклый цвет.',
+      solution:  'Моделирование объёма и контура с акцентом на «сочный» естественный вид. Анестезия включена.',
+      materials: 'Филлер на гиалуроновой кислоте (подбирается индивидуально)',
+      result:    'Наполненные сияющие губы, чёткий контур. Эффект до 12 месяцев.'
+    }
+  },
+
+  /* -------------------- Лицо -------------------- */
+  {
+    slug: 'cheekbones',
+    title: 'Контурная пластика лица — скулы и овал',
+    category: 'face',
     categoryLabel: 'Лицо',
-    summary: 'Создание выразительных скул и улучшение пропорций лица плотным филлером.',
+    summary: 'Создание выразительных скул и более чёткого овала лица.',
     duration: '1 визит · 60 мин',
     featured: true,
-    before: 'assets/img/portfolio/cheekbones-sculpting/before.svg',
-    after:  'assets/img/portfolio/cheekbones-sculpting/after.svg',
+    before: 'assets/img/portfolio/cheekbones/before.jpg',
+    after:  'assets/img/portfolio/cheekbones/after.jpg',
     details: {
-      problem:   'Плоские скулы, желание подчеркнуть овал лица.',
-      solution:  'Расчёт точек по фронтальной и боковой проекции, введение филлера канюлей (2–3 ml).',
-      materials: 'Tesoro, Radiesse',
-      result:    'Выразительные скулы, скульптурный овал лица. Эффект 12–18 месяцев.'
+      problem:   'Недостаточно выраженные скулы, желание подчеркнуть овал лица.',
+      solution:  'Расчёт точек по фронтальной и боковой проекции, введение филлера канюлей.',
+      materials: 'Филлер на гиалуроновой кислоте / Radiesse (подбирается индивидуально)',
+      result:    'Выразительные скулы, скульптурный овал, свежий вид. Эффект 12–18 месяцев.'
     }
   },
   {
-    slug: 'nasolabial-fillers',
-    title: 'Контурная пластика лица — носогубные складки',
-    category: 'contour',
+    slug: 'nasolabial',
+    title: 'Контурная пластика лица — средняя треть',
+    category: 'face',
     categoryLabel: 'Лицо',
-    summary: 'Объёмное моделирование средней трети лица — носогубки уходят без перегруза.',
+    summary: 'Объёмное моделирование средней трети — лицо выглядит отдохнувшим и свежим.',
     duration: '1 визит · 60 мин',
     featured: true,
-    before: 'assets/img/portfolio/nasolabial-fillers/before.svg',
-    after:  'assets/img/portfolio/nasolabial-fillers/after.svg',
+    before: 'assets/img/portfolio/nasolabial/before.jpg',
+    after:  'assets/img/portfolio/nasolabial/after.jpg',
     details: {
-      problem:   'Глубокие носогубные складки, опущение средней трети лица, «уставший» вид.',
-      solution:  'Векторный лифтинг средней трети + точечная коррекция носогубных борозд канюлей.',
-      materials: 'Tesoro, Radiesse',
-      result:    'Лицо выглядит свежее и моложе, складки разглажены. Эффект 12–18 месяцев.'
+      problem:   'Опущение средней трети лица, носогубные складки, «уставший» вид.',
+      solution:  'Векторная поддержка средней трети + деликатная коррекция носогубных борозд канюлей.',
+      materials: 'Филлер на гиалуроновой кислоте / Radiesse (подбирается индивидуально)',
+      result:    'Лицо выглядит свежее и моложе, складки смягчены. Эффект 12–18 месяцев.'
     }
   },
   {
-    slug: 'tear-trough-correction',
-    title: 'Коррекция носослезной борозды',
-    category: 'contour',
+    slug: 'tear-trough',
+    title: 'Коррекция носослёзной борозды',
+    category: 'face',
     categoryLabel: 'Глаза',
-    summary: 'Заполнение слёзной борозды деликатным филлером канюльным методом — уходит «уставший» взгляд.',
+    summary: 'Заполнение слёзной борозды канюльным методом — уходит «уставший» взгляд.',
     duration: '1 визит · 60 мин',
-    featured: false,
-    before: 'assets/img/portfolio/tear-trough-correction/before.svg',
-    after:  'assets/img/portfolio/tear-trough-correction/after.svg',
+    featured: true,
+    before: 'assets/img/portfolio/tear-trough/before.jpg',
+    after:  'assets/img/portfolio/tear-trough/after.jpg',
     details: {
-      problem:   'Выраженная слёзная борозда, тёмные круги, мешки под глазами.',
-      solution:  'Введение филлера канюлей по технологии коррекции носослезной борозды.',
-      materials: 'Teosyal Redensity 2',
+      problem:   'Выраженная слёзная борозда, тёмные круги, «тени» под глазами.',
+      solution:  'Введение деликатного филлера канюлей по технологии коррекции носослёзной борозды.',
+      materials: 'Филлер для зоны вокруг глаз (подбирается индивидуально)',
       result:    'Заполненная слёзная борозда, свежий отдохнувший взгляд. Результат до 1,5 года.'
     }
   },
   {
-    slug: 'botox-forehead-glabella',
-    title: 'Ботулинотерапия лба и межбровья',
-    category: 'injection',
-    categoryLabel: 'Ботулинотерапия',
-    summary: 'Коррекция мимических морщин лба, межбровья и «гусиных лапок» — отдохнувший взгляд без эффекта маски.',
-    duration: '1 визит · 30 мин',
-    featured: true,
-    before: 'assets/img/portfolio/botox-forehead-glabella/before.svg',
-    after:  'assets/img/portfolio/botox-forehead-glabella/after.svg',
+    slug: 'face-harmony',
+    title: 'Гармонизация лица',
+    category: 'face',
+    categoryLabel: 'Лицо',
+    summary: 'Комплексная работа с пропорциями лица — естественный, но заметный результат.',
+    duration: '1–2 визита · 60 мин',
+    featured: false,
+    before: 'assets/img/portfolio/face-harmony/before.jpg',
+    after:  'assets/img/portfolio/face-harmony/after.jpg',
     details: {
-      problem:   'Горизонтальные морщины лба, вертикальная складка между бровями, морщинки у глаз.',
-      solution:  'Комплекс «верхняя треть»: лоб + межбровье + глаза, индивидуальный расчёт единиц по типу мимики.',
-      materials: 'Сертифицированный ботулотоксин типа А',
-      result:    'Гладкая кожа, естественная подвижность лица сохранена. Эффект до 6 месяцев.'
+      problem:   'Дисбаланс пропорций, асимметрия, «уставший» вид лица.',
+      solution:  'Поэтапная коррекция нескольких зон с учётом анатомии и индивидуальных пропорций.',
+      materials: 'Филлеры на гиалуроновой кислоте (подбираются индивидуально)',
+      result:    'Сбалансированные черты, ухоженный и свежий вид. Эффект 12–18 месяцев.'
     }
   },
   {
-    slug: 'biorevitalization-face',
-    title: 'Биоревитализация лица — сияние кожи',
-    category: 'injection',
-    categoryLabel: 'Биорева',
-    summary: 'Восстановление гидробаланса кожи и стимуляция упругости курсом из 3 процедур.',
-    duration: 'Курс 3 процедуры · 1 раз в 2–4 недели',
-    featured: true,
-    before: 'assets/img/portfolio/biorevitalization-face/before.svg',
-    after:  'assets/img/portfolio/biorevitalization-face/after.svg',
+    slug: 'face-fresh',
+    title: 'Контурная пластика лица — свежесть и тонус',
+    category: 'face',
+    categoryLabel: 'Лицо',
+    summary: 'Восстановление тонуса и свежести кожи лица.',
+    duration: '1 визит · 60 мин',
+    featured: false,
+    before: 'assets/img/portfolio/face-fresh/before.jpg',
+    after:  'assets/img/portfolio/face-fresh/after.jpg',
     details: {
-      problem:   'Обезвоженная тусклая кожа, мелкие морщинки, тёмные круги вокруг глаз.',
-      solution:  'Курс биоревитализации препаратами на основе гиалуроновой кислоты. Работа с зоной вокруг глаз.',
-      materials: 'BIOGEL, Meso-Wharton, Meso-Xanthin, Revi',
-      result:    'Гладкая увлажнённая кожа, ровный тон, естественное сияние.'
+      problem:   'Потеря тонуса, тусклый и «уставший» вид кожи.',
+      solution:  'Деликатная контурная коррекция и поддержка тканей для более свежего вида.',
+      materials: 'Филлер на гиалуроновой кислоте (подбирается индивидуально)',
+      result:    'Свежее, отдохнувшее лицо, ровный тон. Эффект 12–18 месяцев.'
     }
   },
+
+  /* -------------------- Липолитики -------------------- */
   {
-    slug: 'lipolytics-double-chin',
-    title: 'Липолитики «Стройность» — второй подбородок',
-    category: 'injection',
+    slug: 'lipo-jawline',
+    title: 'Липолитики — чёткий овал лица',
+    category: 'lipo',
     categoryLabel: 'Липолитики',
-    summary: 'Локальное уменьшение жирового пакета подбородочной области и щёчек без операции.',
+    summary: 'Уменьшение жирового пакета нижней трети лица и более чёткий овал без операции.',
+    duration: 'Курс 1–2 процедуры',
+    featured: true,
+    before: 'assets/img/portfolio/lipo-jawline/before.jpg',
+    after:  'assets/img/portfolio/lipo-jawline/after.jpg',
+    details: {
+      problem:   'Нечёткий овал лица, лишний объём в нижней трети.',
+      solution:  'Курс инъекций липолитика по сетке + сосудистый этап.',
+      materials: 'Липолитический комплекс',
+      result:    'Более чёткий овал и линия челюсти, «худое» свежее лицо.'
+    }
+  },
+  {
+    slug: 'lipo-double-chin',
+    title: 'Липолитики — второй подбородок',
+    category: 'lipo',
+    categoryLabel: 'Липолитики',
+    summary: 'Коррекция второго подбородка инъекционным методом — чёткий шейно-подбородочный угол.',
     duration: 'Курс 1–2 процедуры',
     featured: false,
-    before: 'assets/img/portfolio/lipolytics-double-chin/before.svg',
-    after:  'assets/img/portfolio/lipolytics-double-chin/after.svg',
+    before: 'assets/img/portfolio/lipo-double-chin/before.jpg',
+    after:  'assets/img/portfolio/lipo-double-chin/after.jpg',
     details: {
-      problem:   'Выраженный второй подбородок и щёчки, нечёткий шейно-подбородочный угол.',
-      solution:  'Курс инъекций липолитика (2 ml) с сосудистым этапом по сетке в подбородочную область.',
-      materials: 'Липолитический комплекс «Стройность» + сосудистый этап',
-      result:    'Подбородочная область уменьшена, более чёткий профиль, эффект «худого лица».'
+      problem:   'Выраженный второй подбородок, нечёткий шейно-подбородочный угол.',
+      solution:  'Курс инъекций липолитика в подбородочную область + сосудистый этап.',
+      materials: 'Липолитический комплекс',
+      result:    'Подбородочная область уменьшена, более чёткий профиль.'
     }
   },
   {
-    slug: 'lipolytics-body',
-    title: 'Липолитики «Стройность» — коррекция тела',
-    category: 'injection',
+    slug: 'lipo-submental',
+    title: 'Липолитики — подбородочная зона',
+    category: 'lipo',
     categoryLabel: 'Липолитики',
-    summary: 'Уменьшение локальных жировых отложений на теле инъекционным методом с сосудистым этапом.',
+    summary: 'Уменьшение объёма подбородочной зоны и более выразительная линия челюсти.',
     duration: 'Курс 1–2 процедуры',
     featured: false,
-    before: 'assets/img/portfolio/lipolytics-body/before.svg',
-    after:  'assets/img/portfolio/lipolytics-body/after.svg',
+    before: 'assets/img/portfolio/lipo-submental/before.jpg',
+    after:  'assets/img/portfolio/lipo-submental/after.jpg',
     details: {
-      problem:   'Локальные жировые отложения, не уходящие при диете и спорте.',
-      solution:  'Курс инъекций липолитика (2–4 ml) в проблемную зону + сосудистый этап.',
-      materials: 'Липолитический комплекс «Стройность» + сосудистый этап',
-      result:    'Уменьшение объёма в зоне коррекции, более ровный контур.'
-    }
-  },
-  {
-    slug: 'face-cleaning',
-    title: 'Чистка лица',
-    category: 'skin',
-    categoryLabel: 'Чистка',
-    summary: 'Профессиональная чистка лица на премиальной израильской космоцевтике GIGI.',
-    duration: '1 визит · до 1,5 часа',
-    featured: true,
-    before: 'assets/img/portfolio/face-cleaning/before.svg',
-    after:  'assets/img/portfolio/face-cleaning/after.svg',
-    details: {
-      problem:   'Чёрные точки, расширенные поры, тусклый цвет лица, забитая кожа.',
-      solution:  'Ультразвуковая и механическая чистка, маска по типу кожи, подбор домашнего ухода.',
-      materials: 'Космоцевтика GIGI (Израиль)',
-      result:    'Чистая, ухоженная кожа, сужение пор, ровный тон.'
-    }
-  },
-  {
-    slug: 'face-cleaning-complex',
-    title: 'Чистка лица + пилинг BioRePeelCl3',
-    category: 'skin',
-    categoryLabel: 'Чистка',
-    summary: 'Расширенная программа: чистка лица в сочетании с пилингом для максимального результата.',
-    duration: '1 визит · до 1,5 часа',
-    featured: false,
-    before: 'assets/img/portfolio/face-cleaning-complex/before.svg',
-    after:  'assets/img/portfolio/face-cleaning-complex/after.svg',
-    details: {
-      problem:   'Забитая кожа, неровный тон, тусклость, пигментация.',
-      solution:  'Ультразвуковая и механическая чистка + пилинг BioRePeelCl3, маска, консультация по уходу.',
-      materials: 'Космоцевтика GIGI, пилинг BioRePeelCl3',
-      result:    'Глубоко очищенная, обновлённая кожа, ровный тон и сияние.'
-    }
-  },
-  {
-    slug: 'biorepeel-peel',
-    title: 'Пилинг BioRePeelCl3',
-    category: 'peels',
-    categoryLabel: 'Пилинги',
-    summary: 'Лифтинг-эффект уже за один сеанс: улучшение тонуса кожи и устранение пигментных пятен.',
-    duration: '1 визит · 30 мин',
-    featured: true,
-    before: 'assets/img/portfolio/biorepeel-peel/before.svg',
-    after:  'assets/img/portfolio/biorepeel-peel/after.svg',
-    details: {
-      problem:   'Неровный тон и рельеф кожи, пигментные пятна, потеря тонуса.',
-      solution:  'Отшелушивание в сочетании со стимуляцией биосинтеза и обновлением клеток кожи.',
-      materials: 'BioRePeelCl3',
-      result:    'Лифтинг-эффект, ровный тон, гладкая кожа уже после первого сеанса.'
+      problem:   'Лишний объём в подбородочной зоне, сглаженная линия челюсти.',
+      solution:  'Курс инъекций липолитика по сетке + сосудистый этап.',
+      materials: 'Липолитический комплекс',
+      result:    'Более выразительная линия челюсти, аккуратный профиль.'
     }
   }
 ];
