@@ -189,8 +189,7 @@
   }
 
   function caseCardHTML(item) {
-    // data-case на самом <article> — клик в любом месте карточки откроет
-    // лайтбокс (drag по слайдеру корректно отфильтрован).
+    // data-case на самом <article> — клик в любом месте карточки откроет лайтбокс.
     return `
       <article class="case-card reveal" data-case="${esc(item.slug)}" role="button" tabindex="0" aria-label="${esc(item.title)} — открыть подробности">
         <div class="ba ba--${esc(item.layout || 'lr')}" role="img" aria-label="${esc(item.title)} — до и после">
