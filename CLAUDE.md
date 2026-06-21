@@ -53,6 +53,8 @@
 - `fetch-portfolio-staging.py` — качает фото работ из Drive, ужимает в JPG,
   кладёт в `assets/img/_staging/` (через Action `fetch-portfolio-photos.yml`).
   См. раздел «Портфолио: фото и источник в Google Drive».
+- `watermark.py` — накладывает водяной знак-лого на фото портфолио (обязательный
+  шаг при вставке; см. правило в разделе про портфолио).
 
 ## Портфолио: фото и источник в Google Drive
 Источник фото «до/после» — Google Drive (3 папки по типу работы). Песочница в
@@ -62,6 +64,11 @@ Drive не ходит → фото тянет Action `fetch-portfolio-photos.yml
 кадра пополам на `before.jpg`/`after.jpg` (L/R — лево=до, право=после; T/B —
 верх=до, низ=после), обрезка чёрного letterbox при необходимости, ресайз ≤1280,
 раскладка в `assets/img/portfolio/<slug>/`. После — `_staging` удаляется.
+
+**ПРАВИЛО (всегда):** каждое фото портфолио при вставке получает маленький
+полупрозрачный водяной знак-лого — `python3 scripts/watermark.py [files...]`
+(белый вордmark `logo-wordmark.png`, правый нижний угол). Наложение — один раз
+на файл (повторный запуск задвоит знак).
 
 Папки Drive (родитель `1qx3kbxYnUEpJkowiaEyXfiA1OqHGm30p`):
 - Лицо `1PK9Nr76ZrJxsdD_p5JhfIV17OzxqpyeD` → категория `face`
