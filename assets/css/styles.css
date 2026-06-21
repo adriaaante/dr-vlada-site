@@ -1217,18 +1217,25 @@ a.service-card:hover { color: inherit; }
   grid-template-columns: 1fr 1fr;
   gap: 0;
 }
-/* Совмещённый кадр «до/после» целиком (без обрезки) */
+/* Совмещённый кадр «до/после» целиком (без обрезки).
+   margin-top — чтобы фото и подписи «До/После» не уходили под крестик. */
 .lightbox__media--single {
   display: block;
   position: relative;
   background: var(--c-bg);
+  margin-top: 58px;
 }
 .lightbox__media--single img {
   width: 100%;
-  max-height: 70vh;
+  max-height: calc(70vh - 58px);
   object-fit: contain;
   display: block;
 }
+/* Подписи симметричны в углах фото (12px от краёв) */
+.lightbox__media--single .ba__label { top: 12px; }
+.lightbox__media--single .ba__label--before { left: 12px; right: auto; }
+.lightbox__media--single .ba__label--after  { right: 12px; left: auto; }
+.lightbox__media--single.ba--tb .ba__label--after { top: auto; bottom: 12px; left: 12px; right: auto; }
 .lightbox__media figure { margin: 0; position: relative; aspect-ratio: 4/3; }
 .lightbox__media figure img { width: 100%; height: 100%; object-fit: cover; }
 .lightbox__media figcaption {
