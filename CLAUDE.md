@@ -39,6 +39,16 @@
 
 ## Деплой / что выкатывается
 - Сборки нет — деплоится репозиторий как есть (статика из корня).
+- **reg.ru, обновление на хостинге (основное):** `scripts/update.sh` — тянет
+  `main` из GitHub и раскладывает статику в веб-корень (`WEB_ROOT`). На сервере
+  один раз: `git clone` репо + `cp scripts/deploy.config.example
+  scripts/deploy.config` (вписать `WEB_ROOT`). Обновление одной командой по SSH:
+  `bash ~/dr-vlada-site/scripts/update.sh`. Служебное (`.git`, `scripts`, `*.py`,
+  `*.md`, `_staging`) и серверные `.htaccess`/`.well-known` на сайт не попадают.
+- **Деплой с локальной машины по FTP (альтернатива):** `scripts/deploy.sh`
+  (через `lftp`, доступы в `scripts/deploy.config`). `--dry-run` / `--prune`.
+- Доступы лежат в `scripts/deploy.config` (gitignored). Шаблон —
+  `scripts/deploy.config.example`.
 - Цель по README: GitHub Pages / Netlify / Vercel / Cloudflare Pages / FTP-хостинг.
   CNAME-файла в репо нет — домен vladbobrov.ru настроен на стороне хостинга/DNS,
   не в репо (проверь настройки Pages/хостинга, прежде чем менять домен).
