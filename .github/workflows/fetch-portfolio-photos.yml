@@ -1,0 +1,57 @@
+name: Fetch portfolio before/after photos from Google Drive
+
+# Зачем: песочница Claude не имеет доступа к drive.google.com (host_not_allowed).
+# Раннер GitHub Actions качает фото работ, ужимает до веб-размера (JPG) и
+# коммитит их в assets/img/_staging/ для дальнейшего разбора (до/после,
+# обрезка, раскладка по кейсам portfolio.js).
+#
+# Запуск:
+#   - автоматически при пуше этого workflow/скрипта
+#   - вручную: Actions → этот workflow → Run workflow (выбрать нужную ветку)
+
+on:
+  workflow_dispatch: {}
+  push:
+    paths:
+      - '.github/workflows/fetch-portfolio-photos.yml'
+      - 'scripts/fetch-portfolio-staging.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-portfolio-photos
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (текущая ветка)
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: pip install --quiet Pillow pillow-heif
+
+      - name: Download & downscale portfolio photos
+        run: python3 scripts/fetch-portfolio-staging.py
+
+      - name: List staging
+        run: ls -laR assets/img/_staging/ || true
+
+      - name: Commit & push if anything changed
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/img/_staging
+          if git diff --staged --quiet; then
+            echo "Нет изменений — пропускаю коммит."
+          else
+            git commit -m "Add portfolio photos to staging (auto-fetched from Drive)"
+            git push
+          fi
