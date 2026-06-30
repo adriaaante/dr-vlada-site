@@ -1115,6 +1115,10 @@ a.service-card:hover { color: inherit; }
 .fab__menu {
   position: absolute;
   bottom: 76px; right: 0;
+  /* Меню спозиционировано внутри кнопки 60px — без max-content мобильный
+     Safari зажимает ширину, и текст «таблеток» вылезает за их пределы. */
+  width: max-content;
+  max-width: calc(100vw - 48px);
   display: flex; flex-direction: column;
   gap: 10px;
   align-items: flex-end;
