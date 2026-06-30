@@ -25,7 +25,6 @@
       if (value == null) return;
       if (el.tagName === 'A') {
         if (key === 'phone')        el.href = 'tel:' + (cfg.phoneClean || '');
-        else if (key === 'whatsapp')el.href = cfg.whatsapp || '#';
         else if (key === 'telegram')el.href = cfg.telegram || '#';
         else if (key === 'instagram')el.href = cfg.instagram || '#';
         else if (key === 'vk')      el.href = cfg.vk || '#';
@@ -39,7 +38,6 @@
     $$('[data-href]').forEach(el => {
       const key = el.getAttribute('data-href');
       if (key === 'phone')      el.href = 'tel:' + (cfg.phoneClean || '');
-      else if (key === 'whatsapp') el.href = cfg.whatsapp;
       else if (key === 'telegram') el.href = cfg.telegram;
       else if (key === 'instagram')el.href = cfg.instagram;
       else if (key === 'vk')       el.href = cfg.vk;
@@ -145,13 +143,13 @@
           ${item.duration ? `<div><dt>Длительность</dt><dd>${esc(item.duration)}</dd></div>` : ''}
         </dl>
         <div class="lightbox__cta">
-          <a class="btn btn--primary" data-href="phone">
-            <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            Записаться на консультацию
-          </a>
-          <a class="btn btn--ghost" data-href="telegram" target="_blank" rel="noopener">
+          <a class="btn btn--primary" data-href="telegram" target="_blank" rel="noopener">
             <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
-            Написать в Telegram
+            Записаться в Telegram
+          </a>
+          <a class="btn btn--ghost" data-href="instagram" target="_blank" rel="noopener">
+            <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            Instagram
           </a>
         </div>
       </div>

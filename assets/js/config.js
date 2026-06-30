@@ -18,14 +18,13 @@ window.VB_CONFIG = {
 
   // Телефон в человекочитаемом виде — для отображения
   phone:         '+7 903 359 9647',
-  // Телефон без форматирования — для tel: и wa.me ссылок
+  // Телефон без форматирования — для tel: ссылок
   phoneClean:    '+79033599647',
 
-  // Мессенджеры (deeplinks)
-  whatsapp:      'https://wa.me/79033599647?text=Здравствуйте,%20Влада!%20Хочу%20записаться%20на%20консультацию.',
+  // Мессенджеры и соцсети (deeplinks)
   telegram:      'https://t.me/vladabobro',
-  instagram:     'https://instagram.com/dr.bobrova_',
-  vk:            'https://vk.com/doctorbobrova',
+  instagram:     'https://www.instagram.com/dr.bobrova_',
+  vk:            'https://vk.ru/doctorbobrova',
 
   // Адрес и режим работы.
   // Приём в двух городах: Чебоксары (постоянный адрес) и Москва (по записи).
