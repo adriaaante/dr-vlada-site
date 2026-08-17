@@ -22,6 +22,10 @@
 ## Структура проекта
 - Страницы в корне: `index.html`, `about.html`, `services.html`,
   `portfolio.html`, `contacts.html`, `404.html`.
+- `certificate.html` — печатный бланк сертификата об обучении (A4, заполняется
+  от руки). НЕ путать с подарочными сертификатами (см. ниже).
+- `gift.html` + `gift-studio.html` — веб-приложение подарочных сертификатов
+  (standalone-страницы со встроенными CSS/JS, см. раздел ниже).
 - `assets/css/styles.css` — единая дизайн-система. Палитра в `:root`
   (`--c-primary` тил, `--c-accent` золото, `--c-bg` крем) — менять цвет один раз там.
 - `assets/js/config.js` — **единственный источник правды по контактам/бренду**
@@ -123,6 +127,24 @@ lips/IMG_8765 `1mG6oVNO0TxfYP6SZkjjMfGJIubVzrsut`.
 Ссылка на файл: `https://drive.google.com/file/d/<ID>/view`.
 Переименовать/удалить файлы в Drive из сессии нельзя (в MCP только copy_file) —
 поэтому источник истины по соответствию «фото↔работа» здесь, а не в именах Drive.
+
+## Подарочные сертификаты (gift.html / gift-studio.html)
+Бэкенда нет — все данные сертификата зашиты в саму ссылку:
+`gift.html#1.<base64url(JSON)>`, JSON: `{n: ФИО, a: сумма, t: тип,
+e: действителен до (YYYY-MM-DD), m: пожелание, k: номер VB-ГГММ-XXXX}`.
+- `gift-studio.html` — закрытая студия доктора: пин-код **999123**
+  (в коде хранится как `atob('OTk5MTIz')`, защита клиентская/символическая),
+  форма, живой предпросмотр (iframe `?pv=1&r=N` — `r` нужен, иначе смена только
+  hash не перезагружает iframe; `?pv=1` автооткрывает сертификат), кнопки
+  WhatsApp/Telegram, история в localStorage `vb_gift_history`.
+- `gift.html` — просмотр: интро с печатью → «Открыть подарок» → карточка с
+  канвас-анимацией под повод. Типы (`THEMES` в gift.html == `TYPES` в студии,
+  менять синхронно): universal, birthday, wedding, newyear, march8, love.
+  Все анимации нарисованы кодом (canvas + CSS), внешних ассетов нет.
+- Обе страницы standalone (инлайн CSS/JS), но используют палитру сайта,
+  Google Fonts, `assets/js/config.js` (контакты) и `logo-wordmark.png`.
+- Обе с `noindex`, в sitemap.xml их НЕ добавлять. Ссылок с сайта на студию нет —
+  доктор открывает `doctorbobrova.ru/gift-studio.html` напрямую.
 
 ## Грабли / неочевидное
 - **Песочница Claude не имеет внешнего доступа** к `drive.google.com` и
