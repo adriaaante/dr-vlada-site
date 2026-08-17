@@ -43,6 +43,12 @@
 
 ## Деплой / что выкатывается
 - Сборки нет — деплоится репозиторий как есть (статика из корня).
+- **Автодеплой (основное): GitHub Action `deploy.yml`** — на каждый push в
+  `main` (и вручную через workflow_dispatch) runner заливает статику по SSH
+  (rsync) на reg.ru. Секреты в GitHub: `REGRU_HOST`, `REGRU_USER`,
+  `REGRU_PASSWORD`, опц. `REGRU_WEB_ROOT` (иначе автопоиск
+  `~/www/doctorbobrova.ru` → `~/public_html`). Пароли в репо НЕ хранить.
+  Из песочницы SSH до сервера НЕ работает — только через Action.
 - **reg.ru, обновление на хостинге (основное):** `scripts/update.sh` — тянет
   `main` из GitHub и раскладывает статику в веб-корень (`WEB_ROOT`). На сервере
   один раз: `git clone` репо + `cp scripts/deploy.config.example

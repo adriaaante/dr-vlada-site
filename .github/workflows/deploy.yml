@@ -1,0 +1,84 @@
+name: Deploy to reg.ru
+
+# Автодеплой на хостинг reg.ru по SSH.
+# Песочница Claude не имеет доступа к серверу — деплоит GitHub-runner:
+# checkout репозитория → rsync статики в веб-корень (та же логика исключений,
+# что в scripts/update.sh). Серверный .htaccess и .well-known не трогаются.
+#
+# Нужные секреты (Settings → Secrets and variables → Actions):
+#   REGRU_HOST      — сервер, напр. 31.31.196.254 или server257.hosting.reg.ru
+#   REGRU_USER      — SSH-логин (u3538809)
+#   REGRU_PASSWORD  — SSH-пароль
+#   REGRU_WEB_ROOT  — (необязательно) веб-корень; по умолчанию ищется
+#                     ~/www/doctorbobrova.ru, затем ~/public_html
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install sshpass
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq sshpass
+
+      - name: Deploy via rsync over SSH
+        env:
+          SSHPASS: ${{ secrets.REGRU_PASSWORD }}
+          HOST: ${{ secrets.REGRU_HOST }}
+          USER: ${{ secrets.REGRU_USER }}
+          WEB_ROOT_OVERRIDE: ${{ secrets.REGRU_WEB_ROOT }}
+        run: |
+          set -euo pipefail
+          if [ -z "$HOST" ] || [ -z "$USER" ] || [ -z "$SSHPASS" ]; then
+            echo "::error::Не заданы секреты REGRU_HOST / REGRU_USER / REGRU_PASSWORD"
+            exit 1
+          fi
+          SSH="sshpass -e ssh -o StrictHostKeyChecking=accept-new -o ConnectTimeout=15"
+
+          # Веб-корень: из секрета или автоопределение стандартных путей reg.ru
+          if [ -n "$WEB_ROOT_OVERRIDE" ]; then
+            WEB_ROOT="$WEB_ROOT_OVERRIDE"
+          else
+            WEB_ROOT=$($SSH "$USER@$HOST" '
+              for d in "$HOME/www/doctorbobrova.ru" "$HOME/public_html"; do
+                if [ -d "$d" ]; then echo "$d"; exit 0; fi
+              done
+              echo "MISSING"')
+            if [ "$WEB_ROOT" = "MISSING" ]; then
+              echo "::error::Веб-корень не найден. Содержимое ~ и ~/www на сервере:"
+              $SSH "$USER@$HOST" 'ls -la "$HOME" "$HOME/www" 2>/dev/null || true'
+              echo "Задайте секрет REGRU_WEB_ROOT с путём к папке сайта."
+              exit 1
+            fi
+          fi
+          echo "Веб-корень: $WEB_ROOT"
+
+          # Та же логика, что в scripts/update.sh: служебное не выкатываем,
+          # серверные .htaccess/.well-known не удаляем (--delete не трогает excluded)
+          sshpass -e rsync -az --delete --itemize-changes \
+            -e "ssh -o StrictHostKeyChecking=accept-new" \
+            --exclude '.git' --exclude '.github' --exclude 'scripts' \
+            --exclude '__pycache__' --exclude 'assets/img/_staging' \
+            --exclude '*.py' --exclude '*.md' --exclude '.gitignore' \
+            --exclude 'deploy.config' --exclude '.htaccess' --exclude '.well-known' \
+            ./ "$USER@$HOST:$WEB_ROOT/"
+
+      - name: Verify site is live
+        run: |
+          set -e
+          for url in "https://doctorbobrova.ru/" "https://doctorbobrova.ru/gift-studio.html"; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --retry 3 --max-time 30 "$url")
+            echo "$url -> HTTP $code"
+            [ "$code" = "200" ] || { echo "::error::$url вернул $code"; exit 1; }
+          done
+          curl -s --max-time 30 https://doctorbobrova.ru/gift-studio.html | grep -q "Студия сертификатов" \
+            && echo "✓ Студия сертификатов на проде обновлена"
