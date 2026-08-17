@@ -9,3 +9,6 @@ __pycache__/
 .env
 .env.local
 scripts/deploy.config
+
+# данные истории сертификатов (создаются на сервере / при локальном php -S)
+gift-data/

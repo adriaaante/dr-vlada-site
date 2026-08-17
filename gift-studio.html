@@ -126,6 +126,14 @@
     }
     .finput:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(197,165,114,.14);}
     textarea.finput{resize:vertical;min-height:76px;line-height:1.5;}
+    /* iOS Safari: у date-инпута своя intrinsic-ширина и центровка —
+       без appearance:none он вылезает за рамки формы на телефоне */
+    input[type="date"].finput{
+      -webkit-appearance:none;appearance:none;
+      display:block;width:100%;max-width:100%;min-width:0;
+      min-height:49px;text-align:left;
+    }
+    input[type="date"].finput::-webkit-date-and-time-value{text-align:left;}
 
     .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
     .chip{
@@ -373,7 +381,7 @@
     <!-- История -->
     <section class="history">
       <h2>Выданные сертификаты</h2>
-      <p>История хранится только в этом браузере. Ссылку можно скопировать повторно в любой момент.</p>
+      <p id="histNote">Загружаю историю…</p>
       <div id="historyList"></div>
     </section>
   </div>
@@ -397,7 +405,8 @@
   function unlockApp(){
     lock.classList.add('open');
     app.removeAttribute('data-locked');
-    sessionStorage.setItem('vb_gift_auth', '1');
+    /* пин сохраняем на сессию: им же авторизуются запросы к gift-api.php */
+    sessionStorage.setItem('vb_gift_auth', pin);
     initApp();
   }
   function renderDots(){
@@ -618,7 +627,7 @@
     scalePreview();
 
     update(true);
-    renderHistory();
+    initHistory();
   }
 
   function flashLink(){
@@ -665,28 +674,88 @@
     document.getElementById('pv').src = previewUrl();
   }
 
-  /* ---------- история (localStorage) ---------- */
+  /* ---------- история ----------
+     Источник правды — хостинг (gift-api.php → gift-data/history.json):
+     история общая для всех устройств доктора. localStorage — кэш и
+     запасной вариант, если сервер недоступен (например, локальный запуск). */
+  var API_URL = 'gift-api.php';
+  var serverOk = null; /* null — ещё не знаем, true/false — результат */
+
+  function apiCall(payload){
+    payload.pin = sessionStorage.getItem('vb_gift_auth') || '';
+    return fetch(API_URL, { method:'POST', body: JSON.stringify(payload) })
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if(!d || !d.ok) throw new Error(d && d.error || 'api');
+        return d.list || [];
+      });
+  }
+  function histNote(){
+    var el = document.getElementById('histNote');
+    if(serverOk) el.textContent = 'История сохраняется на сайте и видна с любого устройства. Ссылку можно скопировать повторно в любой момент.';
+    else el.textContent = 'Сервер истории недоступен — записи хранятся только в этом браузере.';
+  }
+
   function loadHistory(){
     try{ return JSON.parse(localStorage.getItem('vb_gift_history') || '[]'); }
     catch(e){ return []; }
   }
+  function cacheHistory(list){
+    try{ localStorage.setItem('vb_gift_history', JSON.stringify(list.slice(0, 40))); }catch(e){}
+  }
+
+  /* первая загрузка: тянем с сервера; локальные записи, которых там нет
+     (созданные до синхронизации), досылаем на сервер */
+  function initHistory(){
+    apiCall({ action:'list' }).then(function(serverList){
+      serverOk = true;
+      var known = {};
+      serverList.forEach(function(x){ known[x.k] = 1; });
+      var missing = loadHistory().filter(function(x){ return x.k && !known[x.k]; });
+      if(!missing.length){
+        cacheHistory(serverList); histNote(); renderHistory(serverList); return;
+      }
+      var chain = Promise.resolve(serverList);
+      missing.reverse().forEach(function(item){
+        chain = chain.then(function(){ return apiCall({ action:'save', item:item }); });
+      });
+      chain.then(function(finalList){
+        cacheHistory(finalList); histNote(); renderHistory(finalList);
+      });
+    }).catch(function(){
+      serverOk = false; histNote(); renderHistory(loadHistory());
+    });
+  }
+
   function saveToHistory(url){
     if(!url) return;
-    var list = loadHistory();
-    /* один сертификат (номер) — одна запись, обновляем при повторном копировании */
-    list = list.filter(function(x){ return x.k !== state.certNo; });
-    list.unshift({
+    var item = {
       k: state.certNo, n: state.name.trim(), a: Number(state.amount),
       t: state.type, e: state.expiry, url: url, ts: Date.now()
-    });
-    if(list.length > 40) list.length = 40;
-    localStorage.setItem('vb_gift_history', JSON.stringify(list));
+    };
     savedCurrent = true;
-    renderHistory();
+    /* локальный кэш обновляем сразу, сервер — следом */
+    var list = loadHistory().filter(function(x){ return x.k !== item.k; });
+    list.unshift(item);
+    cacheHistory(list);
+    renderHistory(list);
+    apiCall({ action:'save', item:item }).then(function(serverList){
+      serverOk = true; cacheHistory(serverList); histNote(); renderHistory(serverList);
+    }).catch(function(){ serverOk = false; histNote(); });
   }
-  function renderHistory(){
+
+  function deleteFromHistory(k){
+    var list = loadHistory().filter(function(x){ return x.k !== k; });
+    cacheHistory(list);
+    renderHistory(list);
+    apiCall({ action:'delete', k:k }).then(function(serverList){
+      serverOk = true; cacheHistory(serverList); histNote(); renderHistory(serverList);
+    }).catch(function(){ serverOk = false; histNote(); });
+  }
+
+  function renderHistory(list){
     var listEl = document.getElementById('historyList');
-    var list = loadHistory();
+    if(!list) list = loadHistory();
     if(!list.length){
       listEl.innerHTML = '<div class="history__empty">Пока пусто. Создайте первый сертификат и нажмите «Копировать» — он появится здесь.</div>';
       return;
@@ -717,16 +786,14 @@
         }).catch(function(){ prompt('Скопируйте ссылку:', item.url); });
       });
       row.querySelector('[data-act="del"]').addEventListener('click', function(){
-        var list2 = loadHistory().filter(function(x){ return x.k !== item.k; });
-        localStorage.setItem('vb_gift_history', JSON.stringify(list2));
-        renderHistory();
+        deleteFromHistory(item.k);
       });
       listEl.appendChild(row);
     });
   }
 
   /* ---------- автологин в рамках сессии ---------- */
-  if(sessionStorage.getItem('vb_gift_auth') === '1'){
+  if(sessionStorage.getItem('vb_gift_auth') === PIN_OK){
     lock.classList.add('open');
     app.removeAttribute('data-locked');
     initApp();

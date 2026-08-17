@@ -43,6 +43,7 @@ if command -v rsync >/dev/null 2>&1; then
     --exclude '__pycache__' --exclude 'assets/img/_staging' \
     --exclude '*.py' --exclude '*.md' --exclude '.gitignore' \
     --exclude 'deploy.config' --exclude '.htaccess' --exclude '.well-known' \
+    --exclude 'gift-data' \
     ./ "$WEB_ROOT/"
 else
   echo "  (rsync не найден — копирую через cp)"

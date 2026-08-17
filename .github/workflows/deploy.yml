@@ -70,6 +70,7 @@ jobs:
             --exclude '__pycache__' --exclude 'assets/img/_staging' \
             --exclude '*.py' --exclude '*.md' --exclude '.gitignore' \
             --exclude 'deploy.config' --exclude '.htaccess' --exclude '.well-known' \
+            --exclude 'gift-data' \
             ./ "$USER@$HOST:$WEB_ROOT/"
 
       - name: Verify site is live
@@ -82,3 +83,8 @@ jobs:
           done
           curl -s --max-time 30 https://doctorbobrova.ru/gift-studio.html | grep -q "Студия сертификатов" \
             && echo "✓ Студия сертификатов на проде обновлена"
+          # PHP-API истории: с неверным пином обязан ответить {"ok":false,"error":"auth"}
+          resp=$(curl -s --max-time 30 -X POST -d '{"pin":"wrong","action":"list"}' https://doctorbobrova.ru/gift-api.php)
+          echo "gift-api.php -> $resp"
+          echo "$resp" | grep -q '"auth"' && echo "✓ PHP-API истории работает" \
+            || { echo "::error::gift-api.php не отвечает как ожидается"; exit 1; }

@@ -142,7 +142,14 @@ e: действителен до (YYYY-MM-DD), m: пожелание, k: ном�
   (в коде хранится как `atob('OTk5MTIz')`, защита клиентская/символическая),
   форма, живой предпросмотр (iframe `?pv=1&r=N` — `r` нужен, иначе смена только
   hash не перезагружает iframe; `?pv=1` автооткрывает сертификат), кнопки
-  WhatsApp/Telegram, история в localStorage `vb_gift_history`.
+  WhatsApp/Telegram.
+- История выданных сертификатов — общая, на хостинге: `gift-api.php`
+  (единственный PHP-файл на статическом сайте; авторизация — sha256 от пина)
+  пишет в `gift-data/history.json` (папка закрыта `.htaccess`, создаётся сама).
+  `gift-data` в исключениях rsync деплоя (deploy.yml, update.sh, deploy.sh) —
+  иначе выкатка стёрла бы историю. localStorage `vb_gift_history` — кэш и
+  fallback, при недоступности API студия работает локально. Меняешь пин —
+  меняй и PIN_HASH в gift-api.php.
 - `gift.html` — просмотр: интро с печатью → «Открыть подарок» → карточка с
   канвас-анимацией под повод. Типы (`THEMES` в gift.html == `TYPES` в студии,
   менять синхронно): universal, birthday, wedding, newyear, march8, love.

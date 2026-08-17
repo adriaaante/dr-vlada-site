@@ -65,6 +65,7 @@ set mirror:parallel-transfer-count 3
 mirror -R --verbose $DRY $DELETE \
   -x '\.git/' -x '\.github/' -x 'scripts/' -x 'node_modules/' \
   -x '__pycache__/' -x '\.idea/' -x '\.vscode/' -x '_staging/' \
+  -x 'gift-data/' \
   -X '*.py' -X '*.pyc' -X '*.md' -X '.gitignore' -X '.env*' \
   -X 'deploy.config' -X '.DS_Store' -X 'Thumbs.db' \
   "$ROOT/" "$REMOTE_DIR/"
