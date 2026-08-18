@@ -47,31 +47,22 @@
       transition:opacity .8s var(--ease-out), transform .8s var(--ease-out);
     }
     .intro.out{opacity:0;transform:scale(1.12);pointer-events:none;}
-    .intro__eyebrow{
-      font-size:11px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;
-      color:var(--theme-accent);margin-bottom:34px;
-      animation:fadeUp .9s var(--ease-out) .15s both;
+    /* фирменный wordmark-логотип с мягким золотым сиянием */
+    .intro__logowrap{
+      position:relative;margin-bottom:20px;
+      animation:sealIn 1.1s var(--ease-out) .2s both, sealFloat 5.5s ease-in-out 1.4s infinite;
     }
-    .seal-big{
-      position:relative;width:148px;height:148px;margin-bottom:34px;
-      animation:sealIn 1.1s var(--ease-out) .25s both, sealFloat 5s ease-in-out 1.4s infinite;
-    }
-    .seal-big__ring{position:absolute;inset:0;border-radius:50%;border:2px solid var(--theme-accent);box-shadow:inset 0 0 0 5px rgba(197,165,114,.15), 0 18px 50px rgba(14,61,77,.18);}
-    .seal-big__ring2{position:absolute;inset:13px;border-radius:50%;border:1px solid var(--theme-accent);opacity:.65;}
-    .seal-big__inner{
-      position:absolute;inset:0;display:flex;flex-direction:column;
-      align-items:center;justify-content:center;gap:8px;text-align:center;
-    }
-    .seal-big__mono{
-      font-family:var(--display);font-weight:700;font-size:54px;line-height:1;
-      letter-spacing:.05em;color:var(--page-ink);padding-left:.05em;
-    }
-    .seal-big__rule{width:32px;height:1px;background:var(--theme-accent);}
-    .seal-big__site{font-size:8.5px;font-weight:600;letter-spacing:.14em;color:var(--theme-accent);}
-    .seal-big__glow{
-      position:absolute;inset:-46px;border-radius:50%;
-      background:radial-gradient(circle, rgba(197,165,114,.28) 0%, rgba(197,165,114,0) 68%);
+    .intro__logowrap::before{
+      content:'';position:absolute;inset:-56px -72px;border-radius:50%;
+      background:radial-gradient(ellipse, rgba(197,165,114,.3) 0%, rgba(197,165,114,0) 68%);
       animation:pulse 3.2s ease-in-out infinite;
+    }
+    .intro__logo{position:relative;width:min(250px,66vw);height:auto;}
+    body.dark .intro__logo{filter:brightness(0) invert(1);} /* на тёмной теме — белый */
+    .intro__site{
+      font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
+      color:var(--theme-accent);margin-bottom:34px;
+      animation:fadeUp .9s var(--ease-out) .4s both;
     }
     .intro__title{
       font-family:var(--display);font-weight:500;font-size:clamp(30px,7vw,46px);
@@ -244,17 +235,10 @@
 
   <!-- Интро -->
   <div class="intro" id="intro" hidden>
-    <div class="intro__eyebrow">Doctor Bobrova · Cosmetology</div>
-    <div class="seal-big" aria-hidden="true">
-      <div class="seal-big__glow"></div>
-      <div class="seal-big__ring"></div>
-      <div class="seal-big__ring2"></div>
-      <div class="seal-big__inner">
-        <span class="seal-big__mono">ВБ</span>
-        <span class="seal-big__rule"></span>
-        <span class="seal-big__site">doctorbobrova.ru</span>
-      </div>
+    <div class="intro__logowrap">
+      <img class="intro__logo" src="assets/img/logo-wordmark.png" alt="Doctor Bobrova Cosmetology">
     </div>
+    <div class="intro__site">doctorbobrova.ru</div>
     <h1 class="intro__title">Вам подарили сертификат</h1>
     <div class="intro__name" id="introName"></div>
     <button class="intro__btn" id="openBtn">Открыть подарок</button>

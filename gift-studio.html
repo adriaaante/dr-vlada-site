@@ -42,21 +42,17 @@
       color:#fff;transition:opacity .6s var(--ease-out), visibility .6s;
     }
     .lock.open{opacity:0;visibility:hidden;pointer-events:none;}
-    .lock__mono{
-      position:relative;width:104px;height:104px;margin-bottom:24px;
+    /* фирменный wordmark-логотип (белый на тёмном фоне) */
+    .lock__logo{
+      width:min(210px,56vw);height:auto;margin-bottom:14px;
+      filter:brightness(0) invert(1);
       animation:fadeUp .8s var(--ease-out) both;
     }
-    .lock__mono-ring{position:absolute;inset:0;border-radius:50%;border:1.6px solid var(--gold);box-shadow:inset 0 0 0 4px rgba(197,165,114,.16);}
-    .lock__mono-inner{
-      position:absolute;inset:0;display:flex;flex-direction:column;
-      align-items:center;justify-content:center;gap:5px;text-align:center;
+    .lock__site{
+      font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+      color:var(--gold);margin-bottom:26px;
+      animation:fadeUp .8s var(--ease-out) .05s both;
     }
-    .lock__mono-vb{
-      font-family:var(--display);font-weight:700;font-size:38px;line-height:1;
-      letter-spacing:.05em;color:#fff;padding-left:.05em;
-    }
-    .lock__mono-rule{width:22px;height:1px;background:var(--gold);}
-    .lock__mono-site{font-size:6.5px;font-weight:600;letter-spacing:.12em;color:var(--gold);}
     .lock__eyebrow{font-size:10.5px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;animation:fadeUp .8s var(--ease-out) .1s both;}
     .lock__title{font-family:var(--display);font-weight:500;font-size:clamp(26px,5vw,34px);margin-bottom:6px;animation:fadeUp .8s var(--ease-out) .15s both;}
     .lock__sub{font-size:13.5px;color:rgba(255,255,255,.6);margin-bottom:30px;animation:fadeUp .8s var(--ease-out) .2s both;}
@@ -252,15 +248,8 @@
 
   <!-- ============ Пин-код ============ -->
   <div class="lock" id="lock">
-    <div class="lock__mono" aria-hidden="true">
-      <div class="lock__mono-ring"></div>
-      <div class="lock__mono-inner">
-        <span class="lock__mono-vb">ВБ</span>
-        <span class="lock__mono-rule"></span>
-        <span class="lock__mono-site">doctorbobrova.ru</span>
-      </div>
-    </div>
-    <div class="lock__eyebrow">Doctor Bobrova · Cosmetology</div>
+    <img class="lock__logo" src="assets/img/logo-wordmark.png" alt="Doctor Bobrova Cosmetology">
+    <div class="lock__site">doctorbobrova.ru</div>
     <h1 class="lock__title">Студия сертификатов</h1>
     <p class="lock__sub">Введите пин-код, чтобы продолжить</p>
     <div class="lock__dots" id="dots">
