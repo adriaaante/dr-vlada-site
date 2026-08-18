@@ -62,10 +62,9 @@
       position:absolute;inset:0;display:flex;flex-direction:column;
       align-items:center;justify-content:center;gap:8px;text-align:center;
     }
-    .seal-big__brand{
-      font-family:var(--display);font-weight:600;font-size:18px;line-height:1.3;
-      letter-spacing:.2em;text-transform:uppercase;color:var(--page-ink);
-      padding-left:.2em; /* компенсация letter-spacing для центровки */
+    .seal-big__mono{
+      font-family:var(--display);font-weight:700;font-size:54px;line-height:1;
+      letter-spacing:.05em;color:var(--page-ink);padding-left:.05em;
     }
     .seal-big__rule{width:32px;height:1px;background:var(--theme-accent);}
     .seal-big__site{font-size:8.5px;font-weight:600;letter-spacing:.14em;color:var(--theme-accent);}
@@ -191,20 +190,11 @@
     .card__meta-col:last-child{text-align:right;}
     .card__meta-cap{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
     .card__meta-val{font-family:var(--display);font-weight:600;font-size:15.5px;color:var(--teal-dark);margin-top:3px;white-space:nowrap;}
-    .card__seal{position:relative;width:78px;height:78px;flex-shrink:0;}
-    .card__seal-ring{position:absolute;inset:0;border-radius:50%;border:1.6px solid var(--gold-dark);box-shadow:inset 0 0 0 3px rgba(197,165,114,.16);}
-    .card__seal-ring2{position:absolute;inset:7px;border-radius:50%;border:1px solid var(--gold);opacity:.7;}
-    .card__seal-inner{
-      position:absolute;inset:0;display:flex;flex-direction:column;
-      align-items:center;justify-content:center;gap:4px;text-align:center;
+    .card__site{
+      text-align:center;margin-top:16px;
+      font-size:9.5px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;
+      color:var(--gold-dark);
     }
-    .card__seal-brand{
-      font-family:var(--display);font-weight:600;font-size:9px;line-height:1.35;
-      letter-spacing:.18em;text-transform:uppercase;color:var(--teal);
-      padding-left:.18em;
-    }
-    .card__seal-rule{width:18px;height:1px;background:var(--gold);}
-    .card__seal-site{font-size:5.4px;font-weight:600;letter-spacing:.08em;color:var(--gold-dark);}
 
     /* ---------- блок «как воспользоваться» ---------- */
     .after{
@@ -260,7 +250,7 @@
       <div class="seal-big__ring"></div>
       <div class="seal-big__ring2"></div>
       <div class="seal-big__inner">
-        <span class="seal-big__brand">Doctor<br>Bobrova</span>
+        <span class="seal-big__mono">ВБ</span>
         <span class="seal-big__rule"></span>
         <span class="seal-big__site">doctorbobrova.ru</span>
       </div>
@@ -308,20 +298,13 @@
           <div class="card__meta-cap">Сертификат №</div>
           <div class="card__meta-val" id="certNo">—</div>
         </div>
-        <div class="card__seal" aria-hidden="true">
-          <div class="card__seal-ring"></div>
-          <div class="card__seal-ring2"></div>
-          <div class="card__seal-inner">
-            <span class="card__seal-brand">Doctor<br>Bobrova</span>
-            <span class="card__seal-rule"></span>
-            <span class="card__seal-site">doctorbobrova.ru</span>
-          </div>
-        </div>
         <div class="card__meta-col">
           <div class="card__meta-cap">Действителен до</div>
           <div class="card__meta-val" id="certExpiry">—</div>
         </div>
       </div>
+
+      <div class="r card__site" style="transition-delay:1.3s">doctorbobrova.ru</div>
     </section>
 
     <div class="after">
