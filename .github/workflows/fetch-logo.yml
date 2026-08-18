@@ -21,7 +21,8 @@ jobs:
       - name: Download logo from CDN
         run: |
           mkdir -p assets/img
-          # ВБ-монограмм без ободка, крупные буквы (Higgsfield, Nano Banana Pro 2k)
+          # ВБ-монограмм без ободка, крупные буквы (Higgsfield, Nano Banana Pro 2k).
+          # Повторный запуск: логотип нужен для подарочных сертификатов (gift.html).
           curl -sSfL --retry 3 \
             -o assets/img/logo-mark.png \
             "https://d8j0ntlcm91z4.cloudfront.net/user_3Di09CVa1BatdZIdE0tir1KKUxw/hf_20260525_073344_f7968a9c-936e-4256-a67d-7e741ed79698.png"
