@@ -33,8 +33,9 @@
       min-height:100svh;-webkit-font-smoothing:antialiased;overflow-x:hidden;
     }
     img{display:block;max-width:100%;height:auto;}
-    button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit;}
-    a{color:inherit;text-decoration:none;}
+    /* touch-action: чтобы двойной тап по кнопкам не приближал страницу на iOS */
+    button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit;touch-action:manipulation;}
+    a{color:inherit;text-decoration:none;touch-action:manipulation;}
 
     /* ---------- канвас с частицами ---------- */
     #fx{position:fixed;inset:0;width:100%;height:100%;z-index:50;pointer-events:none;}
@@ -57,11 +58,17 @@
     }
     .seal-big__ring{position:absolute;inset:0;border-radius:50%;border:2px solid var(--theme-accent);box-shadow:inset 0 0 0 5px rgba(197,165,114,.15), 0 18px 50px rgba(14,61,77,.18);}
     .seal-big__ring2{position:absolute;inset:13px;border-radius:50%;border:1px solid var(--theme-accent);opacity:.65;}
-    .seal-big__mono{
-      position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-      font-family:var(--display);font-weight:700;font-size:64px;color:var(--page-ink);transform:translateY(-7px);
+    .seal-big__inner{
+      position:absolute;inset:0;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;gap:8px;text-align:center;
     }
-    .seal-big__txt{position:absolute;left:0;right:0;bottom:24px;text-align:center;font-size:9px;letter-spacing:.16em;color:var(--theme-accent);font-weight:600;}
+    .seal-big__brand{
+      font-family:var(--display);font-weight:600;font-size:18px;line-height:1.3;
+      letter-spacing:.2em;text-transform:uppercase;color:var(--page-ink);
+      padding-left:.2em; /* компенсация letter-spacing для центровки */
+    }
+    .seal-big__rule{width:32px;height:1px;background:var(--theme-accent);}
+    .seal-big__site{font-size:8.5px;font-weight:600;letter-spacing:.14em;color:var(--theme-accent);}
     .seal-big__glow{
       position:absolute;inset:-46px;border-radius:50%;
       background:radial-gradient(circle, rgba(197,165,114,.28) 0%, rgba(197,165,114,0) 68%);
@@ -140,12 +147,6 @@
     .card__corner.tr{top:12px;right:12px;border-top-width:2px;border-right-width:2px;margin:-5px -5px 0 0;border-top-right-radius:4px;}
     .card__corner.bl{bottom:12px;left:12px;border-bottom-width:2px;border-left-width:2px;margin:0 0 -5px -5px;border-bottom-left-radius:4px;}
     .card__corner.br{bottom:12px;right:12px;border-bottom-width:2px;border-right-width:2px;margin:0 -5px -5px 0;border-bottom-right-radius:4px;}
-    .card__watermark{
-      position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-      font-family:var(--display);font-weight:700;font-size:min(120vw,520px);line-height:1;
-      color:var(--gold);opacity:.05;pointer-events:none;user-select:none;
-    }
-
     /* элементы карточки появляются каскадом (задержки заданы в разметке) */
     .card > .r{opacity:0;transform:translateY(16px);}
     .stage.revealed .card > .r{opacity:1;transform:none;transition:opacity .7s var(--ease-out), transform .7s var(--ease-out);}
@@ -190,11 +191,20 @@
     .card__meta-col:last-child{text-align:right;}
     .card__meta-cap{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
     .card__meta-val{font-family:var(--display);font-weight:600;font-size:15.5px;color:var(--teal-dark);margin-top:3px;white-space:nowrap;}
-    .card__seal{position:relative;width:74px;height:74px;flex-shrink:0;}
+    .card__seal{position:relative;width:78px;height:78px;flex-shrink:0;}
     .card__seal-ring{position:absolute;inset:0;border-radius:50%;border:1.6px solid var(--gold-dark);box-shadow:inset 0 0 0 3px rgba(197,165,114,.16);}
     .card__seal-ring2{position:absolute;inset:7px;border-radius:50%;border:1px solid var(--gold);opacity:.7;}
-    .card__seal-mono{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:32px;color:var(--teal);transform:translateY(-4px);}
-    .card__seal-txt{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-size:5.6px;letter-spacing:.1em;color:var(--gold-dark);font-weight:600;}
+    .card__seal-inner{
+      position:absolute;inset:0;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;gap:4px;text-align:center;
+    }
+    .card__seal-brand{
+      font-family:var(--display);font-weight:600;font-size:9px;line-height:1.35;
+      letter-spacing:.18em;text-transform:uppercase;color:var(--teal);
+      padding-left:.18em;
+    }
+    .card__seal-rule{width:18px;height:1px;background:var(--gold);}
+    .card__seal-site{font-size:5.4px;font-weight:600;letter-spacing:.08em;color:var(--gold-dark);}
 
     /* ---------- блок «как воспользоваться» ---------- */
     .after{
@@ -220,7 +230,6 @@
     /* ---------- тёмные темы (новый год) ---------- */
     body.dark .btn--ghost{background:rgba(255,255,255,.08);}
     body.dark .intro__btn{box-shadow:0 14px 40px rgba(197,165,114,.35);}
-    body.dark .seal-big__mono{color:#fff;}
     body.dark .seal-big__ring{box-shadow:inset 0 0 0 5px rgba(197,165,114,.2), 0 18px 60px rgba(0,0,0,.4);}
 
     /* ---------- «сертификат не найден» ---------- */
@@ -250,8 +259,11 @@
       <div class="seal-big__glow"></div>
       <div class="seal-big__ring"></div>
       <div class="seal-big__ring2"></div>
-      <div class="seal-big__mono">B</div>
-      <div class="seal-big__txt">doctorbobrova.ru</div>
+      <div class="seal-big__inner">
+        <span class="seal-big__brand">Doctor<br>Bobrova</span>
+        <span class="seal-big__rule"></span>
+        <span class="seal-big__site">doctorbobrova.ru</span>
+      </div>
     </div>
     <h1 class="intro__title">Вам подарили сертификат</h1>
     <div class="intro__name" id="introName"></div>
@@ -265,7 +277,6 @@
       <div class="card__frame" aria-hidden="true"></div>
       <span class="card__corner tl" aria-hidden="true"></span><span class="card__corner tr" aria-hidden="true"></span>
       <span class="card__corner bl" aria-hidden="true"></span><span class="card__corner br" aria-hidden="true"></span>
-      <div class="card__watermark" aria-hidden="true">B</div>
 
       <div class="r" style="transition-delay:.45s">
         <img class="card__logo" src="assets/img/logo-wordmark.png" alt="Doctor Bobrova Cosmetology">
@@ -300,8 +311,11 @@
         <div class="card__seal" aria-hidden="true">
           <div class="card__seal-ring"></div>
           <div class="card__seal-ring2"></div>
-          <div class="card__seal-mono">B</div>
-          <div class="card__seal-txt">doctorbobrova.ru</div>
+          <div class="card__seal-inner">
+            <span class="card__seal-brand">Doctor<br>Bobrova</span>
+            <span class="card__seal-rule"></span>
+            <span class="card__seal-site">doctorbobrova.ru</span>
+          </div>
         </div>
         <div class="card__meta-col">
           <div class="card__meta-cap">Действителен до</div>
