@@ -2,6 +2,8 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
+  <!-- страницы часто обновляются — браузер должен проверять свежесть -->
+  <meta http-equiv="Cache-Control" content="no-cache">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Студия сертификатов — Doctor Bobrova</title>
   <meta name="robots" content="noindex, nofollow">
@@ -661,6 +663,9 @@
   }
 
   var pvSeq = 0;
+  /* метка запуска страницы: делает адрес предпросмотра уникальным между
+     сессиями, иначе браузер отдаёт iframe из кэша со старой версией */
+  var PV_BOOT = Date.now().toString(36);
   function previewUrl(){
     var payload = {
       n: state.name.trim() || 'Анна Иванова',
@@ -670,8 +675,9 @@
     };
     if(state.expiry) payload.e = state.expiry;
     if(state.message.trim()) payload.m = state.message.trim();
-    /* pvSeq — чтобы менялся не только hash: иначе iframe не перезагружается */
-    return viewerBase() + '?pv=1&r=' + (++pvSeq) + '#' + encodeData(payload);
+    /* r меняется не только в hash (иначе iframe не перезагружается) и не
+       повторяется между сессиями (иначе предпросмотр придёт из кэша) */
+    return viewerBase() + '?pv=1&r=' + PV_BOOT + '-' + (++pvSeq) + '#' + encodeData(payload);
   }
   function refreshPreview(){
     document.getElementById('pv').src = previewUrl();
